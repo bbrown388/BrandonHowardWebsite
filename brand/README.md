@@ -114,6 +114,12 @@ point with slightly concave flanks and no notch, and two swept ticks at the tail
 `ARROW_STYLE` in `src/ornament.py` switches the tail between `plain`, `bar`,
 `ticks` and `vane`; `src/arrow3.py` holds all four side by side.
 
+Open-licence arrows were searched for rather than assumed unavailable. See
+`ARROW-SOURCING.md`: Openclipart, Public Domain Vectors and Wikimedia Commons
+were all checked with licences verified, and none of them carry an arrow that
+suits a heavy western wordmark. That file also records where the good ones are
+sold, and one search hazard worth knowing about.
+
 `src/arrowtest.py` and `src/arrowtest2.py` hold the ten constructions compared
 side by side at two sizes, so the next change here is a comparison rather than a
 guess.
