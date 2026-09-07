@@ -206,6 +206,26 @@
 
   .alt { background: var(--panel); }
 
+  /* Statement band. Brass hairlines top and bottom rather than a background
+     change, so it reads as punctuation between two sections instead of
+     becoming a third section itself. */
+  .statement {
+    padding: 66px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(200,155,74,0.34);
+    border-bottom: 1px solid rgba(200,155,74,0.34);
+  }
+
+  .statement p {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(27px, 7.4vw, 54px);
+    line-height: 1.06;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
   p + p { margin-top: 15px; }
 
   /* ── Music ────────────────────────────────────────────────────────────── */
@@ -353,6 +373,16 @@
         Bandcamp</a>
     </div>
   </div>
+</section>
+
+<!-- ── STATEMENT ─────────────────────────────────────────────────────────────
+     A full-bleed line with nothing else in it. Placed after the songs, so it
+     reads as the answer to what you just listened to rather than a boast up
+     front. Deliberately given a whole band to itself; crammed into the hero
+     alongside the other motto it would have been the third line competing for
+     the same beat. -->
+<section class="statement">
+  <p>No Pretty Boy Country</p>
 </section>
 
 <!-- ── SHOWS ─────────────────────────────────────────────────────────────── -->
