@@ -128,13 +128,14 @@ CARDS = [
       title='Arrow rules', tag='Chosen',
       faces='Sancreek',
       body='The rules themselves become arrows, pointing out from the centre with '
-           'THE and BAND sitting in the breaks. The arrows have been redrawn '
-           'twice. The first attempt built the fletching as two solid swept vanes '
-           'and they fused into a lump at the tail that read as a leaf, worse the '
-           'smaller it got. These use three thin parallel bars crossing the shaft '
-           'instead, which stay legible all the way down because the eye reads the '
-           'rhythm of the gaps rather than the mass. The head is barbed, with its '
-           'base cut back between the barbs. Letterforms untouched.'),
+           'THE and BAND sitting in the breaks. The arrows are now drawn the way '
+           'the ones in the band badge are: a feather at the tail built from '
+           'individual barbs radiating off the shaft, so the shaft stays visible '
+           'through it. That detail is the whole difference. A filled vane closes '
+           'into a solid paddle however elegantly it is shaped, because the halves '
+           'meet across the shaft, and that paddle is what made two earlier '
+           'attempts look cheap. The head is barbed with its base cut back between '
+           'the barbs. Letterforms untouched.'),
  dict(k='am-sancreek-crow', g='orn', hat='am-sancreek-crow-hat',
       title='Crow on the rule', tag='A bird on a sign',
       faces='Sancreek',

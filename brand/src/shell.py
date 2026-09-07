@@ -186,10 +186,11 @@ vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
 into the letters. You picked that one, so the arrows themselves have been
-redrawn twice. The first attempt gave them solid swept vanes and those fused into
-a lump at the tail. These have a barbed head and fletching drawn as three thin
-parallel bars crossing the shaft, which is what keeps them legible small: the eye
-reads the rhythm of the gaps rather than the mass.</p>
+redrawn three times, and the last pass was against the arrows in the band badge
+you sent. Those draw the feather as individual barbs radiating off the shaft,
+which keeps the shaft visible through the fletching. A filled vane closes into a
+solid paddle however elegantly it is shaped, because the two halves meet across
+the shaft, and that paddle is what made the earlier attempts look cheap.</p>
 </div>
 __ORN__
 <div class="callout">

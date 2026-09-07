@@ -103,13 +103,18 @@ Standalone devices are in `marks/device-arrow.svg`,
 `marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
 own for a sleeve, a hat back or a setlist stamp.
 
-The arrows took two goes. The first gave them solid swept vanes for fletching,
-and those fused into a lump at the tail that read as a leaf, getting worse the
-smaller it went. The shipping version has a barbed head with its base cut back
-between the barbs, and fletching drawn as three thin parallel bars crossing the
-shaft. Separate strokes stay legible all the way down, because the eye reads the
-rhythm of the gaps rather than the mass. `src/arrowtest.py` holds the six
-constructions that were compared.
+The arrows took three goes, the last against the arrows in the band's own
+circular badge. Those draw the feather as individual barbs radiating off the
+shaft, so the shaft stays visible through the fletching, and that is the detail
+that decides it. A filled vane closes into a solid paddle however elegantly it is
+shaped, because the two halves meet across the shaft; both earlier attempts
+failed that way, once as a leaf and once as a spade. The shipping arrow has a
+barbed head with its base cut back between the barbs, and a seven-barb feather
+whose barb length follows a profile peaking about a third along.
+
+`src/arrowtest.py` and `src/arrowtest2.py` hold the ten constructions compared
+side by side at two sizes, so the next change here is a comparison rather than a
+guess.
 
 **The crow is not finished, and should not ship as it stands.** Five redraws
 against a supplied reference and it still reads closer to a grackle. The method

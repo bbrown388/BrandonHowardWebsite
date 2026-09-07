@@ -28,34 +28,43 @@ def arrowhead(cx, tip_y, w, h, notch=0.60):
 
 
 def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
-    """A horizontal arrow pointing right.
+    """A horizontal arrow pointing right, fletched the way a real one is drawn.
 
-    Three parts, all separate subpaths unioned by a nonzero fill: a plain shaft,
-    a barbed head with the base cut back between the barbs, and fletching drawn
-    as three thin parallel bars crossing the shaft.
+    Three parts unioned by a nonzero fill: shaft, barbed head with its base cut
+    back between the barbs, and a feather at the tail drawn as individual barbs
+    radiating off the shaft.
 
-    The bars matter. An earlier version used two solid swept vanes and they fused
-    into a lump at the tail that read as a leaf rather than feathers, worse the
-    smaller it got. Separate strokes stay legible all the way down because the
-    eye reads the rhythm of the gaps, not the mass.
+    The barbs are the whole point. A filled vane closes into a solid paddle no
+    matter how elegantly it is shaped, because the halves meet across the shaft,
+    and that paddle is what made two earlier attempts look cheap. Separate
+    strokes keep the shaft visible through the feather and stay legible small,
+    because the eye reads the rhythm rather than the mass. Barb length follows a
+    profile peaking about a third along, which gives the silhouette of a real
+    fletching without drawing its outline.
     """
-    hl = head if head is not None else thick * 5.4       # head length
-    hw = barb if barb is not None else thick * 2.5       # head half width
+    hl = head if head is not None else thick * 5.4
+    hw = barb if barb is not None else thick * 2.5
+    n = int(fletch) if fletch is not None else 7
     t2 = thick / 2.0
 
-    parts = [_pts([(x0 + thick, y - t2), (x1 - hl * 0.9, y - t2),
-                   (x1 - hl * 0.9, y + t2), (x0 + thick, y + t2)]),
+    parts = [_pts([(x0 + thick * 0.8, y - t2), (x1 - hl * 0.9, y - t2),
+                   (x1 - hl * 0.9, y + t2), (x0 + thick * 0.8, y + t2)]),
              _pts([(x1, y), (x1 - hl, y - hw),
-                   (x1 - hl * 0.62, y), (x1 - hl, y + hw)])]
+                   (x1 - hl * 0.62, y), (x1 - hl, y + hw)]),
+             _pts([(x0, y - thick * 1.45), (x0 + thick * 0.85, y - thick * 1.45),
+                   (x0 + thick * 0.85, y + thick * 1.45), (x0, y + thick * 1.45)])]
 
-    lean, reach, gap = thick * 1.1, thick * 2.6, thick * 2.4
-    n = fletch if fletch is not None else 3
-    for i in range(int(n)):
-        bx = x0 + gap * i + thick * 1.2
-        parts.append(_pts([(bx - lean, y - reach),
-                           (bx - lean + thick * 0.95, y - reach),
-                           (bx + lean + thick * 0.95, y + reach),
-                           (bx + lean, y + reach)]))
+    L, maxh, lean, w = thick * 9.0, thick * 3.3, 0.55, thick * 0.68
+    for s in (-1, 1):
+        for i in range(n):
+            u = i / float(n - 1)
+            prof = math.sin(math.pi * (0.18 + 0.72 * u)) ** 0.65
+            h = maxh * prof
+            bx = x0 + thick * 0.7 + L * u
+            parts.append(_pts([(bx, y + s * t2 * 0.6),
+                               (bx + w, y + s * t2 * 0.6),
+                               (bx + w - lean * h, y + s * h),
+                               (bx - lean * h, y + s * h)]))
     return ' '.join(parts)
 
 
