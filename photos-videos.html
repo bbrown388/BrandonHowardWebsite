@@ -127,15 +127,20 @@
   .lb-close:hover, .lb-nav:hover { border-color: var(--brass); color: var(--brass); }
 
   /* ── Videos ───────────────────────────────────────────────────────────── */
+  /* align-items:start, not the default stretch, so cards size to their own
+     content. Otherwise a two-line caption in one card leaves a tall empty box
+     under every one-line caption sharing its row. */
   .videos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 22px;
+    align-items: start;
   }
 
-  /* Click-to-play facade. A real iframe per video would pull YouTube's player
-     and its cookies on page load for every tile; this loads a thumbnail and
-     only swaps in the iframe when someone actually asks for it. */
+  /* Click-to-play facade. A real iframe per tile would pull YouTube's player
+     and its cookies on page load for all eight; this shows a thumbnail and
+     loads the player only when someone asks for it. */
+
   .vid {
     border: 1px solid var(--rule); background: var(--panel);
     display: flex; flex-direction: column;
@@ -146,7 +151,36 @@
   }
   .vid .frame img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .82; transition: opacity .2s ease; }
   .vid .frame:hover img, .vid .frame:focus-visible img { opacity: 1; }
-  .vid .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .vid .frame:focus-visible { outline: 2px solid var(--brass); outline-offset: -2px; }
+
+  /* ── Video lightbox ───────────────────────────────────────────────────
+     A tile is roughly 300-400px wide, which is too small to actually watch
+     anything. Playing opens the video here instead, at up to 1100px, rather
+     than inside the grid cell. */
+  dialog.vb { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; }
+  dialog.vb::backdrop { background: rgba(6,6,6,.95); }
+
+  .vb-inner {
+    width: min(94vw, 1100px);
+    margin: 0 auto;
+  }
+
+  .vb-frame { position: relative; aspect-ratio: 16/9; width: 100%; background: #000; }
+  .vb-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .vb-cap {
+    margin-top: 14px; text-align: center;
+    font-family: var(--display); font-size: 15px;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--paper);
+  }
+
+  .vb-close {
+    position: fixed; top: 16px; right: 16px;
+    background: rgba(18,18,18,.82); border: 1px solid var(--rule);
+    color: var(--paper); font-size: 22px; padding: 8px 13px;
+    cursor: pointer; line-height: 1;
+  }
+  .vb-close:hover { border-color: var(--brass); color: var(--brass); }
 
   .play {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -228,6 +262,14 @@
   </div>
 </main>
 
+<dialog class="vb" id="vb">
+  <button class="vb-close" id="vbClose" aria-label="Close">&times;</button>
+  <div class="vb-inner">
+    <div class="vb-frame" id="vbFrame"></div>
+    <p class="vb-cap" id="vbCap"></p>
+  </div>
+</dialog>
+
 <dialog class="lb" id="lb">
   <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
   <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&lsaquo;</button>
@@ -307,6 +349,30 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') open(idx + 1);
 });
 
+/* ─── Video lightbox ─────────────────────────────────────────────────────── */
+const vb      = document.getElementById('vb');
+const vbFrame = document.getElementById('vbFrame');
+const vbCap   = document.getElementById('vbCap');
+
+function playInLightbox(id, title) {
+  const f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+  f.title = title;
+  f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+  f.allowFullscreen = true;
+  vbFrame.replaceChildren(f);
+  vbCap.textContent = title;
+  vb.showModal();
+}
+
+/* Tearing the iframe out is what actually stops playback; hiding the dialog
+   alone leaves the audio running. */
+function closeVideo() { vbFrame.replaceChildren(); vbCap.textContent = ''; }
+
+vb.addEventListener('close', closeVideo);
+document.getElementById('vbClose').addEventListener('click', () => vb.close());
+vb.addEventListener('click', e => { if (e.target === vb) vb.close(); });
+
 /* ─── Video facades ──────────────────────────────────────────────────────── */
 const vids = document.getElementById('videos');
 VIDEOS.forEach(([id, title]) => {
@@ -331,15 +397,10 @@ VIDEOS.forEach(([id, title]) => {
     '<path d="M27 34V14l18 10z" fill="#fff"/></svg>';
   frame.appendChild(play);
 
-  // Swap the facade for the real player only on demand, and use nocookie.
-  frame.addEventListener('click', () => {
-    const f = document.createElement('iframe');
-    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
-    f.title = title;
-    f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-    f.allowFullscreen = true;
-    frame.replaceWith(f);
-  }, { once: true });
+  // Open large rather than playing in the tile. A grid cell is 300-400px wide,
+  // which is too small to watch anything, and an earlier version replaced the
+  // .frame element outright, which also dropped its aspect-ratio styling.
+  frame.addEventListener('click', () => playInLightbox(id, title));
 
   const cap = document.createElement('div');
   cap.className = 'cap';
