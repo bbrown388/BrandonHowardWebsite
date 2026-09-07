@@ -45,6 +45,19 @@ CARDS = [
       body='A western slab arch over a formal script. It leans further into old '
            'Texas than the Gruene sign does. Worth seeing, but the thinnest of the '
            'set by a distance.'),
+ dict(k='am-alamo', hat='am-alamo-hat',
+      title='Alamo lettering', tag='The ALAMO word, not DRAFTHOUSE',
+      faces='Poppins Black with a constructed arch A',
+      body='The word ALAMO on that marquee is custom lettering rather than a '
+           'typeface, which their own brand manual confirms, so there is nothing '
+           'to buy. This rebuilds it. Poppins Black was picked as the base '
+           'because it matches the reference on the two things that can be '
+           'measured, stem to cap height within a hundredth and a genuinely '
+           'circular O, and then the A was constructed: a half round arch on two '
+           'vertical legs with a low crossbar, no pointed apex. His name happens '
+           'to need only that one special letter, since the other oddities on the '
+           'sign are the angled L foot and the arched M and neither letter is in '
+           'BRANDON HOWARD.'),
  dict(k='am-archivo', hat='am-archivo-hat',
       title='Archivo Expanded Black', tag='Closest to your marquee photo',
       faces='Archivo, expanded and black',

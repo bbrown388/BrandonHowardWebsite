@@ -34,13 +34,23 @@
   "emb": 4.9,
   "verdict": "safe for embroidery and print"
  },
+ "am-alamo": {
+  "dtg": 0.0,
+  "emb": 15.6,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-alamo-hat": {
+  "dtg": 0.0,
+  "emb": 10.8,
+  "verdict": "safe for embroidery and print"
+ },
  "gh-bodoni-hat": {
   "dtg": 1.5,
   "emb": 31.2,
   "verdict": "print only at this size"
  },
  "gh-playfair-hat": {
-  "dtg": 2.0,
+  "dtg": 1.9,
   "emb": 11.8,
   "verdict": "safe for embroidery and print"
  },

@@ -16,6 +16,11 @@ strap line carries his motto where Gruene carries "Texas' Oldest Dance Hall".
 **Marquee** follows the Alamo Drafthouse marquee from the original photo: heavy
 caps stacked tight, hairline rules above and below, tagline underneath.
 
+On that sign the word ALAMO and the words DRAFTHOUSE CINEMA are set in two
+different faces. DRAFTHOUSE CINEMA is plain Futura Std Bold, which the Alamo
+brand manual names as its primary face. ALAMO is a custom logotype, confirmed by
+the manual itself, so there is no font to buy. `am-alamo` rebuilds it.
+
 ## Files
 
 | File | What it is |
@@ -26,6 +31,8 @@ caps stacked tight, hairline rules above and below, tagline underneath.
 | `marks/gh-playfair.svg` | Dance hall, Playfair Display Black + Kaushan Script. Heavier script. |
 | `marks/gh-playfair-hat.svg` | Same, small format. The only dance hall mark that clears embroidery. |
 | `marks/gh-rye.svg` | Dance hall, Rye + Great Vibes. Reads more saloon. |
+| `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Poppins Black with a constructed arch A. |
+| `marks/am-alamo-hat.svg` | Same, small format. |
 | `marks/am-archivo.svg` | Marquee, Archivo Expanded Black. Closest to the marquee photo. |
 | `marks/am-archivo-hat.svg` | Same, small format. |
 | `marks/am-jost.svg` | Marquee, Jost. Jost is an open Futura, and Futura Std Bold is what the Alamo brand manual actually specifies. |
@@ -46,6 +53,29 @@ The swash under the script word is drawn, not set. No font ships that gesture,
 and it is the thing that makes the layout read as a dance hall sign rather than
 an underline.
 
+## The rebuilt Alamo A
+
+Poppins Black is the base because it matches the reference on the two things
+that can actually be measured off the artwork: stem width to cap height, 0.314
+against roughly 0.31, and an O with an aspect ratio of 1.001, meaning a true
+circle. Every other candidate was further off on one or both.
+
+What Poppins does not have is the A. The Alamo A has no pointed apex. It is a
+half round arch on two vertical legs with a low crossbar, essentially an `n`
+with a bar through it. `src/archa.py` constructs that letter from the base
+font's own stem width and cap height and writes it back into the `glyf` table,
+so shaping, kerning and every existing code path keep working with no special
+cases.
+
+His name needs only that one substitution. The other oddities on the sign are
+the angled foot on the L and the arch built M, and neither letter appears in
+BRANDON HOWARD.
+
+Typeface designs are not copyrightable in the United States, and this is a
+letter drawn from geometry rather than a copy of anyone's outline. Their logo as
+a whole is protected, which is why none of the marquee housing, the badge shape
+or their name appears anywhere here.
+
 ## The measurements
 
 `src/strokes.json` holds a measured, not estimated, figure for every mark: the
@@ -60,19 +90,27 @@ exactly the ink thinner than a given width.
 
 The headline result: at hat size the Bodoni and Alex Brush mark loses 31 percent
 of its ink to strokes too fine to stitch, while the Playfair and Kaushan small
-format lockup loses 12 percent and clears. This is the same class of failure
+format lockup loses 12 percent and clears. The Alamo lettering is the strongest
+distinctive option in the set, losing nothing at all below the print threshold
+and clearing embroidery outright in small format at 10.8 percent. This is the same class of failure
 already seen on Bob's BD mark, where fine strokes dropped out below about three
 and a half inches on DTG.
 
-So the intended shape is a small family: the Bodoni mark for tee fronts, posters
-and the website, and the Playfair small format lockup for hats and pockets.
+So the intended shape is a small family rather than one file. In the dance hall
+direction that means the Bodoni mark for tee fronts, posters and the website with
+the Playfair small format lockup for hats and pockets. The Alamo lettering needs
+no such split, since it holds up at both sizes on its own.
 
 ## Licensing
 
 All faces are SIL Open Font License 1.1, which permits merchandise sold for
 money with no fee and no attribution on the product. That was a deliberate
 choice over the actual Alamo faces, which are commercial licences that would
-have to be bought. Notices are in `fonts/LICENSES.md` and must stay with the
+have to be bought. `AlamoLike-Black.ttf` is a derivative of Poppins and inherits
+the same licence, which the OFL expressly permits provided it is not sold on its
+own as a font. Poppins declares no Reserved Font Name, so renaming was not
+strictly required; it was renamed anyway so it cannot collide with a real
+Poppins install. Notices are in `fonts/LICENSES.md` and must stay with the
 font files.
 
 ## The Gruene resemblance
@@ -90,6 +128,7 @@ the venue.
 
 ```
 cd src
+python archa.py     # builds AlamoLike-Black.ttf, the arch-A derivative
 python build.py     # regenerates every SVG into ../marks
 python sheet.py     # builds the option cards
 python shell.py     # assembles marks-sheet.html

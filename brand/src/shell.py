@@ -7,7 +7,7 @@ HEAD = """<title>Brandon Howard Marks</title>
 /* Palette is lifted from Brandon's site tokens so this sits inside the identity
    that already exists: ink, paper, brass. Neutrals are warmed toward the brass
    rather than left as flat grey. The page face is deliberately the plain system
-   stack: ten logotypes are the subject here, and any characterful page type
+   stack: the logotypes are the subject here, and any characterful page type
    would compete with the thing being judged. */
 :root {
   --bg:#FBF7EF; --surface:#FFFFFF; --line:#E0D6C4; --line2:#EFE7D9;
@@ -95,13 +95,14 @@ BODY = """
 <div class="wrap">
 <p class="eyebrow">Merch identity, first pass</p>
 <h1>Brandon Howard</h1>
-<p class="lead">Six candidate marks in two directions, each shown on a light and a
-dark garment, then tested at the size that actually breaks logos: a four inch hat
-front.</p>
+<p class="lead">Seven candidate marks in two directions, each shown on a light and
+a dark garment, then tested at the size that actually breaks logos: a four inch
+hat front.</p>
 
 <div class="callout">
 <p><strong>Two directions, because you named two references.</strong> The first was
-the Alamo Drafthouse marquee, which is heavy squared caps. The second was the
+the Alamo Drafthouse marquee, specifically the ALAMO word rather than the
+DRAFTHOUSE CINEMA line under it, which are two different faces. The second was the
 Gruene Hall sign, which is a different animal: a word arched across the top, a
 big script underneath carrying a swash, and a small letterspaced strap line below
 that. Both are built here so you can see them side by side.</p>
@@ -122,8 +123,11 @@ __DANCE__
 <div class="sechead">
 <h2>Direction two, marquee</h2>
 <h3 style="font-size:22px;margin-top:4px">Stacked caps in a ruled panel</h3>
-<p>The original Alamo Drafthouse reference. Heavy caps, wide tracking, hairline
-rules above and below, tagline underneath.</p>
+<p>The original Alamo Drafthouse reference. Worth being precise about which
+half: on that marquee the word ALAMO and the words DRAFTHOUSE CINEMA are set in
+two different faces. DRAFTHOUSE CINEMA is plain Futura Std Bold, which is the
+primary face their brand manual names. ALAMO is something else entirely, and it
+is the one worth having.</p>
 </div>
 __MARQ__
 </section>
@@ -132,8 +136,8 @@ __MARQ__
 <div class="sechead">
 <h2>What the numbers mean</h2>
 </div>
-<p>Every mark was rendered at exactly four inches wide at 300 dpi and measured for
-how much of its ink sits in strokes too fine for a given process. A morphological
+<p>Twelve marks were rendered at exactly four inches wide at 300 dpi and measured
+for how much of their ink sits in strokes too fine for a given process. A morphological
 opening removes precisely the ink thinner than a given width, so the percentages
 are measured rather than estimated.</p>
 <div class="scroll">
@@ -161,8 +165,10 @@ fronts, posters, backdrops and the website.</li>
 <li><strong>Playfair + Kaushan, small format</strong> for hats and pockets. Same
 layout and the same idea, built to survive stitching. It is the only dance hall
 option that clears the embroidery threshold.</li>
-<li>The marquee direction is the fallback if Brandon wants something blunter.
-<strong>Archivo Expanded</strong> is the closest to your original photo.</li>
+<li>In the marquee direction, take <strong>Alamo lettering</strong>. It is the
+actual ALAMO letterform rather than a lookalike, and on the measurements it is
+the strongest distinctive option in the whole set: nothing at all below the
+print threshold, and the small format lockup clears embroidery outright.</li>
 </ul>
 </section>
 
@@ -172,10 +178,15 @@ option that clears the embroidery threshold.</li>
 </div>
 <p><strong>Fonts are clear.</strong> Every face here is under the SIL Open Font
 License: Bodoni Moda, Alex Brush, Playfair Display, Kaushan Script, Rye, Great
-Vibes, Archivo, Jost and Anton. That licence permits commercial use including
+Vibes, Archivo, Jost, Anton and Poppins. That licence permits commercial use including
 merchandise sold for money, with no fee and no attribution needed on the product.
 This was chosen deliberately over the actual Alamo faces, which are commercial
 licences he would have to buy.</p>
+<p><strong>On the rebuilt Alamo A.</strong> Typeface designs are not copyrightable
+in the United States, and this is in any case a letter drawn from geometry rather
+than a copy of their outline. What is protected is their logo as a whole, which
+is why none of the marquee housing, the badge shape or their name appears
+anywhere here.</p>
 <p><strong>On the Gruene resemblance.</strong> What is borrowed is a layout
 convention, an arched word over a script over a strap line, which is common to
 dozens of Texas dance halls and roadhouses and is not something anyone owns. The
