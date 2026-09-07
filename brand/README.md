@@ -1,4 +1,4 @@
-# Brandon Howard, merch marks
+# The Brandon Howard Band, merch marks
 
 First pass at a logo for merch. Nothing here is approved yet. Open
 `marks-sheet.html` in a browser to compare everything side by side on light and
@@ -10,11 +10,19 @@ Bob named two references, so both are built.
 
 **Dance hall** follows the Gruene Hall sign: a word arched across the top, a
 large script beneath it carrying a swash, and a small letterspaced strap line
-under that. BRANDON takes the GRUENE slot, Howard takes the Hall slot, and the
-strap line carries his motto where Gruene carries "Texas' Oldest Dance Hall".
+under that. BRANDON takes the GRUENE slot, Howard takes the Hall slot, THE sits
+above the arch, and BAND takes the strap line position where Gruene carries
+"Texas' Oldest Dance Hall". The whole name then reads straight down the mark.
+
+`gh-bodoni-tag` maps the name the other way, and is actually the closer parallel:
+Gruene arches the identifying word and puts the type word in script, so that
+variant arches BRANDON HOWARD and lets Band carry the script.
 
 **Marquee** follows the Alamo Drafthouse marquee from the original photo: heavy
-caps stacked tight, hairline rules above and below, tagline underneath.
+caps stacked tight, hairline rules above and below, tagline underneath. THE and
+BAND are set into breaks in those rules rather than given lines of their own,
+which keeps BRANDON and HOWARD as the only full height lines instead of turning
+the mark into a four deck stack.
 
 On that sign the word ALAMO and the words DRAFTHOUSE CINEMA are set in two
 different faces. DRAFTHOUSE CINEMA is plain Futura Std Bold, which the Alamo
@@ -26,10 +34,10 @@ the manual itself, so there is no font to buy. `am-alamo` rebuilds it.
 | File | What it is |
 |---|---|
 | `marks/gh-bodoni.svg` | Dance hall, Bodoni Moda Black + Alex Brush. Closest to the Gruene reference. |
-| `marks/gh-bodoni-tag.svg` | Same, strap line swapped for the tagline. |
+| `marks/gh-bodoni-tag.svg` | Dance hall, the other mapping: BRANDON HOWARD arched over Band in script. |
 | `marks/gh-bodoni-hat.svg` | Same, strap line removed for small placements. |
 | `marks/gh-playfair.svg` | Dance hall, Playfair Display Black + Kaushan Script. Heavier script. |
-| `marks/gh-playfair-hat.svg` | Same, small format. The only dance hall mark that clears embroidery. |
+| `marks/gh-playfair-hat.svg` | Same, small format. Strongest of the dance hall set. |
 | `marks/gh-rye.svg` | Dance hall, Rye + Great Vibes. Reads more saloon. |
 | `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Poppins Black with a constructed arch A. |
 | `marks/am-alamo-hat.svg` | Same, small format. |
@@ -103,18 +111,28 @@ exactly the ink thinner than a given width.
 | 0.42 mm | Screen print, DTG | Below this, ink bridges or drops out. Every mark here is comfortable. |
 | 1.10 mm | Embroidery | A stitch cannot render a finer stroke. This is what decides hats. |
 
-The headline result: at hat size the Bodoni and Alex Brush mark loses 31 percent
-of its ink to strokes too fine to stitch, while the Playfair and Kaushan small
-format lockup loses 12 percent and clears. The Alamo lettering is the strongest
-distinctive option in the set, losing nothing at all below the print threshold
-and clearing embroidery outright in small format at 10.6 percent. This is the same class of failure
+The headline result: at hat size the Bodoni and Alex Brush mark loses 33 percent
+of its ink to strokes too fine to stitch. The Alamo lettering is the strongest
+distinctive option, losing nothing at all below the print threshold and clearing
+embroidery in small format at 11.1 percent.
+
+The longer name cost something real here. Before BAND was added, the Playfair and
+Kaushan small format lockup cleared embroidery at 11.8 percent. A motto can be
+dropped for a small placement; BAND cannot, and the extra fine ink pushed that
+mark back to 13.6 percent. No dance hall version clears embroidery at four inches
+any more. This is the same class of failure
 already seen on Bob's BD mark, where fine strokes dropped out below about three
 and a half inches on DTG.
 
-So the intended shape is a small family rather than one file. In the dance hall
-direction that means the Bodoni mark for tee fronts, posters and the website with
-the Playfair small format lockup for hats and pockets. The Alamo lettering needs
-no such split, since it holds up at both sizes on its own.
+So the intended shape is a small family rather than one file: the Bodoni mark for
+tee fronts, posters and the website, and the Alamo mark wherever something has to
+survive small. The Alamo lettering needs no split of its own, since it holds up at
+both sizes.
+
+Hats need a decision either way. Three ways out: run the mark larger, since many
+hat fronts take four and a half to five inches; put the Alamo mark on hats and the
+dance hall mark on shirts; or have BAND redrawn heavier for the stitched version
+only.
 
 ## Licensing
 
@@ -155,8 +173,11 @@ tuning does not mean touching the geometry code in `logolib.py`.
 
 ## Open questions for Brandon
 
-- Which direction, and which strap line. Both current options came off the
-  website copy and neither has been through him.
+- Which direction, and which of the two ways of mapping the name.
+- Whether hats are definitely happening, since that decides how hard the
+  embroidery constraint bites.
+- The motto and tagline are placeholders. Both came off the website copy and
+  neither has been through him. They are optional in every mark, unlike BAND.
 - Whether he wants a monogram, a BH mark for sleeves, hat backs and a favicon.
 - Final files follow the pick: transparent PNG at print resolution, one colour
   and reversed versions, and a stitch ready simplification if hats go ahead.

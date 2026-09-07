@@ -2,7 +2,7 @@
 import io
 dance, marq = io.open('sheet_body.html', encoding='utf-8').read().split('\x00')
 
-HEAD = """<title>Brandon Howard Marks</title>
+HEAD = """<title>Brandon Howard Band Marks</title>
 <style>
 /* Palette is lifted from Brandon's site tokens so this sits inside the identity
    that already exists: ink, paper, brass. Neutrals are warmed toward the brass
@@ -94,10 +94,21 @@ a{color:var(--brass)}
 BODY = """
 <div class="wrap">
 <p class="eyebrow">Merch identity, first pass</p>
-<h1>Brandon Howard</h1>
+<h1>The Brandon Howard Band</h1>
 <p class="lead">Seven candidate marks in two directions, each shown on a light and
 a dark garment, then tested at the size that actually breaks logos: a four inch
 hat front.</p>
+
+<div class="callout">
+<p><strong>Now built for the full band name.</strong> Four words need two more
+slots than either reference gives you, and the two layouts solve it differently.
+The dance hall marks put THE above the arch and BAND in the strap line slot, so
+the name reads straight down. The marquee marks set THE and BAND into breaks in
+the rules, which keeps the two big words as the only full height lines.</p>
+<p>It cost something, and the cost is in the numbers below. A motto can be
+dropped for a small placement. BAND cannot, so the small format lockups no longer
+get to shed their finest ink.</p>
+</div>
 
 <div class="callout">
 <p><strong>Two directions, because you named two references.</strong> The first was
@@ -113,8 +124,12 @@ that. Both are built here so you can see them side by side.</p>
 <h2>Direction one, dance hall</h2>
 <h3 style="font-size:22px;margin-top:4px">BRANDON arched, Howard in script</h3>
 <p>The Gruene layout you described, with BRANDON where GRUENE sits and Howard
-where Hall sits. The strap line at the bottom is where Gruene puts its own
-"Texas' Oldest Dance Hall" line, so it is carrying his motto instead.</p>
+where Hall sits. THE goes above the arch and BAND takes the strap line slot,
+where Gruene puts its own "Texas' Oldest Dance Hall" line.</p>
+<p>There is a second way to map the name onto this layout, shown inside the first
+card: arch BRANDON HOWARD and let Band carry the script. That is actually the
+closer parallel, since Gruene arches the identifying word and puts the type word
+in script. It reads differently, so it is worth a look before you settle.</p>
 </div>
 __DANCE__
 </section>
@@ -123,6 +138,9 @@ __DANCE__
 <div class="sechead">
 <h2>Direction two, marquee</h2>
 <h3 style="font-size:22px;margin-top:4px">Stacked caps in a ruled panel</h3>
+<p>THE and BAND are set into breaks in the rules rather than given lines of their
+own. That is a real marquee device, and it means BRANDON and HOWARD stay the only
+full height lines instead of the mark becoming a four deck stack.</p>
 <p>The original Alamo Drafthouse reference. Worth being precise about which
 half: on that marquee the word ALAMO and the words DRAFTHOUSE CINEMA are set in
 two different faces. DRAFTHOUSE CINEMA is plain Futura Std Bold, which is the
@@ -162,13 +180,16 @@ mark:</p>
 <li><strong>Bodoni + Alex Brush</strong> as the primary. It is the one that
 actually looks like the reference you sent, and it is the right mark for tee
 fronts, posters, backdrops and the website.</li>
-<li><strong>Playfair + Kaushan, small format</strong> for hats and pockets. Same
-layout and the same idea, built to survive stitching. It is the only dance hall
-option that clears the embroidery threshold.</li>
-<li>In the marquee direction, take <strong>Alamo lettering</strong>. It is the
-actual ALAMO letterform rather than a lookalike, and on the measurements it is
-the strongest distinctive option in the whole set: nothing at all below the
-print threshold, and the small format lockup clears embroidery outright.</li>
+<li><strong>Alamo lettering</strong> if you want one mark that does everything.
+It is the actual ALAMO letterform rather than a lookalike, it puts nothing at all
+below the print threshold, and its small format lockup is the only distinctive
+option that still clears embroidery now the name is longer.</li>
+<li><strong>Hats need a decision.</strong> No dance hall version clears
+embroidery at four inches any more. Three ways out: run the mark larger, since
+many hat fronts take four and a half to five inches; put the Alamo mark on hats
+and the dance hall mark on shirts; or have BAND redrawn heavier for the stitched
+version only.</li>
+</ul>
 </ul>
 </section>
 
@@ -194,9 +215,9 @@ typefaces are different, the swash is drawn from scratch rather than traced, and
 the words are his. That is the line to stay on. What would not be fine is
 reproducing Gruene's own artwork or trading on their name, so the mark should
 never appear alongside anything implying a connection to the venue.</p>
-<p><strong>The strap line is a placeholder.</strong> It currently reads "Real
-Songs, No Apologies" with a tagline alternate. Both came off the website copy and
-neither has been through Brandon.</p>
+<p><strong>The motto and tagline are placeholders.</strong> "Real Songs, No
+Apologies" and "No Pretty Boy Country" both came off the website copy and neither
+has been through Brandon. They are optional in every mark here, unlike BAND.</p>
 </section>
 
 <section>
@@ -204,7 +225,9 @@ neither has been through Brandon.</p>
 <h2>To finish this</h2>
 </div>
 <ul>
-<li>Which direction, and which strap line.</li>
+<li>Which direction, and which of the two ways of mapping the name.</li>
+<li>Whether hats are definitely happening, since that decides how hard the
+embroidery constraint bites.</li>
 <li>Whether he wants a monogram, a BH mark for sleeves, hat backs and a favicon.</li>
 <li>Final files follow on the pick: layered SVG, transparent PNG at print
 resolution, one colour and reversed versions, and a stitch ready simplification

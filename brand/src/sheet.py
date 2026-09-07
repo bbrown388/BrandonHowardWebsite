@@ -25,20 +25,26 @@ def data(key, label):
 
 CARDS = [
  dict(k='gh-bodoni', hat='gh-bodoni-hat', alt='gh-bodoni-tag',
-      altlab='Strap line swapped for the tagline',
+      altlab='The other way to map the name onto this layout',
       title='Bodoni + Alex Brush', tag='Closest to the Gruene sign',
       faces='Bodoni Moda Black, Alex Brush',
       body='The high contrast serif and the fine looping script are what make the '
            'Gruene sign read the way it does, so this is the nearest thing to what '
-           'you pointed at. It is also the most fragile: those hairlines are the '
-           'reason the embroidery number below is poor.'),
+           'you pointed at. THE sits above the arch and BAND takes the strap line '
+           'slot, so the whole name reads straight down the mark. It is also the '
+           'most fragile of the set: those hairlines are why the embroidery number '
+           'below is poor. The version underneath maps the name the other way, the '
+           'way Gruene maps its own, with the identifying words arched and the type '
+           'word carrying the script.'),
  dict(k='gh-playfair', hat='gh-playfair-hat',
-      title='Playfair + Kaushan', tag='The one that survives a hat',
+      title='Playfair + Kaushan', tag='Best of the dance hall set',
       faces='Playfair Display Black, Kaushan Script',
       body='Same layout, heavier brush script. It gives up a little of the vintage '
-           'delicacy and gets back a mark that can actually be stitched. On the '
-           'measurements this is the only dance hall option that clears embroidery '
-           'at hat size.'),
+           'delicacy and gets back a far more robust mark. Worth knowing what the '
+           'longer name cost here: before BAND was added this cleared embroidery at '
+           'hat size outright. BAND cannot be dropped the way a motto can, and the '
+           'extra fine ink pushed it back over the line. It is still comfortably '
+           'the strongest of the three dance hall options for print.'),
  dict(k='gh-rye', hat='gh-rye',
       title='Rye + Great Vibes', tag='More saloon than dance hall',
       faces='Rye, Great Vibes',
