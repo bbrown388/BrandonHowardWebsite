@@ -366,6 +366,14 @@ marq('am-rye-arrows-crow', 'Rye, arrows and crow', 'Rye-Regular.ttf',
 marq('am-rye-arrows-crow-hat', 'Rye, arrows and crow, small format', 'Rye-Regular.ttf',
      tagline=None, rule_style='arrow', decorate=dec_crow, note='Hat lockup.')
 
+# Prune first. Without this, marks renamed or dropped in an earlier round stay on
+# disk forever and get copied onward, so the folder and the sheet quietly disagree.
+keep = {m['key'] + '.svg' for m in marks} | {
+    'device-arrow.svg', 'device-crossed-arrows.svg', 'device-crow.svg'}
+for _f in os.listdir(OUT):
+    if _f.endswith('.svg') and _f not in keep:
+        os.remove(os.path.join(OUT, _f))
+
 for m in marks:
     io.open(os.path.join(OUT, m['key'] + '.svg'), 'w', encoding='utf-8', newline='\n').write(
         svg(m['body'], m['box'], fg='#141210'))
