@@ -163,15 +163,15 @@ inbox. Send one test message and click the link they email back.
 The form carries a hidden honeypot (`_honey`), a set subject line, and table-formatted
 delivery. Fields are name, email, date, venue or city, and details.
 
-**Why not GigSync?** bobdavismusic.com does not use FormSubmit either; its fan capture posts
-to GigSync's own public endpoint. GigSync would be the better home for this, and it already
-has most of the machinery: a `booking_leads` table with venue, contact, date and fee fields, a
-`booking_inquiry` notification type, and a public route namespace at `/p/`.
+**Deliberately not routed through GigSync**, or through anything else Bob owns. Bob's call,
+and it is the same principle that keeps the former manager's address off this page: **Brandon's
+booking should not depend on infrastructure another person controls.** A site built to get him
+out of one dependency should not quietly create a new one. FormSubmit is a commodity that can
+be swapped for any equivalent in two edits, and Brandon can take the whole thing elsewhere
+without asking anyone.
 
-**What it does not have is a public submission endpoint.** `api/src/routes/bookingLeads.js`
-opens with `router.use(requireAuth)`, so leads can only be created from inside the dashboard.
-A visitor on an artist's website cannot post one. That gap is the only reason this form uses a
-third party. See the note at the end of this file.
+Same reasoning applies to the merch link below, which is a temporary arrangement rather than
+an architecture.
 
 ### 2. Merch link
 
@@ -272,33 +272,3 @@ the registration, which currently sits on a third party's nameservers.
 from `howardcountymusic.com` to it so existing links and search history carry over. That
 needs control of the old domain, which may not be available — another reason to establish
 who holds what before committing to a destination.
-
----
-
-## Product note for GigSync
-
-Building this site surfaced a real gap, and Brandon is the concrete use case.
-
-**An artist's own website cannot feed the GigSync booking pipeline.** Everything else is
-already built:
-
-| Piece | Status |
-|---|---|
-| `booking_leads` table with venue, contact, date, fee | exists |
-| `booking_inquiry` notification type | exists |
-| Public unauthenticated route namespace `/p/` | exists |
-| Public fan capture at `/p/:artistId/fan-signup` | exists, and bobdavismusic.com uses it |
-| **Public booking submission** | **missing** |
-
-`bookingLeads.js` is entirely behind `requireAuth`, so booking leads can only be entered by
-the artist from the dashboard. The obvious counterpart to the existing fan-signup route would
-be **`POST /p/:artistId/booking-lead`**, writing straight into the same pipeline with the same
-rate limiting and honeypot treatment the fan endpoint already uses.
-
-The payoff: any GigSync artist could drop a booking form on their own site and have enquiries
-land in their lead funnel instead of an inbox, already deduped by the normalized key that
-`bookingLeads.js` computes. That is a reason to be a GigSync customer that a form service
-cannot match.
-
-**If that shipped, this site's booking form should switch to it**, and the FormSubmit
-dependency goes away.
