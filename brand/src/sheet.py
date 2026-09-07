@@ -24,7 +24,7 @@ def data(key, label):
             % (label, s['dtg'], tone, s['emb'], tone, s['verdict']))
 
 CARDS = [
- dict(k='gh-bodoni', hat='gh-bodoni-hat', alt='gh-bodoni-tag',
+ dict(k='gh-bodoni', g='dance', hat='gh-bodoni-hat', alt='gh-bodoni-tag',
       altlab='The other way to map the name onto this layout',
       title='Bodoni + Alex Brush', tag='Closest to the Gruene sign',
       faces='Bodoni Moda Black, Alex Brush',
@@ -36,7 +36,7 @@ CARDS = [
            'below is poor. The version underneath maps the name the other way, the '
            'way Gruene maps its own, with the identifying words arched and the type '
            'word carrying the script.'),
- dict(k='gh-playfair', hat='gh-playfair-hat',
+ dict(k='gh-playfair', g='dance', hat='gh-playfair-hat',
       title='Playfair + Kaushan', tag='Best of the dance hall set',
       faces='Playfair Display Black, Kaushan Script',
       body='Same layout, heavier brush script. It gives up a little of the vintage '
@@ -45,13 +45,13 @@ CARDS = [
            'hat size outright. BAND cannot be dropped the way a motto can, and the '
            'extra fine ink pushed it back over the line. It is still comfortably '
            'the strongest of the three dance hall options for print.'),
- dict(k='gh-rye', hat='gh-rye',
+ dict(k='gh-rye', g='dance', hat='gh-rye',
       title='Rye + Great Vibes', tag='More saloon than dance hall',
       faces='Rye, Great Vibes',
       body='A western slab arch over a formal script. It leans further into old '
            'Texas than the Gruene sign does. Worth seeing, but the thinnest of the '
            'set by a distance.'),
- dict(k='am-slab', hat='am-slab-hat', alt='am-slab-ultra',
+ dict(k='am-slab', g='marq', hat='am-slab-hat', alt='am-slab-ultra',
       altlab='Ultra, the same idea pushed heavier and quirkier',
       title='Alfa Slab One', tag='The honky-tonk poster',
       faces='Alfa Slab One',
@@ -60,41 +60,70 @@ CARDS = [
            'looks like it was printed on a letterpress bill for a Saturday night '
            'show. If the objection to the first one was that it felt too clean '
            'and modern, this is the direct answer.'),
- dict(k='am-rye', hat='am-rye-hat',
-      title='Rye', tag='The most overtly Texas',
-      faces='Rye',
-      body='Western slab with spurred terminals. Saloon door, rodeo bill, Lone '
-           'Star. It is the least ambiguous about where the band is from, which '
-           'is either exactly right or a bit on the nose depending on how much '
-           'he wants the hat to do the talking.'),
- dict(k='am-oswald', hat='am-oswald-hat',
+ dict(k='am-oswald', g='marq', hat='am-oswald-hat',
       title='Oswald Bold', tag='Already his website face',
       faces='Oswald Bold',
       body='Condensed gothic. Lean, hard and modern, with none of the roundness '
            'of the first attempt. It is also the display face already running on '
            'his site, so this is the only option that ties the mark to something '
            'that exists rather than starting a second visual language.'),
- dict(k='am-stencil', hat='am-stencil-hat',
+ dict(k='am-stencil', g='marq', hat='am-stencil-hat',
       title='Black Ops One', tag='Least pretty by a distance',
       faces='Black Ops One',
       body='Stencil, with the breaks cut through the strokes. It reads military '
            'more than country, which may be too far, but for a band whose tagline '
            'is No Pretty Boy Country it is the one that argues hardest for the '
            'line.'),
- dict(k='am-varsity', hat='am-varsity-hat',
+ dict(k='am-varsity', g='marq', hat='am-varsity-hat',
       title='Graduate', tag='Vintage varsity',
       faces='Graduate',
       body='Collegiate slab, the lettering off an old letterman jacket or a '
            'stadium scoreboard. It reads American and vintage without going to '
            'the saloon, which makes it the most versatile of the set. It is also '
            'the lightest, so watch the measurements.'),
- dict(k='am-alamo', hat='am-alamo-hat',
+ dict(k='am-alamo', g='marq', hat='am-alamo-hat',
       title='Alamo lettering', tag='What he turned down',
       faces='Poppins Black with a constructed flat-topped A',
       body='Kept here only so the comparison is honest. This is the rebuild of the '
            'custom ALAMO lettering, and the reason it probably did not land is that '
            'the underlying face is geometric and round, which reads friendly. Every '
            'option above moves away from that in a different direction.'),
+ dict(k='am-rye', g='west', hat='am-rye-hat',
+      title='Rye', tag='The one you liked',
+      faces='Rye',
+      body='Spurred western slab. Saloon door, rodeo bill, Lone Star, and the '
+           'least ambiguous about where the band is from of anything built so far. '
+           'The problem was never the character. It is that the spurs are '
+           'hairlines, so it loses 46 per cent of its ink at hat size. Everything '
+           'below keeps the flavour and adds weight.'),
+ dict(k='am-sancreek', g='west', hat='am-sancreek-hat',
+      title='Sancreek', tag='Best of the western set',
+      faces='Sancreek',
+      body='The same spurred western language with more ink in the stems. If what '
+           'you liked was specifically the western lettering rather than the general '
+           'vintage feel, this is the one to hold up against Rye first. It is also '
+           'the strongest of this group on the measurements by a clear margin, '
+           'turning Rye 46 per cent into 14.'),
+ dict(k='am-swanky', g='west', hat='am-swanky-hat',
+      title='Fontdiner Swanky', tag='More swagger',
+      faces='Fontdiner Swanky',
+      body='Vintage American with flared spurs rather than square ones. Less rodeo, '
+           'more roadhouse sign, with a bit of movement in the letterforms that the '
+           'straighter faces do not have.'),
+ dict(k='am-bevan', g='west', hat='am-bevan-hat',
+      title='Bevan', tag='Looks tougher than it measures',
+      faces='Bevan',
+      body='Heavy Egyptian slab, and unmistakably old American printing. I expected '
+           'this to be the durable one, since it drops the spurs entirely, and the '
+           'measurement says otherwise: its serif brackets and the thin horizontals '
+           'in the small type give it the worst full size number in the western set. '
+           'Good for shirts and posters, poor for stitching.'),
+ dict(k='am-rammetto', g='west', hat='am-rammetto-hat',
+      title='Rammetto One', tag='Heaviest of the group',
+      faces='Rammetto One',
+      body='The heaviest thing in the whole set. Poster weight with softened '
+           'corners. Furthest from Rye in detail, but doing the same job: loud, '
+           'vintage and American, and it holds at any size you throw at it.'),
 ]
 
 def card(c):
@@ -125,7 +154,10 @@ def card(c):
                  data(c['k'], 'Full size, 4 in wide'),
                  data(c['hat'], 'Small format lockup'))
 
-dance = ''.join(card(c) for c in CARDS[:3])
-marq  = ''.join(card(c) for c in CARDS[3:])
-io.open('sheet_body.html', 'w', encoding='utf-8', newline='\n').write(dance + '\x00' + marq)
-print('  cards built: %d dance hall, %d marquee' % (3, 3))
+dance = ''.join(card(c) for c in CARDS if c.get('g') == 'dance')
+marq  = ''.join(card(c) for c in CARDS if c.get('g') == 'marq')
+west  = ''.join(card(c) for c in CARDS if c.get('g') == 'west')
+io.open('sheet_body.html', 'w', encoding='utf-8', newline='\n').write(
+    chr(0).join([dance, marq, west]))
+print('  cards built: %d dance hall, %d marquee, %d western'
+      % tuple(sum(1 for c in CARDS if c.get('g') == g) for g in ('dance', 'marq', 'west')))

@@ -54,8 +54,38 @@
   "emb": 15.3,
   "verdict": "print fine, embroidery needs it larger"
  },
+ "am-oswald": {
+  "dtg": 0.0,
+  "emb": 6.9,
+  "verdict": "safe for embroidery and print"
+ },
+ "am-oswald-hat": {
+  "dtg": 0.0,
+  "emb": 6.5,
+  "verdict": "safe for embroidery and print"
+ },
+ "am-stencil": {
+  "dtg": 0.2,
+  "emb": 18.3,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-stencil-hat": {
+  "dtg": 0.2,
+  "emb": 13.9,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-varsity": {
+  "dtg": 5.8,
+  "emb": 21.7,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-varsity-hat": {
+  "dtg": 1.6,
+  "emb": 18.4,
+  "verdict": "print fine, embroidery needs it larger"
+ },
  "am-rye": {
-  "dtg": 4.9,
+  "dtg": 4.8,
   "emb": 45.7,
   "verdict": "print only at this size"
  },
@@ -64,34 +94,44 @@
   "emb": 42.9,
   "verdict": "print only at this size"
  },
- "am-oswald": {
-  "dtg": 0.0,
-  "emb": 6.9,
-  "verdict": "safe for embroidery and print"
- },
- "am-oswald-hat": {
-  "dtg": 0.0,
-  "emb": 2.4,
-  "verdict": "safe for embroidery and print"
- },
- "am-stencil": {
-  "dtg": 0.3,
-  "emb": 17.5,
+ "am-sancreek": {
+  "dtg": 1.1,
+  "emb": 13.9,
   "verdict": "print fine, embroidery needs it larger"
  },
- "am-stencil-hat": {
-  "dtg": 0.2,
-  "emb": 14.4,
+ "am-sancreek-hat": {
+  "dtg": 0.5,
+  "emb": 14.3,
   "verdict": "print fine, embroidery needs it larger"
  },
- "am-varsity": {
-  "dtg": 5.7,
-  "emb": 21.9,
+ "am-swanky": {
+  "dtg": 3.7,
+  "emb": 27.0,
   "verdict": "print fine, embroidery needs it larger"
  },
- "am-varsity-hat": {
-  "dtg": 1.6,
-  "emb": 17.0,
+ "am-swanky-hat": {
+  "dtg": 1.3,
+  "emb": 20.0,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-bevan": {
+  "dtg": 2.6,
+  "emb": 51.6,
+  "verdict": "print only at this size"
+ },
+ "am-bevan-hat": {
+  "dtg": 1.9,
+  "emb": 26.8,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-rammetto": {
+  "dtg": 4.6,
+  "emb": 26.0,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-rammetto-hat": {
+  "dtg": 2.2,
+  "emb": 15.8,
   "verdict": "print fine, embroidery needs it larger"
  }
 }

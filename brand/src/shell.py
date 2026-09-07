@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import io
-dance, marq = io.open('sheet_body.html', encoding='utf-8').read().split('\x00')
+dance, marq, west = io.open('sheet_body.html', encoding='utf-8').read().split(chr(0))
 
 HEAD = """<title>Brandon Howard Band Marks</title>
 <style>
@@ -95,9 +95,9 @@ BODY = """
 <div class="wrap">
 <p class="eyebrow">Merch identity, first pass</p>
 <h1>The Brandon Howard Band</h1>
-<p class="lead">Nine candidate marks in two directions, each shown on a light and
-a dark garment, then tested at the size that actually breaks logos: a four inch
-hat front.</p>
+<p class="lead">Thirteen candidate marks in three directions, each shown on a
+light and a dark garment, then tested at the size that actually breaks logos: a
+four inch hat front.</p>
 
 <div class="callout">
 <p><strong>Now built for the full band name.</strong> Four words need two more
@@ -111,7 +111,7 @@ get to shed their finest ink.</p>
 </div>
 
 <div class="callout">
-<p><strong>Two directions, because you named two references.</strong> The first was
+<p><strong>Three directions now.</strong> The first was
 the Alamo Drafthouse marquee, specifically the ALAMO word rather than the
 DRAFTHOUSE CINEMA line under it, which are two different faces. The second was the
 Gruene Hall sign, which is a different animal: a word arched across the top, a
@@ -154,6 +154,23 @@ __MARQ__
 
 <section>
 <div class="sechead">
+<h2>Direction three, western</h2>
+<h3 style="font-size:22px;margin-top:4px">Spurs, slabs and rodeo bills</h3>
+<p>Iterating on Rye, which stays at the top of the group so it can be compared
+directly. Its problem was never the character. The spurs are hairlines, so it
+loses 46 per cent of its ink at hat size, and the four below hold the flavour
+while carrying more weight.</p>
+<p>Worth saying plainly: this direction is expensive for embroidery no matter
+which face you pick. Spurs, brackets and thin horizontals are what make lettering
+read as western, and they are exactly what a stitch cannot hold. Nothing in this
+group clears the embroidery threshold. Sancreek gets closest and turns Rye 46 per
+cent into 14.</p>
+</div>
+__WEST__
+</section>
+
+<section>
+<div class="sechead">
 <h2>What the numbers mean</h2>
 </div>
 <p>Twelve marks were rendered at exactly four inches wide at 300 dpi and measured
@@ -189,9 +206,11 @@ solves the hat problem outright.</li>
 the strongest answer to the specific objection, since it is about as far from
 clean and geometric as you can get without a novelty face, and it still clears
 embroidery in small format at 10.2 per cent.</li>
-<li><strong>Rye is print only.</strong> It is the most obviously Texan thing
-here and its spurs are hairlines, so it loses 46 per cent of its ink at hat size.
-Shirts and posters only, or not at all.</li>
+<li><strong>If the western direction wins, it is Sancreek and it costs you
+hats.</strong> Rye is print only at 46 per cent, and Sancreek is the best of the
+group at 14, but nothing western clears the embroidery bar. That is not a bad
+face choice, it is the direction itself: spurs and brackets are what make
+lettering read western and they are what a stitch cannot hold.</li>
 <li><strong>Bodoni + Alex Brush</strong> stays the pick in the dance hall
 direction, for tee fronts, posters, backdrops and the website.</li>
 </ul>
@@ -204,7 +223,8 @@ direction, for tee fronts, posters, backdrops and the website.</li>
 </div>
 <p><strong>Fonts are clear.</strong> Every face here is under the SIL Open Font
 License: Bodoni Moda, Alex Brush, Playfair Display, Kaushan Script, Rye, Great
-Vibes, Alfa Slab One, Oswald, Black Ops One, Graduate, Ultra and Poppins. That licence permits commercial use including
+Vibes, Alfa Slab One, Oswald, Black Ops One, Graduate, Ultra, Sancreek, Fontdiner
+Swanky, Bevan, Rammetto One and Poppins. That licence permits commercial use including
 merchandise sold for money, with no fee and no attribution needed on the product.
 This was chosen deliberately over the actual Alamo faces, which are commercial
 licences he would have to buy.</p>
@@ -243,5 +263,7 @@ if hats are going ahead.</li>
 """
 
 io.open('brandon-marks.html', 'w', encoding='utf-8', newline='\n').write(
-    HEAD + BODY.replace('__DANCE__', dance).replace('__MARQ__', marq))
+    HEAD + BODY.replace('__DANCE__', dance)
+               .replace('__MARQ__', marq)
+               .replace('__WEST__', west))
 print('  brandon-marks.html written')

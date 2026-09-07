@@ -206,11 +206,6 @@ marq('am-slab-hat', 'Alfa Slab One, small format', 'AlfaSlabOne-Regular.ttf', ta
 marq('am-slab-ultra', 'Ultra', 'Ultra-Regular.ttf',
      note='Same idea pushed heavier and quirkier. Tighter fit, more 1970s.')
 
-# Western, spurred. The most overtly Texas of the set.
-marq('am-rye', 'Rye', 'Rye-Regular.ttf',
-     note='Western slab with spurred terminals. Saloon and rodeo poster.')
-marq('am-rye-hat', 'Rye, small format', 'Rye-Regular.ttf', tagline=None, note='Hat lockup.')
-
 # Condensed gothic. Also already the display face on his website, so this is the
 # one option that ties the mark to something that exists.
 marq('am-oswald', 'Oswald Bold', 'Oswald-Bold.ttf',
@@ -228,6 +223,35 @@ marq('am-stencil-hat', 'Black Ops One, small format', 'BlackOpsOne-Regular.ttf',
 marq('am-varsity', 'Graduate', 'Graduate-Regular.ttf',
      note='Collegiate varsity slab. Vintage American sport rather than saloon.')
 marq('am-varsity-hat', 'Graduate, small format', 'Graduate-Regular.ttf', tagline=None,
+     note='Hat lockup.')
+
+# ── Western ─────────────────────────────────────────────────────────────────
+# Iterating on Rye. Its problem was never the character, it was that the spurs
+# are hairlines, so 46 per cent of its ink vanishes at hat size. These hold the
+# spurred, vintage American flavour while carrying progressively more weight,
+# ordered from most decorative to most robust.
+marq('am-rye', 'Rye', 'Rye-Regular.ttf',
+     note='The original. Spurred western slab, saloon and rodeo poster.')
+marq('am-rye-hat', 'Rye, small format', 'Rye-Regular.ttf', tagline=None, note='Hat lockup.')
+
+marq('am-sancreek', 'Sancreek', 'Sancreek-Regular.ttf',
+     note='The closest sibling to Rye: same spurred western language, more ink in the stems.')
+marq('am-sancreek-hat', 'Sancreek, small format', 'Sancreek-Regular.ttf', tagline=None,
+     note='Hat lockup.')
+
+marq('am-swanky', 'Fontdiner Swanky', 'FontdinerSwanky-Regular.ttf',
+     note='Vintage American with flared spurs. More personality, less rodeo.')
+marq('am-swanky-hat', 'Fontdiner Swanky, small format', 'FontdinerSwanky-Regular.ttf',
+     tagline=None, note='Hat lockup.')
+
+marq('am-bevan', 'Bevan', 'Bevan-Regular.ttf',
+     note='Heavy Egyptian slab. Drops the spurs and gains a lot of robustness.')
+marq('am-bevan-hat', 'Bevan, small format', 'Bevan-Regular.ttf', tagline=None,
+     note='Hat lockup.')
+
+marq('am-rammetto', 'Rammetto One', 'RammettoOne-Regular.ttf',
+     note='The heaviest here. Poster weight, softened corners, hardest to break.')
+marq('am-rammetto-hat', 'Rammetto One, small format', 'RammettoOne-Regular.ttf', tagline=None,
      note='Hat lockup.')
 
 for m in marks:

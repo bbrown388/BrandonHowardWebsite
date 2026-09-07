@@ -41,11 +41,33 @@ the manual itself, so there is no font to buy. `am-alamo` rebuilds it.
 | `marks/gh-rye.svg` | Dance hall, Rye + Great Vibes. Reads more saloon. |
 | `marks/am-slab.svg` | Marquee, Alfa Slab One. Heavy Americana slab. |
 | `marks/am-slab-ultra.svg` | Marquee, Ultra. Same idea, heavier and quirkier. |
-| `marks/am-rye.svg` | Marquee, Rye. Western spurred slab. Print only, see measurements. |
 | `marks/am-oswald.svg` | Marquee, Oswald Bold. Condensed gothic, and his existing website face. |
 | `marks/am-stencil.svg` | Marquee, Black Ops One. Stencil. |
 | `marks/am-varsity.svg` | Marquee, Graduate. Collegiate varsity slab. |
 | `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Kept for comparison; Brandon turned the face down. |
+
+### Western
+
+Iterating on Rye. Its problem was never the character, it is that the spurs are
+hairlines, so it loses 46 percent of its ink at hat size. These hold the flavour
+while carrying more weight.
+
+| File | What it is | Embroidery, hat |
+|---|---|---|
+| `marks/am-rye.svg` | Rye. Spurred western slab, the original. | 42.9% |
+| `marks/am-sancreek.svg` | Sancreek. Same western language, more ink in the stems. | **14.3%** |
+| `marks/am-swanky.svg` | Fontdiner Swanky. Flared spurs, more swagger. | 20.0% |
+| `marks/am-bevan.svg` | Bevan. Heavy Egyptian slab. | 26.8% |
+| `marks/am-rammetto.svg` | Rammetto One. Poster weight, softened corners. | 15.8% |
+
+Nothing in the western group clears the 12 percent embroidery threshold, and that
+is the direction rather than the face choice: spurs, serif brackets and thin
+horizontals are what make lettering read western, and they are exactly what a
+stitch cannot hold. Sancreek is the best available compromise and turns Rye's 46
+percent into 14.
+
+Bevan is worth a note because it contradicts the obvious guess. It looks like the
+robust one, since it has no spurs at all, and it measures worst at full size.
 
 Every marquee mark has a `-hat` small format twin with the tagline removed.
 
