@@ -90,8 +90,19 @@ Extracted at full resolution and resized to 1600px, with a square 640px thumbnai
 
 **To change the selection**, edit the `PHOTOS` array near the bottom of
 `photos-videos.html`. Each entry needs `images/gallery/<name>.jpg` for the lightbox and
-`<name>-t.jpg` for the grid. Removing an entry removes the tile. The home-page strip is
-four hard-coded `<img>` tags in `index.html`, changed the same way.
+`<name>-t.jpg` for the grid. Removing an entry removes the tile. The home page carries a
+separate **full-bleed carousel** of eight, hard-coded as `<div class="slide">` entries in
+`index.html`.
+
+**How the carousel behaves.** The chevrons are visible at the edges, but **the entire
+picture is the control**: clicking left of the midpoint goes back, right of it goes forward.
+The cursor flips between `w-resize` and `e-resize` as the pointer crosses centre so the
+direction is obvious before committing. Arrow keys work when the carousel has focus, scoped
+that way so they do not steal the page's normal scrolling, and a 40px swipe works on touch
+without turning taps into swipes.
+
+The chevron handlers call `stopPropagation`, otherwise a chevron click would also register
+on the surface underneath and advance twice.
 
 The grid opens a keyboard-navigable lightbox using a native `<dialog>`, so arrow keys and
 Escape work without a library.

@@ -367,25 +367,75 @@
     .booking-form textarea { font-size: 16px; }
   }
 
-  /* ── Home photo strip ─────────────────────────────────────────────────── */
-  .strip {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 10px;
+  /* ── Home photo carousel ──────────────────────────────────────────────
+     Full-bleed and near-full-height, in the same spirit as the hero. Breaks out
+     of .inner with the 50vw margin trick, since the section itself is padded. */
+  .carousel {
+    position: relative;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50vw);
+    overflow: hidden;
+    background: #000;
+    /* Clicking the picture advances it, so the whole surface is a control.
+       The cursor is set per-half in JS to signal which way it will go. */
+    cursor: e-resize;
+    user-select: none;
   }
 
-  .strip a { display: block; overflow: hidden; aspect-ratio: 4/5; }
-
-  .strip img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform .45s ease, opacity .2s ease;
+  .track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
   }
 
-  .strip a:hover img, .strip a:focus-visible img { transform: scale(1.05); opacity: .88; }
+  @media (prefers-reduced-motion: reduce) { .track { transition: none; } }
 
-  .more {
-    text-align: center; margin-top: 30px;
+  .slide { min-width: 100%; }
+
+  .slide img {
+    width: 100%;
+    height: 76vh;
+    max-height: 820px;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;   /* clicks belong to the carousel, not the image */
   }
+
+  /* Thin chevrons at the far edges, matching the reference. Deliberately quiet:
+     the whole picture is clickable, so these are a signal and a keyboard
+     affordance rather than the only way through. */
+  .cx {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: none; border: 0; cursor: pointer;
+    color: rgba(242,234,220,.86);
+    font-size: 44px; line-height: 1;
+    padding: 18px 22px;
+    text-shadow: 0 2px 14px rgba(0,0,0,.8);
+    transition: color .15s ease;
+    z-index: 2;
+  }
+
+  .cx:hover, .cx:focus-visible { color: var(--brass); }
+  .cx:focus-visible { outline: 2px solid var(--brass); outline-offset: -6px; }
+  .cx-prev { left: 4px; }
+  .cx-next { right: 4px; }
+
+  .counter {
+    position: absolute; bottom: 16px; right: 20px; z-index: 2;
+    font-family: var(--display);
+    font-size: 12px; letter-spacing: .18em;
+    color: rgba(242,234,220,.72);
+    text-shadow: 0 1px 10px rgba(0,0,0,.85);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 700px) {
+    .slide img { height: 58vh; }
+    .cx { font-size: 34px; padding: 14px 12px; }
+  }
+
+  .more { text-align: center; margin-top: 30px; }
 
   .more a {
     display: inline-block;
@@ -541,19 +591,30 @@
   </div>
 </section>
 
-<!-- ── PHOTO STRIP ───────────────────────────────────────────────────────────
-     Four alternative shots on the way down the page, in the same spirit as the
-     hero. Portrait crops so they read as a row of frames rather than a second
-     hero. Links through to the full gallery. -->
+<!-- ── PHOTO CAROUSEL ───────────────────────────────────────────────────────
+     Full-bleed, near-full-height. Chevrons are visible but the entire picture is
+     the control: a click left of centre goes back, right of centre goes on.
+     Keyboard and swipe both work. Links through to the full gallery. -->
 <section class="alt">
-  <div class="inner">
-    <h2>Photos</h2>
-    <div class="strip">
-      <a href="photos-videos.html"><img src="images/gallery/bison-arms-crossed-t.jpg" alt="Arms crossed in the field, bison behind" loading="lazy" width="640" height="640"></a>
-      <a href="photos-videos.html"><img src="images/gallery/smoke-telecaster-t.jpg" alt="Playing a Telecaster in smoke and stage light" loading="lazy" width="640" height="640"></a>
-      <a href="photos-videos.html"><img src="images/gallery/fence-goldenhour-t.jpg" alt="Leaning on a fence line at golden hour" loading="lazy" width="640" height="640"></a>
-      <a href="photos-videos.html"><img src="images/gallery/acoustic-barn-bw-t.jpg" alt="Playing acoustic in a barn, black and white" loading="lazy" width="640" height="640"></a>
+  <div class="inner"><h2>Photos</h2></div>
+
+  <div class="carousel" id="car" role="group" aria-roledescription="carousel" aria-label="Photos of Brandon Howard">
+    <div class="track" id="track">
+      <div class="slide"><img src="images/gallery/bison-arms-crossed.jpg" alt="Arms crossed in the field, bison behind" width="1600" height="1004"></div>
+      <div class="slide"><img src="images/gallery/smoke-telecaster.jpg" alt="Playing a Telecaster in smoke and stage light" loading="lazy" width="1600" height="1352"></div>
+      <div class="slide"><img src="images/gallery/fence-goldenhour.jpg" alt="Leaning on a fence line at golden hour" loading="lazy" width="1600" height="996"></div>
+      <div class="slide"><img src="images/gallery/smoke-color.jpg" alt="Playing amid coloured smoke" loading="lazy" width="1600" height="1043"></div>
+      <div class="slide"><img src="images/gallery/acoustic-barn-bw.jpg" alt="Playing acoustic in a barn, black and white" loading="lazy" width="1600" height="952"></div>
+      <div class="slide"><img src="images/gallery/bison-portrait-bw.jpg" alt="Black and white portrait, bison behind" loading="lazy" width="1600" height="1107"></div>
+      <div class="slide"><img src="images/gallery/garage-smoke.jpg" alt="Portrait in a parking garage with smoke" loading="lazy" width="1600" height="1366"></div>
+      <div class="slide"><img src="images/gallery/teal-guitar-shop.jpg" alt="Playing a teal guitar in a workshop" loading="lazy" width="1600" height="1196"></div>
     </div>
+    <button class="cx cx-prev" id="cxPrev" type="button" aria-label="Previous photo">&lsaquo;</button>
+    <button class="cx cx-next" id="cxNext" type="button" aria-label="Next photo">&rsaquo;</button>
+    <div class="counter" id="cxCount"></div>
+  </div>
+
+  <div class="inner">
     <p class="more"><a href="photos-videos.html">Photos &amp; Videos</a></p>
   </div>
 </section>
@@ -626,5 +687,70 @@
   <p>Brandon Howard &nbsp;&middot;&nbsp; Texas Country &nbsp;&middot;&nbsp; North Texas</p>
 </footer>
 
+
+<script>
+/* Home photo carousel. The whole picture is the control: a click left of the
+   midpoint goes back, right of it goes forward. The chevrons stay visible as a
+   signal and for keyboard users, and stop their own clicks propagating so they
+   are not counted twice by the surface handler underneath. */
+(function () {
+  var car   = document.getElementById('car');
+  var track = document.getElementById('track');
+  var count = document.getElementById('cxCount');
+  if (!car) return;
+
+  var n = track.children.length;
+  var i = 0;
+
+  function go(next) {
+    i = (next + n) % n;
+    track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    count.textContent = (i + 1) + ' / ' + n;
+    /* Nudge the neighbours into cache so a fast clicker never hits a blank. */
+    [(i + 1) % n, (i - 1 + n) % n].forEach(function (k) {
+      var img = track.children[k].querySelector('img');
+      if (img && img.loading === 'lazy') img.loading = 'eager';
+    });
+  }
+
+  document.getElementById('cxPrev').addEventListener('click', function (e) {
+    e.stopPropagation(); go(i - 1);
+  });
+  document.getElementById('cxNext').addEventListener('click', function (e) {
+    e.stopPropagation(); go(i + 1);
+  });
+
+  /* Click anywhere on the picture; the midpoint decides direction. */
+  car.addEventListener('click', function (e) {
+    var r = car.getBoundingClientRect();
+    go(e.clientX < r.left + r.width / 2 ? i - 1 : i + 1);
+  });
+
+  /* Cursor shows which way you are about to go before you commit. */
+  car.addEventListener('mousemove', function (e) {
+    var r = car.getBoundingClientRect();
+    car.style.cursor = e.clientX < r.left + r.width / 2 ? 'w-resize' : 'e-resize';
+  });
+
+  /* Arrow keys, scoped to the carousel so they do not steal page scrolling. */
+  car.setAttribute('tabindex', '0');
+  car.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(i - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); }
+  });
+
+  /* Swipe. 40px of travel before it counts, so a tap stays a tap. */
+  var x0 = null;
+  car.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  car.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) go(dx > 0 ? i - 1 : i + 1);
+    x0 = null;
+  }, { passive: true });
+
+  go(0);
+})();
+</script>
 </body>
 </html>
