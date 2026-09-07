@@ -173,17 +173,40 @@ without asking anyone.
 Same reasoning applies to the merch link below, which is a temporary arrangement rather than
 an architecture.
 
-### 2. Merch link
+### 2. Merch store
 
-Currently points at **`bobdavismusic.com/merch.html`** per Bob's instruction.
+`merch.html`, reached from the top nav rather than as a section on the home page.
 
-**That store does not carry Howard County products.** Until it does, the button sends
-Brandon's fans to buy Bob's merch, which does not serve Brandon. Two ways to resolve:
+**It is wired to Bob's Shopify store as a temporary stand-in**, so every item shown is Bob's
+product and every sale is Bob's money. A visible notice on the page says so.
 
-- **Add Howard County products** to the Bob Davis store. Needs an arrangement about who
-  collects, what split, who fulfils and who handles returns — revenue would land in Bob
-  Davis Music LLC.
-- **Or hide the section** until there is something to sell. One line to comment out.
+#### Switching to Brandon's store
+
+**Two values at the top of `merch.html`. Nothing else on the page changes.**
+
+```js
+const SHOP_DOMAIN      = '6anqxb-rt.myshopify.com';
+const STOREFRONT_TOKEN = '2a7e0382b6e5915658809f9549bb28a7';
+```
+
+Get the token from Shopify admin, **Settings → Apps and sales channels → Develop apps →
+Configure Storefront API scopes**, with `unauthenticated_read_product_listings`. A Storefront
+token is designed to be public and read-only; it is not a secret and is safe in client-side
+source.
+
+#### How it works, and what it deliberately does not do
+
+Reads the catalogue over the Storefront API and renders a grid. Buying goes straight to a
+**Shopify cart permalink**, `/cart/{variantId}:1`, which drops the item in the cart and lands
+the visitor on Shopify's own checkout.
+
+**There is no cart on this page, on purpose.** A borrowed storefront is not worth a
+`localStorage` cart that would have to be migrated the day the store changes. When Brandon has
+his own store this page keeps working unchanged, and anyone who wants a full cart can build
+one then.
+
+The catalogue request fires in `<head>` before the body parses, so it is in flight while the
+browser is still building the DOM.
 
 ### 3. Shows
 

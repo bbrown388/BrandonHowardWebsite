@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merch | Brandon Howard</title>
+<meta name="description" content="Merch from Brandon Howard. Texas country, red dirt and southern rock out of North Texas.">
+<meta name="robots" content="noindex">
+
+<meta property="og:title" content="Merch | Brandon Howard">
+<meta property="og:description" content="Real Songs, No Apologies.">
+<meta property="og:image" content="images/hero.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   SHOPIFY CONFIG — THE ONLY THING TO CHANGE WHEN BRANDON HAS HIS OWN STORE
+
+   Replace these two values and nothing else on this page needs touching.
+   The Storefront token is designed to be public and read-only; it is not a
+   secret and it is safe in client-side source. Get one from:
+     Shopify admin -> Settings -> Apps and sales channels -> Develop apps
+     -> Configure Storefront API scopes -> unauthenticated_read_product_listings
+
+   Right now this points at BOB'S store as a temporary stand-in. Everything a
+   visitor buys here is Bob's product and Bob's money. See README.md.
+   ══════════════════════════════════════════════════════════════════════════ */
+const SHOP_DOMAIN      = '6anqxb-rt.myshopify.com';
+const STOREFRONT_TOKEN = '2a7e0382b6e5915658809f9549bb28a7';
+
+/* ────────────────────────────────────────────────────────────────────────── */
+
+const GQL = `https://${SHOP_DOMAIN}/api/2024-01/graphql.json`;
+
+const CATALOG_QUERY = `{
+  products(first: 24, sortKey: CREATED_AT, reverse: true) {
+    edges { node {
+      id title handle productType availableForSale
+      priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } }
+      images(first: 4) { edges { node { url altText } } }
+      variants(first: 60) { edges { node {
+        id title availableForSale
+        selectedOptions { name value }
+        price { amount currencyCode }
+      } } }
+    } }
+  }
+}`;
+
+/* Fired before the rest of the page parses, so the catalogue is in flight while
+   the browser is still building the DOM. Resolves to the body or an error box
+   that render() knows how to display. */
+window.__catalog = fetch(GQL, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN },
+  body: JSON.stringify({ query: CATALOG_QUERY }),
+  signal: AbortSignal.timeout(20000),
+}).then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+  .catch(err => ({ __error: err }));
+</script>
+
+<style>
+  :root {
+    --ink:    #0A0A0A;
+    --panel:  #121212;
+    --paper:  #F2EADC;
+    --muted:  #9E968A;
+    --brass:  #C89B4A;
+    --rule:   rgba(242,234,220,0.14);
+    --display: 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+
+  a { color: var(--brass); }
+
+  /* ── Nav, matching index.html ─────────────────────────────────────────── */
+  .topbar { padding: 26px 20px 0; text-align: center; }
+
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700; font-size: 23px;
+    letter-spacing: 0.20em; text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .wordmark a { color: var(--paper); text-decoration: none; }
+
+  nav { margin-top: 20px; }
+
+  nav a {
+    font-family: var(--display);
+    font-size: 12.5px; font-weight: 500;
+    letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    margin: 0 11px; line-height: 2.4; white-space: nowrap;
+    transition: color .15s ease;
+  }
+
+  nav a:hover, nav a:focus-visible, nav a[aria-current] { color: var(--brass); }
+
+  /* ── Head ─────────────────────────────────────────────────────────────── */
+  main { flex: 1; padding: 54px 20px 84px; }
+  .inner { max-width: 1060px; margin: 0 auto; }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(34px, 8vw, 56px);
+    letter-spacing: 0.03em; text-transform: uppercase;
+    text-align: center;
+  }
+
+  h1::after {
+    content: ''; display: block;
+    width: 54px; height: 2px; margin: 15px auto 0;
+    background: var(--brass);
+  }
+
+  .todo {
+    border: 1px dashed rgba(200,155,74,0.5);
+    background: rgba(200,155,74,0.06);
+    padding: 20px 22px;
+    font-size: 14.5px; color: var(--muted);
+    max-width: 660px; margin: 34px auto 0;
+  }
+
+  .todo b { color: var(--brass); }
+
+  /* ── Grid ─────────────────────────────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 26px;
+    margin-top: 44px;
+  }
+
+  .card {
+    border: 1px solid var(--rule);
+    background: var(--panel);
+    display: flex; flex-direction: column;
+    transition: border-color .15s ease;
+  }
+
+  .card:hover { border-color: rgba(200,155,74,0.42); }
+
+  .shot {
+    aspect-ratio: 1;
+    background: #171717;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .sold-out {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(10,10,10,.72);
+    font-family: var(--display);
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--paper);
+  }
+
+  .body { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+
+  .name {
+    font-family: var(--display);
+    font-size: 17px; font-weight: 500;
+    letter-spacing: 0.045em; text-transform: uppercase;
+    line-height: 1.25;
+  }
+
+  .price { font-size: 14.5px; color: var(--brass); font-variant-numeric: tabular-nums; }
+
+  select {
+    font-family: var(--body); font-size: 14px;
+    color: var(--paper);
+    background: rgba(242,234,220,0.05);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 9px 10px;
+    width: 100%;
+  }
+
+  select:focus { outline: none; border-color: var(--brass); }
+
+  .buy {
+    margin-top: auto;
+    display: block; text-align: center;
+    font-family: var(--display);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    border: 1px solid var(--rule);
+    background: rgba(242,234,220,0.04);
+    padding: 12px;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+
+  .buy:hover, .buy:focus-visible { border-color: var(--brass); background: rgba(200,155,74,0.11); }
+  .buy[disabled] { opacity: .4; cursor: not-allowed; }
+
+  /* ── States ───────────────────────────────────────────────────────────── */
+  .state { text-align: center; padding: 70px 20px; color: var(--muted); font-size: 15px; }
+  .state a { color: var(--brass); }
+
+  /* ── Footer ───────────────────────────────────────────────────────────── */
+  footer {
+    padding: 34px 20px 44px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 12.5px; color: var(--muted); letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark"><a href="index.html">Brandon Howard</a></div>
+  <nav>
+    <a href="index.html#music">Music</a>
+    <a href="index.html#shows">Shows</a>
+    <a href="index.html#about">About</a>
+    <a href="merch.html" aria-current="page">Merch</a>
+    <a href="index.html#booking">Booking</a>
+  </nav>
+</div>
+
+<main>
+  <div class="inner">
+    <h1>Merch</h1>
+
+    <div class="todo">
+      <b>PLACEHOLDER STORE.</b> This page is wired to the <b>Bob Davis Music</b>
+      Shopify store as a temporary stand-in, so every item shown is Bob's product
+      and every sale is Bob's money. Switching it to Brandon's own store is two
+      values at the top of this file. See <code>README.md</code>.
+    </div>
+
+    <div id="out"><div class="state">Loading…</div></div>
+  </div>
+</main>
+
+<footer>
+  <p>Brandon Howard &nbsp;&middot;&nbsp; Texas Country &nbsp;&middot;&nbsp; North Texas</p>
+</footer>
+
+<script>
+const out = document.getElementById('out');
+
+const money = (amt, cur) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: cur }).format(amt);
+
+/* Storefront returns a GID like gid://shopify/ProductVariant/123, sometimes
+   base64-wrapped depending on API version. Cart permalinks want the bare
+   number, so handle both rather than assuming one. */
+function variantNumber(gid) {
+  let s = gid;
+  if (!s.includes('/')) {
+    try { s = atob(s); } catch (e) { /* not base64, use as-is */ }
+  }
+  return s.split('/').pop();
+}
+
+/* Straight to Shopify checkout with one item. Deliberately no cart state on
+   this page: a borrowed storefront is not worth a localStorage cart that would
+   have to be migrated when the store changes. */
+const buyUrl = (variantGid) =>
+  `https://${SHOP_DOMAIN}/cart/${variantNumber(variantGid)}:1`;
+
+function priceLabel(product, variants) {
+  const amounts = variants.map(v => parseFloat(v.price.amount)).filter(n => !isNaN(n));
+  const cur = variants[0]?.price?.currencyCode
+           || product.priceRange.minVariantPrice.currencyCode;
+  if (!amounts.length) {
+    return money(product.priceRange.minVariantPrice.amount, cur);
+  }
+  const lo = Math.min(...amounts), hi = Math.max(...amounts);
+  return lo === hi ? money(lo, cur) : `${money(lo, cur)} – ${money(hi, cur)}`;
+}
+
+function card(product) {
+  const variants = product.variants.edges.map(e => e.node);
+  const inStock  = variants.filter(v => v.availableForSale);
+  const img      = product.images.edges[0]?.node;
+
+  const el = document.createElement('article');
+  el.className = 'card';
+
+  const shot = document.createElement('div');
+  shot.className = 'shot';
+  if (img) {
+    const i = document.createElement('img');
+    i.src = img.url; i.alt = img.altText || product.title;
+    i.loading = 'lazy'; i.width = 600; i.height = 600;
+    shot.appendChild(i);
+  }
+  if (!inStock.length) {
+    const s = document.createElement('div');
+    s.className = 'sold-out'; s.textContent = 'Sold out';
+    shot.appendChild(s);
+  }
+  el.appendChild(shot);
+
+  const body = document.createElement('div');
+  body.className = 'body';
+
+  const name = document.createElement('div');
+  name.className = 'name'; name.textContent = product.title;
+  body.appendChild(name);
+
+  const price = document.createElement('div');
+  price.className = 'price';
+  price.textContent = priceLabel(product, inStock.length ? inStock : variants);
+  body.appendChild(price);
+
+  /* One variant needs no chooser; several do. Size and colour arrive as one
+     combined variant title from Shopify, which is what a shopper picks anyway. */
+  let chosen = inStock[0] || variants[0];
+
+  if (inStock.length > 1) {
+    const sel = document.createElement('select');
+    sel.setAttribute('aria-label', 'Choose an option for ' + product.title);
+    inStock.forEach(v => {
+      const o = document.createElement('option');
+      o.value = v.id;
+      o.textContent = v.title === 'Default Title' ? 'One size' : v.title;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', () => {
+      chosen = inStock.find(v => v.id === sel.value) || chosen;
+      buy.href = buyUrl(chosen.id);
+      price.textContent = money(chosen.price.amount, chosen.price.currencyCode);
+    });
+    body.appendChild(sel);
+  }
+
+  const buy = document.createElement('a');
+  buy.className = 'buy';
+  if (inStock.length) {
+    buy.href = buyUrl(chosen.id);
+    buy.rel = 'noopener';
+    buy.textContent = 'Buy';
+  } else {
+    buy.textContent = 'Sold out';
+    buy.setAttribute('disabled', '');
+    buy.setAttribute('aria-disabled', 'true');
+  }
+  body.appendChild(buy);
+
+  el.appendChild(body);
+  return el;
+}
+
+window.__catalog.then(res => {
+  if (res.__error || res.errors || !res.data) {
+    const why = res.__error?.message || res.errors?.[0]?.message || 'no data';
+    out.innerHTML =
+      `<div class="state">The store did not load (${why}).<br>` +
+      `Try again shortly, or <a href="index.html#booking">get in touch</a>.</div>`;
+    return;
+  }
+  const products = res.data.products.edges
+    .map(e => e.node)
+    .filter(p => p.variants.edges.length);
+
+  if (!products.length) {
+    out.innerHTML = '<div class="state">Nothing in the store right now.</div>';
+    return;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  products.forEach(p => grid.appendChild(card(p)));
+  out.replaceChildren(grid);
+});
+</script>
+
+</body>
+</html>
