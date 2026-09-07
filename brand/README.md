@@ -103,14 +103,16 @@ Standalone devices are in `marks/device-arrow.svg`,
 `marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
 own for a sleeve, a hat back or a setlist stamp.
 
-The arrows took three goes, the last against the arrows in the band's own
-circular badge. Those draw the feather as individual barbs radiating off the
-shaft, so the shaft stays visible through the fletching, and that is the detail
-that decides it. A filled vane closes into a solid paddle however elegantly it is
-shaped, because the two halves meet across the shaft; both earlier attempts
-failed that way, once as a leaf and once as a spade. The shipping arrow has a
-barbed head with its base cut back between the barbs, and a seven-barb feather
-whose barb length follows a profile peaking about a third along.
+The arrow was rebuilt from scratch after four attempts that all read as clip art,
+and both causes are worth recording. Every shape was made of straight segments,
+because the path helper only ever emitted L commands; a polygon head on a
+rectangular shaft cannot look drawn however carefully the proportions are tuned.
+And each attempt was designed zoomed in, where a feather can carry detail, when in
+the mark the arrow is a rule sitting beside small caps and that detail can only
+print as fuzz. The answer was curves and far fewer parts: a tapering shaft, a
+point with slightly concave flanks and no notch, and two swept ticks at the tail.
+`ARROW_STYLE` in `src/ornament.py` switches the tail between `plain`, `bar`,
+`ticks` and `vane`; `src/arrow3.py` holds all four side by side.
 
 `src/arrowtest.py` and `src/arrowtest2.py` hold the ten constructions compared
 side by side at two sizes, so the next change here is a comparison rather than a
@@ -207,9 +209,9 @@ and masks ink on all three colour channels so the stamp itself is never counted.
 | 0.42 mm | Screen print, DTG | Below this, ink bridges or drops out. Every mark here is comfortable. |
 | 1.10 mm | Embroidery | A stitch cannot render a finer stroke. This is what decides hats. |
 
-The headline result: Oswald Bold measures best of everything at 11.0 percent full
-size and 6.5 on a hat. The chosen mark, Sancreek with arrow rules, is 12.7 percent
-full size and 8.9 on a hat, which clears embroidery. Rye is print only at 47
+The headline result: the chosen mark, Sancreek with arrow rules, measures 11.2
+percent full size and 6.9 on a hat, so it clears embroidery at both sizes. Oswald
+Bold is comparable at 11.0 and 6.5. Rye is print only at 47
 percent, which is the face rather than the western direction, since Sancreek,
 Bevan and Rammetto all clear in small format. No dance hall version clears.
 

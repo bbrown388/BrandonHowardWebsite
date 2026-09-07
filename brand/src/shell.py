@@ -185,12 +185,15 @@ the A and rebalancing the apex around them. That is a type designer sitting in a
 vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
-into the letters. You picked that one, so the arrows themselves have been
-redrawn three times, and the last pass was against the arrows in the band badge
-you sent. Those draw the feather as individual barbs radiating off the shaft,
-which keeps the shaft visible through the fletching. A filled vane closes into a
-solid paddle however elegantly it is shaped, because the two halves meet across
-the shaft, and that paddle is what made the earlier attempts look cheap.</p>
+into the letters. You picked that one, so the arrows were rebuilt from
+scratch. Four earlier attempts all read as clip art for two reasons. Every shape
+was made of straight segments, since the path helper only ever emitted line
+commands, so a polygon head on a rectangular shaft could never look drawn no
+matter how the proportions were tuned. And each was designed zoomed in, where a
+feather can carry detail, when in the mark the arrow is a rule beside small caps
+and that detail only ever prints as fuzz. These are curves with far fewer parts:
+a tapering shaft, a point with slightly concave flanks, and two swept ticks at
+the tail. They were judged at the size they are actually used at.</p>
 </div>
 __ORN__
 <div class="callout">
@@ -215,7 +218,7 @@ the top of this section shows.</p>
 metric is a share of total ink, so a solid crow or a pair of heavy arrows raises
 the denominator and pulls the percentage down without any hairline getting
 thicker. Rye alone measures 47.1 per cent too fine and the same Rye with arrows
-and a crow measures 37.4, which is that effect at its real size. An earlier
+and a crow measures 41.1, which is that effect at its real size. An earlier
 version of this sheet put the second figure at 9.6 and made a great deal of it.
 That was a broken measurement rather than a real effect.</p>
 </div>
@@ -269,9 +272,9 @@ opening a second visual language.</li>
 as far from clean and geometric as you can get without a novelty face, and it
 still clears embroidery in small format at 9.8 per cent.</li>
 <li><strong>The chosen mark is in good shape.</strong> Sancreek with arrow rules
-measures 12.7 per cent full size and 8.9 on a hat, which clears embroidery. Rye
-stays print only at 47 per cent, and that is the face rather than the direction:
-Sancreek, Bevan and Rammetto all clear in small format.</li>
+measures 11.2 per cent full size and 6.9 on a hat, so it clears embroidery at both
+sizes. Rye stays print only at 47 per cent, and that is the face rather than the
+direction: Sancreek, Bevan and Rammetto all clear in small format.</li>
 <li><strong>Bodoni + Alex Brush</strong> stays the pick in the dance hall
 direction, for tee fronts, posters, backdrops and the website.</li>
 </ul>
