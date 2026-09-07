@@ -39,13 +39,15 @@ the manual itself, so there is no font to buy. `am-alamo` rebuilds it.
 | `marks/gh-playfair.svg` | Dance hall, Playfair Display Black + Kaushan Script. Heavier script. |
 | `marks/gh-playfair-hat.svg` | Same, small format. Strongest of the dance hall set. |
 | `marks/gh-rye.svg` | Dance hall, Rye + Great Vibes. Reads more saloon. |
-| `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Poppins Black with a constructed arch A. |
-| `marks/am-alamo-hat.svg` | Same, small format. |
-| `marks/am-alamo-flat.svg` | Same, squared flat-top A instead of a softened shoulder. |
-| `marks/am-archivo.svg` | Marquee, Archivo Expanded Black. Closest to the marquee photo. |
-| `marks/am-archivo-hat.svg` | Same, small format. |
-| `marks/am-jost.svg` | Marquee, Jost. Jost is an open Futura, and Futura Std Bold is what the Alamo brand manual actually specifies. |
-| `marks/am-anton.svg` | Marquee, Anton. Best measurements of the set, least distinctive. |
+| `marks/am-slab.svg` | Marquee, Alfa Slab One. Heavy Americana slab. |
+| `marks/am-slab-ultra.svg` | Marquee, Ultra. Same idea, heavier and quirkier. |
+| `marks/am-rye.svg` | Marquee, Rye. Western spurred slab. Print only, see measurements. |
+| `marks/am-oswald.svg` | Marquee, Oswald Bold. Condensed gothic, and his existing website face. |
+| `marks/am-stencil.svg` | Marquee, Black Ops One. Stencil. |
+| `marks/am-varsity.svg` | Marquee, Graduate. Collegiate varsity slab. |
+| `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Kept for comparison; Brandon turned the face down. |
+
+Every marquee mark has a `-hat` small format twin with the tagline removed.
 
 Each SVG is a single flat fill, so recolouring is one attribute and a reversed
 version needs no separate file.
@@ -124,9 +126,22 @@ any more. This is the same class of failure
 already seen on Bob's BD mark, where fine strokes dropped out below about three
 and a half inches on DTG.
 
+Brandon turned down the face on the Alamo mark, so the marquee layout was kept
+and the typeface treated as the variable. Five new directions were tried, each
+moving away from geometric in a different way rather than five shades of one
+idea, all normalised to a common cap height so a condensed gothic could be
+compared fairly against a fat slab.
+
+Oswald Bold came out well ahead on measurement, at 6.9 percent full size and 2.4
+percent on a hat where nothing else gets under 10, and it is already the display
+face on his website. Alfa Slab One is the strongest answer to the actual
+objection and still clears embroidery small at 10.2 percent. Rye is the most
+Texan and is print only, losing 46 percent of its ink at hat size to hairline
+spurs.
+
 So the intended shape is a small family rather than one file: the Bodoni mark for
-tee fronts, posters and the website, and the Alamo mark wherever something has to
-survive small. The Alamo lettering needs no split of its own, since it holds up at
+tee fronts, posters and the website, and whichever marquee face he picks wherever
+something has to survive small. The Alamo lettering needs no split of its own, since it holds up at
 both sizes.
 
 Hats need a decision either way. Three ways out: run the mark larger, since many

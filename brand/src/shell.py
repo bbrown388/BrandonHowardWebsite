@@ -95,7 +95,7 @@ BODY = """
 <div class="wrap">
 <p class="eyebrow">Merch identity, first pass</p>
 <h1>The Brandon Howard Band</h1>
-<p class="lead">Seven candidate marks in two directions, each shown on a light and
+<p class="lead">Nine candidate marks in two directions, each shown on a light and
 a dark garment, then tested at the size that actually breaks logos: a four inch
 hat front.</p>
 
@@ -138,14 +138,16 @@ __DANCE__
 <div class="sechead">
 <h2>Direction two, marquee</h2>
 <h3 style="font-size:22px;margin-top:4px">Stacked caps in a ruled panel</h3>
-<p>THE and BAND are set into breaks in the rules rather than given lines of their
-own. That is a real marquee device, and it means BRANDON and HOWARD stay the only
-full height lines instead of the mark becoming a four deck stack.</p>
-<p>The original Alamo Drafthouse reference. Worth being precise about which
-half: on that marquee the word ALAMO and the words DRAFTHOUSE CINEMA are set in
-two different faces. DRAFTHOUSE CINEMA is plain Futura Std Bold, which is the
-primary face their brand manual names. ALAMO is something else entirely, and it
-is the one worth having.</p>
+<p>Brandon did not like the face on the first version of this, so the layout is
+unchanged and the typeface is the variable. Five new directions below, then the
+original at the bottom so the comparison is honest.</p>
+<p>The likely problem with the first one is that its base is a geometric sans:
+circular O, even strokes, no serifs, which reads clean and friendly. Every option
+here moves away from that, and each moves in a different direction rather than
+five shades of the same idea. THE and BAND stay set into breaks in the rules
+throughout.</p>
+<p>All six are normalised to the same cap height rather than the same point size,
+which is the only fair way to compare a condensed gothic against a fat slab.</p>
 </div>
 __MARQ__
 </section>
@@ -177,18 +179,21 @@ again.</p>
 <p>Treat it as a small family rather than one file, which is normal for an artist
 mark:</p>
 <ul>
-<li><strong>Bodoni + Alex Brush</strong> as the primary. It is the one that
-actually looks like the reference you sent, and it is the right mark for tee
-fronts, posters, backdrops and the website.</li>
-<li><strong>Alamo lettering</strong> if you want one mark that does everything.
-It is the actual ALAMO letterform rather than a lookalike, it puts nothing at all
-below the print threshold, and its small format lockup is the only distinctive
-option that still clears embroidery now the name is longer.</li>
-<li><strong>Hats need a decision.</strong> No dance hall version clears
-embroidery at four inches any more. Three ways out: run the mark larger, since
-many hat fronts take four and a half to five inches; put the Alamo mark on hats
-and the dance hall mark on shirts; or have BAND redrawn heavier for the stitched
-version only.</li>
+<li><strong>Oswald Bold is the surprise.</strong> It is the best performing mark
+in the entire set by a wide margin, 6.9 per cent full size and 2.4 per cent on a
+hat, where nothing else gets under 10. It is also already the display face on his
+website, so it is the only option that joins the mark to something that exists
+instead of opening a second visual language. If he is at all warm to it, it
+solves the hat problem outright.</li>
+<li><strong>Alfa Slab One if he wants character over convenience.</strong> It is
+the strongest answer to the specific objection, since it is about as far from
+clean and geometric as you can get without a novelty face, and it still clears
+embroidery in small format at 10.2 per cent.</li>
+<li><strong>Rye is print only.</strong> It is the most obviously Texan thing
+here and its spurs are hairlines, so it loses 46 per cent of its ink at hat size.
+Shirts and posters only, or not at all.</li>
+<li><strong>Bodoni + Alex Brush</strong> stays the pick in the dance hall
+direction, for tee fronts, posters, backdrops and the website.</li>
 </ul>
 </ul>
 </section>
@@ -199,7 +204,7 @@ version only.</li>
 </div>
 <p><strong>Fonts are clear.</strong> Every face here is under the SIL Open Font
 License: Bodoni Moda, Alex Brush, Playfair Display, Kaushan Script, Rye, Great
-Vibes, Archivo, Jost, Anton and Poppins. That licence permits commercial use including
+Vibes, Alfa Slab One, Oswald, Black Ops One, Graduate, Ultra and Poppins. That licence permits commercial use including
 merchandise sold for money, with no fee and no attribution needed on the product.
 This was chosen deliberately over the actual Alamo faces, which are commercial
 licences he would have to buy.</p>

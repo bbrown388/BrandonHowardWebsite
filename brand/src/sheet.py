@@ -51,43 +51,50 @@ CARDS = [
       body='A western slab arch over a formal script. It leans further into old '
            'Texas than the Gruene sign does. Worth seeing, but the thinnest of the '
            'set by a distance.'),
- dict(k='am-alamo', hat='am-alamo-hat', alt='am-alamo-flat',
-      altlab='Squared flat top instead of a softened shoulder',
-      title='Alamo lettering', tag='The ALAMO word, not DRAFTHOUSE',
+ dict(k='am-slab', hat='am-slab-hat', alt='am-slab-ultra',
+      altlab='Ultra, the same idea pushed heavier and quirkier',
+      title='Alfa Slab One', tag='The honky-tonk poster',
+      faces='Alfa Slab One',
+      body='A heavy Americana slab, and the furthest thing here from geometric '
+           'without being a novelty face. Bracketed serifs, a lot of ink, and it '
+           'looks like it was printed on a letterpress bill for a Saturday night '
+           'show. If the objection to the first one was that it felt too clean '
+           'and modern, this is the direct answer.'),
+ dict(k='am-rye', hat='am-rye-hat',
+      title='Rye', tag='The most overtly Texas',
+      faces='Rye',
+      body='Western slab with spurred terminals. Saloon door, rodeo bill, Lone '
+           'Star. It is the least ambiguous about where the band is from, which '
+           'is either exactly right or a bit on the nose depending on how much '
+           'he wants the hat to do the talking.'),
+ dict(k='am-oswald', hat='am-oswald-hat',
+      title='Oswald Bold', tag='Already his website face',
+      faces='Oswald Bold',
+      body='Condensed gothic. Lean, hard and modern, with none of the roundness '
+           'of the first attempt. It is also the display face already running on '
+           'his site, so this is the only option that ties the mark to something '
+           'that exists rather than starting a second visual language.'),
+ dict(k='am-stencil', hat='am-stencil-hat',
+      title='Black Ops One', tag='Least pretty by a distance',
+      faces='Black Ops One',
+      body='Stencil, with the breaks cut through the strokes. It reads military '
+           'more than country, which may be too far, but for a band whose tagline '
+           'is No Pretty Boy Country it is the one that argues hardest for the '
+           'line.'),
+ dict(k='am-varsity', hat='am-varsity-hat',
+      title='Graduate', tag='Vintage varsity',
+      faces='Graduate',
+      body='Collegiate slab, the lettering off an old letterman jacket or a '
+           'stadium scoreboard. It reads American and vintage without going to '
+           'the saloon, which makes it the most versatile of the set. It is also '
+           'the lightest, so watch the measurements.'),
+ dict(k='am-alamo', hat='am-alamo-hat',
+      title='Alamo lettering', tag='What he turned down',
       faces='Poppins Black with a constructed flat-topped A',
-      body='The word ALAMO on that marquee is custom lettering rather than a '
-           'typeface, which their own brand manual confirms, so there is nothing '
-           'to buy. This rebuilds it. Poppins Black was picked as the base '
-           'because it matches the reference on the two things that can be '
-           'measured, stem to cap height within a hundredth and a genuinely '
-           'circular O, and then the A was constructed: a half round arch on two '
-           'vertical legs with a low crossbar and no pointed apex. Copying that '
-           'exactly is the most recognisable thing about their lettering, so the '
-           'shoulder here is pulled back to about a third of a full semicircle. '
-           'It keeps a flat-topped geometric A, which reads as deliberate and '
-           'holds the family resemblance, without reproducing their letter. The '
-           'squared version below takes it all the way down and is the least '
-           'derivative of the set. His name needs only that one special letter '
-           'either way, since the other oddities on that sign are the angled L foot '
-           'and the arch-built M and neither letter is in BRANDON HOWARD.'),
- dict(k='am-archivo', hat='am-archivo-hat',
-      title='Archivo Expanded Black', tag='Closest to your marquee photo',
-      faces='Archivo, expanded and black',
-      body='The wide heavy grotesque from the first direction, stacked and ruled '
-           'like a painted marquee panel. Reads at any distance and holds up '
-           'small.'),
- dict(k='am-jost', hat='am-jost',
-      title='Jost', tag='What the Alamo manual actually specifies',
-      faces='Jost, an open Futura',
-      body='The Alamo brand manual names Futura Std Bold as its primary face. Jost '
-           'is an open licensed Futura, so this is the honest version of the '
-           'original ask.'),
- dict(k='am-anton', hat='am-anton',
-      title='Anton', tag='Strongest small, most generic',
-      faces='Anton',
-      body='Condensed and very heavy. Best measurements of anything here by a wide '
-           'margin, and the least distinctive. A good utility mark for small '
-           'placements if the main mark goes elsewhere.'),
+      body='Kept here only so the comparison is honest. This is the rebuild of the '
+           'custom ALAMO lettering, and the reason it probably did not land is that '
+           'the underlying face is geometric and round, which reads friendly. Every '
+           'option above moves away from that in a different direction.'),
 ]
 
 def card(c):

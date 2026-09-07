@@ -171,34 +171,64 @@ dancehall('gh-rye', 'Rye + Great Vibes', 'Rye-Regular.ttf', 'GreatVibes-Regular.
           caps_font='BodoniModa-Bold.ttf',
           note='Western slab arch. Reads more saloon, less dance hall.')
 
-# ── Marquee ──────────────────────────────────────────────────────────────────
-# The wordmark on that marquee is custom lettering, not a typeface, so this is
-# Poppins Black (which matches it on stem to cap and has a truly circular O)
-# carrying a constructed flat topped A with the shoulder pulled back to 0.35 of
-# a full semicircle. Tracking is tighter here because the reference sets tight.
-marquee('am-alamo', 'Alamo lettering', 'AlamoLike-Black.ttf', tagline=TAG,
-        size=168, track=13,
-        note='Flat-topped A with a softened shoulder, built rather than set.')
+# ── Marquee ─────────────────────────────────────────────────────────────────
+def cap_size(font, target=120.0):
+    """Size that puts this face at a given cap height.
 
-marquee('am-alamo-hat', 'Alamo lettering, small format', 'AlamoLike-Black.ttf',
-        tagline=None, size=168, track=13,
-        note='Hat and pocket lockup, tagline removed.')
+    Judging faces at a shared point size is meaningless when the set mixes
+    condensed gothics with fat slabs. Normalising on cap height compares them at
+    the size the eye actually reads. H is resolved through shaping rather than by
+    assuming the glyph is named 'H', which is not true in every font.
+    """
+    f = face(font)
+    gn = f.shape('H')[0][0]
+    bb = f.bounds(gn)
+    return target / ((bb[3] - bb[1]) / f.upem)
 
-marquee('am-alamo-flat', 'Alamo lettering, squared A', 'AlamoLike-Flat.ttf', tagline=TAG,
-        size=168, track=13,
-        note='Same mark with a squared flat top instead of a softened shoulder.')
 
-marquee('am-archivo', 'Archivo Expanded Black', 'Archivo-ExpBlack.ttf', tagline=TAG,
-        note='Wide heavy grotesque, closest to the marquee lettering in the photo.')
+def marq(key, label, font, tagline=TAG, cap=120.0, track=0.085, note=''):
+    s = cap_size(font, cap)
+    marquee(key, label, font, tagline=tagline, size=s, track=s * track, note=note)
 
-marquee('am-archivo-hat', 'Archivo Expanded Black, small format', 'Archivo-ExpBlack.ttf',
-        tagline=None, note='Hat and pocket lockup, tagline removed.')
 
-marquee('am-jost', 'Jost (Futura)', 'Jost-Bold.ttf', tagline=TAG, size=165, track=34,
-        note='Jost is an open Futura. Futura Std Bold is what the Alamo manual specifies for DRAFTHOUSE CINEMA.')
+# The face Brandon saw first. Kept for comparison, not as a recommendation.
+marq('am-alamo', 'Alamo lettering', 'AlamoLike-Black.ttf', track=0.075,
+     note='The original Alamo rebuild. Geometric and round, which is the thing he did not like.')
+marq('am-alamo-hat', 'Alamo lettering, small format', 'AlamoLike-Black.ttf',
+     tagline=None, track=0.075, note='Hat lockup.')
 
-marquee('am-anton', 'Anton', 'Anton-Regular.ttf', tagline=TAG, size=190, track=14,
-        note='Condensed and very heavy. Most poster-like of the three.')
+# Heavy Americana slab. The honky-tonk poster answer, and the furthest from
+# geometric of anything here without being a novelty face.
+marq('am-slab', 'Alfa Slab One', 'AlfaSlabOne-Regular.ttf',
+     note='Heavy Americana slab. Bracketed serifs and a lot of ink.')
+marq('am-slab-hat', 'Alfa Slab One, small format', 'AlfaSlabOne-Regular.ttf', tagline=None,
+     note='Hat lockup.')
+marq('am-slab-ultra', 'Ultra', 'Ultra-Regular.ttf',
+     note='Same idea pushed heavier and quirkier. Tighter fit, more 1970s.')
+
+# Western, spurred. The most overtly Texas of the set.
+marq('am-rye', 'Rye', 'Rye-Regular.ttf',
+     note='Western slab with spurred terminals. Saloon and rodeo poster.')
+marq('am-rye-hat', 'Rye, small format', 'Rye-Regular.ttf', tagline=None, note='Hat lockup.')
+
+# Condensed gothic. Also already the display face on his website, so this is the
+# one option that ties the mark to something that exists.
+marq('am-oswald', 'Oswald Bold', 'Oswald-Bold.ttf',
+     note='Condensed gothic. Lean and hard, and already the display face on his site.')
+marq('am-oswald-hat', 'Oswald Bold, small format', 'Oswald-Bold.ttf', tagline=None,
+     note='Hat lockup.')
+
+# Stencil. The hardest edge available and the least pretty by some distance.
+marq('am-stencil', 'Black Ops One', 'BlackOpsOne-Regular.ttf',
+     note='Stencil. Military rather than country, and the least pretty of the set.')
+marq('am-stencil-hat', 'Black Ops One, small format', 'BlackOpsOne-Regular.ttf', tagline=None,
+     note='Hat lockup.')
+
+# Collegiate. Vintage varsity rather than saloon, which reads Texas differently.
+marq('am-varsity', 'Graduate', 'Graduate-Regular.ttf',
+     note='Collegiate varsity slab. Vintage American sport rather than saloon.')
+marq('am-varsity-hat', 'Graduate, small format', 'Graduate-Regular.ttf', tagline=None,
+     note='Hat lockup.')
 
 for m in marks:
     io.open(os.path.join(OUT, m['key'] + '.svg'), 'w', encoding='utf-8', newline='\n').write(

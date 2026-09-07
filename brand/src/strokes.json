@@ -31,37 +31,67 @@
  },
  "am-alamo": {
   "dtg": 0.0,
-  "emb": 14.9,
+  "emb": 15.4,
   "verdict": "print fine, embroidery needs it larger"
  },
  "am-alamo-hat": {
   "dtg": 0.0,
-  "emb": 11.1,
+  "emb": 11.5,
   "verdict": "safe for embroidery and print"
  },
- "am-alamo-flat": {
+ "am-slab": {
   "dtg": 0.0,
-  "emb": 14.9,
+  "emb": 14.5,
   "verdict": "print fine, embroidery needs it larger"
  },
- "am-archivo": {
+ "am-slab-hat": {
+  "dtg": 0.0,
+  "emb": 10.2,
+  "verdict": "safe for embroidery and print"
+ },
+ "am-slab-ultra": {
   "dtg": 0.1,
-  "emb": 17.6,
+  "emb": 15.3,
   "verdict": "print fine, embroidery needs it larger"
  },
- "am-archivo-hat": {
+ "am-rye": {
+  "dtg": 4.9,
+  "emb": 45.7,
+  "verdict": "print only at this size"
+ },
+ "am-rye-hat": {
+  "dtg": 1.8,
+  "emb": 42.9,
+  "verdict": "print only at this size"
+ },
+ "am-oswald": {
   "dtg": 0.0,
-  "emb": 13.6,
-  "verdict": "print fine, embroidery needs it larger"
- },
- "am-jost": {
-  "dtg": 0.3,
-  "emb": 20.3,
-  "verdict": "print fine, embroidery needs it larger"
- },
- "am-anton": {
-  "dtg": 0.0,
-  "emb": 6.4,
+  "emb": 6.9,
   "verdict": "safe for embroidery and print"
+ },
+ "am-oswald-hat": {
+  "dtg": 0.0,
+  "emb": 2.4,
+  "verdict": "safe for embroidery and print"
+ },
+ "am-stencil": {
+  "dtg": 0.3,
+  "emb": 17.5,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-stencil-hat": {
+  "dtg": 0.2,
+  "emb": 14.4,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-varsity": {
+  "dtg": 5.7,
+  "emb": 21.9,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-varsity-hat": {
+  "dtg": 1.6,
+  "emb": 17.0,
+  "verdict": "print fine, embroidery needs it larger"
  }
 }
