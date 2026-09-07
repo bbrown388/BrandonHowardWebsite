@@ -79,19 +79,31 @@ the display type work. Swap it for a self-hosted copy if that dependency is unwa
 
 ---
 
-## Photographs — read this
+## Photographs
 
-`images/hero.jpg`, `feature.jpg` and `about.jpg` were **downloaded from
-howardcountymusic.com** and resized for web. They are photographs of Brandon, from a site
-about Brandon.
+**`images/hero.jpg` came from Bob**, via an iCloud link, and is the better-provenance image
+of the two sources here. Sepia profile shot in a prairie field, flat-bill cap, bolo tie. It
+was cropped out of the iCloud viewer at full resolution and resized to 1920px.
 
-**But the photographer's rights are unknown, and that site may be controlled by the former
-management.** Before this goes on a real domain, Brandon should either confirm he holds
-rights to these images or supply his own. Swapping them is a file replacement, nothing more.
+**`images/feature.jpg` was downloaded from howardcountymusic.com** and resized. It is a
+photograph of Brandon, from a site about Brandon, **but the photographer's rights are unknown
+and that site may be controlled by the former management.** Before this goes on a real domain,
+Brandon should confirm he holds rights or supply a replacement. It is a file swap, nothing more.
 
 **Randy Rogers Band images were not used and must never be.** They are another band's
 copyrighted photographs of their own members. Using them, even as a placeholder, would be
 both infringement and misrepresentation.
+
+### Hero tuning, if the photo is ever replaced
+
+Two settings are specific to this picture and will need revisiting:
+
+- **The scrim** in `.hero::before` is tuned for a bright sepia image, mean luminance 208/255.
+  Weight sits at the top, where cream nav crosses bright sky, and at the bottom for the fade
+  into the page. The middle is deliberately light so the photograph reads.
+- **`align-items: flex-end`** rather than centre. At this photo's aspect ratio the image fits
+  the viewport height exactly, so `background-position` cannot move the subject, and centred
+  type lands across his jaw. Dropping the block puts it over his chest and the field instead.
 
 ---
 

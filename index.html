@@ -87,18 +87,31 @@
   .hero {
     position: relative;
     min-height: 100svh;
-    display: flex; align-items: center; justify-content: center;
+    /* flex-end, not centre. At this photo's aspect ratio the image fits the
+       viewport height exactly, so background-position cannot move the subject
+       and centred type lands across his jaw. Dropping the block instead puts it
+       over his chest and the field, leaving the face clear above it. */
+    display: flex; align-items: flex-end; justify-content: center;
     text-align: center;
-    padding: 190px 20px 60px;
-    background: #000 url('images/hero.jpg') center 22% / cover no-repeat;
+    padding: 190px 20px 96px;
+    background: #000 url('images/hero.jpg') 47% center / cover no-repeat;
   }
 
-  /* Legibility scrim. The photo is bright top-left, so this is weighted
-     to protect the centred type without flattening the picture. */
+  /* Legibility scrim, tuned to this photo. The picture is sepia and bright,
+     mean luminance 208/255, but the headline lands over his dark jacket rather
+     than the sky, so the middle can stay light and let the photograph read.
+     The weight goes where it is actually needed: the top, where cream nav sits
+     over bright sky, and the bottom, where the image has to fade into the page.
+     Warm-tinted rather than neutral black so the sepia survives. */
   .hero::before {
     content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 34%, rgba(0,0,0,.62) 78%, var(--ink) 100%);
+      linear-gradient(to bottom,
+        rgba(10,8,6,.66) 0%,
+        rgba(10,8,6,.20) 30%,
+        rgba(10,8,6,.30) 60%,
+        rgba(10,8,6,.74) 88%,
+        var(--ink) 100%);
   }
 
   .hero-inner { position: relative; }
@@ -118,7 +131,7 @@
     letter-spacing: 0.005em;
     text-transform: uppercase;
     margin: 12px 0 14px;
-    text-shadow: 0 2px 26px rgba(0,0,0,.6);
+    text-shadow: 0 2px 30px rgba(0,0,0,.75);
   }
 
   .tagline {
@@ -126,7 +139,7 @@
     max-width: 430px;
     margin: 0 auto;
     color: #E4DBCB;
-    text-shadow: 0 1px 14px rgba(0,0,0,.7);
+    text-shadow: 0 1px 16px rgba(0,0,0,.85);
   }
 
   .cta {
