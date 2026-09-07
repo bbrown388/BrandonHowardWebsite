@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Give a geometric black face the Alamo arch-A.
+"""Give a geometric black face a flat-topped A, with the shoulder as a dial.
 
-The Alamo wordmark is custom lettering, not a typeface, and its single most
-distinctive move is the A: no pointed apex, just a half-round arch on two
-vertical legs with a low crossbar, exactly like an 'n' with a bar. No shipping
-font has that letter, so it is constructed here from the base font's own stem
-width and cap height and written back into the glyf table. Doing it inside the
-font rather than at the composition layer means shaping, kerning and every
-existing code path keep working untouched.
+The Alamo A is a full half-round arch on two vertical legs. Copying that exactly
+is the most recognisable thing about their lettering, so `arch` here controls how
+much of it to take: 1.0 is the literal semicircle, 0.0 is a squared flat top, and
+the middle is a flat top with softened shoulders that reads as its own letter.
+
+The A is constructed from the base font's own stem width and cap height and
+written into the glyf table, so shaping, kerning and every existing code path
+keep working with no special cases at the composition layer.
 """
-import sys, os
+import os
 from fontTools.ttLib import TTFont
 from fontTools.pens.ttGlyphPen import TTGlyphPen
 from fontTools.pens.cu2quPen import Cu2QuPen
@@ -18,35 +19,42 @@ from fontTools.pens.boundsPen import BoundsPen
 K = 0.5522847498307936        # circle-to-cubic constant
 
 
-def ink(font, gs, name):
+def ink(gs, name):
     bp = BoundsPen(gs)
     gs[name].draw(bp)
     return bp.bounds
 
 
-def draw_arch_A(pen, W, H, S, bar_y, bar_t):
-    """An 'n' arch with a crossbar. Author coords are y-up, like the font."""
-    R = W / 2.0
-    r = R - S
-    cy = H - R                      # centre of the arch
+def draw_A(pen, W, H, S, Rc, bar_y, bar_t):
+    """Flat-topped A with shoulder radius Rc. Author coords are y-up."""
+    ri = Rc - S                                  # inner shoulder radius
 
     pen.moveTo((0, 0))
-    pen.lineTo((0, cy))
-    # outer half circle, left shoulder then right shoulder
-    pen.curveTo((0, cy + R * K), (R - R * K, H), (R, H))
-    pen.curveTo((R + R * K, H), (W, cy + R * K), (W, cy))
+    pen.lineTo((0, H - Rc))
+    if Rc > 0:
+        pen.curveTo((0, H - Rc + Rc * K), (Rc - Rc * K, H), (Rc, H))
+        pen.lineTo((W - Rc, H))
+        pen.curveTo((W - Rc + Rc * K, H), (W, H - Rc + Rc * K), (W, H - Rc))
+    else:
+        pen.lineTo((0, H))
+        pen.lineTo((W, H))
     pen.lineTo((W, 0))
+
     pen.lineTo((W - S, 0))
-    pen.lineTo((W - S, cy))
-    # inner half circle, coming back the other way
-    pen.curveTo((W - S, cy + r * K), (R + r * K, H - S), (R, H - S))
-    pen.curveTo((R - r * K, H - S), (S, cy + r * K), (S, cy))
+    if ri > 0:
+        pen.lineTo((W - S, H - Rc))
+        pen.curveTo((W - S, H - Rc + ri * K), (W - Rc + ri * K, H - S), (W - Rc, H - S))
+        pen.lineTo((Rc, H - S))
+        pen.curveTo((Rc - ri * K, H - S), (S, H - Rc + ri * K), (S, H - Rc))
+    else:
+        pen.lineTo((W - S, H - S))
+        pen.lineTo((S, H - S))
     pen.lineTo((S, 0))
     pen.closePath()
 
-    # The bar is its own contour. The area under the arch has winding zero
-    # because the shape is open along the baseline, so a nonzero fill paints
-    # this rectangle in whichever direction it is wound.
+    # Separate contour. The area under the shoulder has winding zero because the
+    # shape is open along the baseline, so a nonzero fill paints this bar in
+    # whichever direction it happens to be wound.
     pen.moveTo((S, bar_y))
     pen.lineTo((W - S, bar_y))
     pen.lineTo((W - S, bar_y + bar_t))
@@ -54,33 +62,26 @@ def draw_arch_A(pen, W, H, S, bar_y, bar_t):
     pen.closePath()
 
 
-def build(src, dst, bar_frac=0.20, bar_weight=0.92, width_from='O'):
+def build(src, dst, arch=1.0, bar_frac=0.20, bar_weight=0.92, width_from='O'):
     f = TTFont(src)
     gs = f.getGlyphSet()
     upem = f['head'].unitsPerEm
 
-    hb = ink(f, gs, 'H')
-    ib = ink(f, gs, 'I')
-    wb = ink(f, gs, width_from)
-
+    hb, ib, wb = ink(gs, 'H'), ink(gs, 'I'), ink(gs, width_from)
     H = hb[3] - hb[1]                 # cap height
     S = ib[2] - ib[0]                 # stem width
     W = wb[2] - wb[0]                 # match the round letters' width
+    Rc = (W / 2.0) * arch
 
     tpen = TTGlyphPen(gs)
-    pen = Cu2QuPen(tpen, max_err=upem / 2000.0)
-    draw_arch_A(pen, W, H, S, H * bar_frac, S * bar_weight)
+    draw_A(Cu2QuPen(tpen, max_err=upem / 2000.0),
+           W, H, S, Rc, H * bar_frac, S * bar_weight)
     glyph = tpen.glyph()
-
-    # Sit the new A on the baseline and give it the round letters' sidebearings
-    lsb = wb[0]
     glyph.recalcBounds(f['glyf'])
     f['glyf']['A'] = glyph
-    adv_o = f['hmtx']['O'][0]
-    f['hmtx']['A'] = (adv_o, lsb)
+    f['hmtx']['A'] = (f['hmtx']['O'][0], wb[0])
 
-    # rename so nothing collides with a real Poppins install
-    for rec in f['name'].names:
+    for rec in f['name'].names:                   # avoid clashing with real Poppins
         try:
             v = rec.toUnicode()
         except Exception:
@@ -88,10 +89,16 @@ def build(src, dst, bar_frac=0.20, bar_weight=0.92, width_from='O'):
         if 'Poppins' in v:
             rec.string = v.replace('Poppins', 'AlamoLike')
     f.save(dst)
-    print('  %s  cap %d  stem %d  width %d  bar at %.0f%% x %.2f stem'
-          % (os.path.basename(dst), H, S, W, bar_frac * 100, bar_weight))
-    return dst
+    return dict(dst=dst, arch=arch, H=H, S=S, W=W, Rc=Rc)
 
 
 if __name__ == '__main__':
-    build('fonts/Poppins-Black.ttf', 'fonts/AlamoLike-Black.ttf')
+    # 0.35 is the shipping default: a flat top with softened shoulders, which
+    # keeps the geometric family resemblance without reproducing the Alamo
+    # semicircle. 0.00 is the squared alternate and is the least derivative
+    # letter of the set.
+    for dst, a in [('fonts/AlamoLike-Black.ttf', 0.35),
+                   ('fonts/AlamoLike-Flat.ttf', 0.00)]:
+        r = build('fonts/Poppins-Black.ttf', dst, arch=a)
+        print('  arch %-5.2f  shoulder radius %4.0f of half-width %4.0f  -> %s'
+              % (a, r['Rc'], r['W'] / 2, os.path.basename(r['dst'])))

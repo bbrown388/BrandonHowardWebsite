@@ -33,6 +33,7 @@ the manual itself, so there is no font to buy. `am-alamo` rebuilds it.
 | `marks/gh-rye.svg` | Dance hall, Rye + Great Vibes. Reads more saloon. |
 | `marks/am-alamo.svg` | Marquee, the rebuilt ALAMO lettering. Poppins Black with a constructed arch A. |
 | `marks/am-alamo-hat.svg` | Same, small format. |
+| `marks/am-alamo-flat.svg` | Same, squared flat-top A instead of a softened shoulder. |
 | `marks/am-archivo.svg` | Marquee, Archivo Expanded Black. Closest to the marquee photo. |
 | `marks/am-archivo-hat.svg` | Same, small format. |
 | `marks/am-jost.svg` | Marquee, Jost. Jost is an open Futura, and Futura Std Bold is what the Alamo brand manual actually specifies. |
@@ -67,6 +68,20 @@ font's own stem width and cap height and writes it back into the `glyf` table,
 so shaping, kerning and every existing code path keep working with no special
 cases.
 
+How much of that arch to take is a dial, because copying it outright is the most
+recognisable thing about their lettering. The `arch` argument runs from 1.0, the
+literal semicircle, down to 0.0, a squared flat top.
+
+| Value | Result | Shipped as |
+|---|---|---|
+| 1.00 | The literal Alamo semicircle | not used |
+| **0.35** | **Flat top with softened shoulders** | **`AlamoLike-Black.ttf`, the default** |
+| 0.00 | Squared flat top, least derivative of the set | `AlamoLike-Flat.ttf`, the alternate |
+
+0.35 is the shipping default. It keeps a flat-topped geometric A that reads as
+deliberate and sits properly next to the circular O, without reproducing their
+letter.
+
 His name needs only that one substitution. The other oddities on the sign are
 the angled foot on the L and the arch built M, and neither letter appears in
 BRANDON HOWARD.
@@ -92,7 +107,7 @@ The headline result: at hat size the Bodoni and Alex Brush mark loses 31 percent
 of its ink to strokes too fine to stitch, while the Playfair and Kaushan small
 format lockup loses 12 percent and clears. The Alamo lettering is the strongest
 distinctive option in the set, losing nothing at all below the print threshold
-and clearing embroidery outright in small format at 10.8 percent. This is the same class of failure
+and clearing embroidery outright in small format at 10.6 percent. This is the same class of failure
 already seen on Bob's BD mark, where fine strokes dropped out below about three
 and a half inches on DTG.
 

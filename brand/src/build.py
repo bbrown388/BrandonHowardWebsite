@@ -117,14 +117,20 @@ marquee('am-anton', 'Anton', 'Anton-Regular.ttf', TAG, size=190, track=14,
 
 # The Alamo direction proper. The wordmark on that marquee is custom lettering,
 # not a typeface, so this is Poppins Black (which matches it on stem-to-cap and
-# has a truly circular O) carrying a constructed arch A. Tracking is tighter
-# than the other marquee marks because the reference sets tight.
+# has a truly circular O) carrying a constructed flat-topped A. The shoulder is
+# pulled back to 0.35 of a full semicircle: enough to keep the geometric family
+# resemblance, not so much that it reproduces the Alamo letter. Tracking is
+# tighter than the other marquee marks because the reference sets tight.
 marquee('am-alamo', 'Alamo lettering', 'AlamoLike-Black.ttf', TAG, size=168, track=13,
-        note='The arch A is built, not set. No shipping font has that letter.')
+        note='Flat-topped A with a softened shoulder, built rather than set.')
 
 marquee('am-alamo-hat', 'Alamo lettering, small format', 'AlamoLike-Black.ttf', None,
         size=168, track=13,
         note='Hat and pocket lockup, strap line removed.')
+
+marquee('am-alamo-flat', 'Alamo lettering, squared A', 'AlamoLike-Flat.ttf', TAG,
+        size=168, track=13,
+        note='Same mark with a squared flat top instead of a softened shoulder.')
 
 # Small-format lockups. The strap line is the finest ink in the mark, so on a
 # hat front or a pocket it is the first thing to fill in or drop stitches.
