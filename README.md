@@ -1,6 +1,7 @@
-# Howard County — starter site
+# Brandon Howard — starter site
 
-Single-page site for **Brandon Howard / Howard County**. Built 7 Sep 2026.
+Single-page site for **Brandon Howard**, performing with his band **Howard County**.
+Built 7 Sep 2026.
 
 One file, `index.html`, plus `images/`. No build step, no framework. Edit, commit, and
 GitHub Pages redeploys.
