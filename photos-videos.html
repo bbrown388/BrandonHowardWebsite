@@ -157,13 +157,21 @@
      A tile is roughly 300-400px wide, which is too small to actually watch
      anything. Playing opens the video here instead, at up to 1100px, rather
      than inside the grid cell. */
-  dialog.vb { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; }
+  /* Fills the viewport and centres its contents with flex, rather than relying
+     on the browser's own `margin: auto` centring for a modal dialog. The reset
+     at the top of this file sets `* { margin: 0 }`, which overrides that UA rule
+     and pins the dialog to the top left. The photo lightbox above sizes itself
+     the same way for the same reason. */
+  dialog.vb {
+    border: 0; padding: 0; background: transparent;
+    width: 100%; height: 100%;
+    max-width: 100vw; max-height: 100vh;
+  }
+
+  dialog.vb[open] { display: flex; align-items: center; justify-content: center; }
   dialog.vb::backdrop { background: rgba(6,6,6,.95); }
 
-  .vb-inner {
-    width: min(94vw, 1100px);
-    margin: 0 auto;
-  }
+  .vb-inner { width: min(94vw, 1100px); }
 
   .vb-frame { position: relative; aspect-ratio: 16/9; width: 100%; background: #000; }
   .vb-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
