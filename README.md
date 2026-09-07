@@ -10,27 +10,50 @@ GitHub Pages redeploys.
 
 ---
 
-## This site is a rebrand, not just a new site
+## This is a separation, not a rename
 
-**The brand is moving from the band name, Howard County, to the artist name, Brandon
-Howard.** That is the point of the whole exercise and it drives every naming decision here.
+**Brandon has left Howard County.** He is the former lead singer. This site is his own
+presence under his own name.
 
-**How it is handled on the page.** The old name is subordinated, not erased:
+That distinction matters and an earlier draft of this file got it wrong. It argued for
+keeping "Howard County" visible and secondary for search continuity, which is the right
+advice for a *rename* — same act, new name. It is the wrong advice here, and possibly worse
+than wrong: if the band name is entangled with the former management, leaning on it is a
+problem rather than an asset.
 
-| | |
+**Every reference has been removed except one**, kept because it is a plain biographical
+fact and it explains the connection to anyone who knew the band:
+
+> He is the former lead singer of Howard County.
+
+It sits in the About paragraph, deliberately not in the branding. **Delete that one line and
+the name is gone entirely** — no other change needed.
+
+---
+
+## OPEN QUESTION: do these accounts belong to Brandon?
+
+**This is the most important thing in this file after the booking contact.** The page links
+to three external accounts and it is not clear he controls any of them:
+
+| Link | Whose? |
 |---|---|
-| `<title>`, `h1`, footer | **Brandon Howard** |
-| Wordmark | **BRANDON HOWARD** with `& HOWARD COUNTY` beneath in brass |
-| Tagline and About | "Performing with his band, Howard County" |
+| `facebook.com/HowardCountyMusic` | **The band's page.** He is the former lead singer, so this may not be his |
+| `redironpush.bandcamp.com` | "Red Iron Push" — a label or collective, not his name |
+| `open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu` | Unverified. More than one artist shares the name |
 
-That is the standard way to run a name change. People who already know "Howard County"
-search for it, arrive, and immediately understand it is the same act. Deleting the old name
-outright throws away every bit of existing recognition and search history. Keep it visible
-and secondary until the new name carries on its own.
+**If he does not control them, they should come off the page.** Linking a former band's
+Facebook from the site that exists to separate him from that band is the same failure as
+putting the former manager's booking email on it. It sends his own fans somewhere he has no
+say over.
 
-**Why the rebrand makes sense here:** when an act leaves a management or label situation,
-the band name is often the thing that is entangled. Moving to the artist's own name is the
-clean break, and the artist's legal name cannot be taken from him.
+They were left in place rather than deleted because **many artists keep the page and simply
+rename it**, in which case the link is correct and removing it would lose his audience. One
+answer from Brandon settles it.
+
+The song list is a separate question. Those are songs he **wrote and sang**, so listing them
+is factual whoever owns the masters. But if he wants to lead with new material instead, it is
+a six-line edit.
 
 ---
 
