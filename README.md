@@ -9,6 +9,30 @@ GitHub Pages redeploys.
 
 ---
 
+## This site is a rebrand, not just a new site
+
+**The brand is moving from the band name, Howard County, to the artist name, Brandon
+Howard.** That is the point of the whole exercise and it drives every naming decision here.
+
+**How it is handled on the page.** The old name is subordinated, not erased:
+
+| | |
+|---|---|
+| `<title>`, `h1`, footer | **Brandon Howard** |
+| Wordmark | **BRANDON HOWARD** with `& HOWARD COUNTY` beneath in brass |
+| Tagline and About | "Performing with his band, Howard County" |
+
+That is the standard way to run a name change. People who already know "Howard County"
+search for it, arrive, and immediately understand it is the same act. Deleting the old name
+outright throws away every bit of existing recognition and search history. Keep it visible
+and secondary until the new name carries on its own.
+
+**Why the rebrand makes sense here:** when an act leaves a management or label situation,
+the band name is often the thing that is entangled. Moving to the artist's own name is the
+clean break, and the artist's legal name cannot be taken from him.
+
+---
+
 ## Design
 
 Built in the **standard Texas country band convention**: full-bleed photo hero with a dark
@@ -123,20 +147,36 @@ not reported into Bob's property. Add Brandon's own if he wants one.
 
 ## The domain situation
 
+Checked 7 Sep 2026.
+
 | Domain | Registered | Expires | Nameservers | State |
 |---|---|---|---|---|
-| `howardcountymusic.com` | 2023-03-25 | 2027-03-25 | GoDaddy | **live**, old site, former-manager contact |
-| `howardcountyband.com` | **2025-11-26** | **2026-11-26** | `radiopromoguy.com` | **registered, not resolving** |
+| `howardcountymusic.com` | 2023-03-25 | 2027-03-25 | GoDaddy | **LIVE**, old brand, former-manager booking contact |
+| `howardcountyband.com` | 2025-11-26 | **2026-11-26** | `radiopromoguy.com` | registered, **does not resolve** |
+| `brandonhowardmusic.com` | — | **2027-01-16** | `radiopromoguy.com` | registered, **does not resolve** |
 
-`howardcountyband.com` is indexed by Google as "Brandon Howard Music || Official Website"
-but its DNS does not resolve. Somebody already tried to move Brandon onto a new domain and
-it never landed.
+**The rebrand was already started and stalled.** Two domains were registered on the same
+nameservers, belonging to a radio promotion company, and neither serves anything. Google
+still has `howardcountyband.com` indexed under the title "Brandon Howard Music || Official
+Website", which is the rebrand showing through.
 
-**It expires 26 November 2026 — whoever controls it should know that.**
+Meanwhile the only site that actually loads is the old one, under the old brand, routing
+bookings to the former manager.
 
-**If Brandon owns it, that is the right long-term home for this site**, not a subdomain of
-anyone else's domain. A working artist's booking contact, cards and socials should point at
-a domain he controls.
+**`brandonhowardmusic.com` is the right long-term home.** It matches the new brand exactly,
+it is already registered, and it runs to January 2027. This site exists to fill it.
+
+**Two dates somebody needs to be told:**
+
+- **`howardcountyband.com` expires 26 November 2026** — about eleven weeks out.
+- **`brandonhowardmusic.com` expires 16 January 2027.**
+
+If Brandon does not control those registrations, that is the first thing to sort out, ahead
+of any design work. A rebrand that depends on someone else's renewal is not a rebrand.
+
+**Still available if a fresh start is easier:** `brandonhowardband.com`,
+`brandonhowardtx.com`. (`brandonhoward.com` is taken by an unrelated party on GoDaddy
+nameservers.)
 
 ---
 
@@ -166,5 +206,11 @@ Then add a file named `CNAME` containing exactly `howardcounty.bobdavismusic.com
 Pages serves one repository per hostname and the apex is already served by
 `bbrown388/bobdavismusicwebsite`. A separate repo requires a subdomain.
 
-**For `howardcountyband.com`**, use four `A` records at GitHub's Pages IPs plus a `CNAME`
-file containing the apex domain.
+**For `brandonhowardmusic.com`**, the preferred destination, use four `A` records at
+GitHub's Pages IPs plus a `CNAME` file containing the apex domain. This requires control of
+the registration, which currently sits on a third party's nameservers.
+
+**SEO continuity when the domain changes.** Once the new domain is live, put a 301 redirect
+from `howardcountymusic.com` to it so existing links and search history carry over. That
+needs control of the old domain, which may not be available — another reason to establish
+who holds what before committing to a destination.
