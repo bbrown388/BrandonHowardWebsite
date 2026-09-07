@@ -333,6 +333,17 @@
   .booking-form input::placeholder,
   .booking-form textarea::placeholder { color: #6E6A61; }
 
+  /* Autofill in Chrome repaints the field with its own near-white background and
+     dark text, which on this ground looks like a rendering fault. The inset
+     shadow trick is the only way to override it. */
+  .booking-form input:-webkit-autofill,
+  .booking-form input:-webkit-autofill:hover,
+  .booking-form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--paper);
+    -webkit-box-shadow: 0 0 0 1000px #17170F inset;
+    caret-color: var(--paper);
+  }
+
   .booking-form input:focus,
   .booking-form textarea:focus {
     outline: none;

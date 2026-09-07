@@ -178,23 +178,43 @@ window.__catalog = fetch(GQL, {
 
   .body { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
 
+  /* Two lines reserved whether or not the title needs them. Titles here run one
+     or two lines, and without this the price, chooser and button below sit at a
+     different height in every card and nothing lines up across the row. */
   .name {
     font-family: var(--display);
     font-size: 17px; font-weight: 500;
     letter-spacing: 0.045em; text-transform: uppercase;
     line-height: 1.25;
+    min-height: calc(2 * 1.25em);
   }
+
+  /* Same reasoning: a product with a single variant still occupies the chooser
+     row, so single-variant and multi-variant cards stay in step. */
+  .chooser { min-height: 38px; display: flex; align-items: center; }
+  .chooser .one { font-size: 13.5px; color: var(--muted); }
 
   .price { font-size: 14.5px; color: var(--brass); font-variant-numeric: tabular-nums; }
 
   select {
     font-family: var(--body); font-size: 14px;
     color: var(--paper);
-    background: rgba(242,234,220,0.05);
+    /* SOLID, not rgba. A translucent background composites fine for the closed
+       control but the browser also uses it for the popup on some platforms,
+       where there is no dark parent behind it to composite against. */
+    background: #1C1C1C;
     border: 1px solid var(--rule);
     border-radius: 3px;
     padding: 9px 10px;
     width: 100%;
+  }
+
+  /* The dropdown list is drawn by the OS, not by this stylesheet, so it does not
+     inherit the dark ground. Without these two lines the options render as cream
+     text on the system's white popup and are unreadable. */
+  select option {
+    background: #1C1C1C;
+    color: var(--paper);
   }
 
   select:focus { outline: none; border-color: var(--brass); }
@@ -334,6 +354,10 @@ function card(product) {
      combined variant title from Shopify, which is what a shopper picks anyway. */
   let chosen = inStock[0] || variants[0];
 
+  const chooser = document.createElement('div');
+  chooser.className = 'chooser';
+  body.appendChild(chooser);
+
   if (inStock.length > 1) {
     const sel = document.createElement('select');
     sel.setAttribute('aria-label', 'Choose an option for ' + product.title);
@@ -348,7 +372,13 @@ function card(product) {
       buy.href = buyUrl(chosen.id);
       price.textContent = money(chosen.price.amount, chosen.price.currencyCode);
     });
-    body.appendChild(sel);
+    chooser.appendChild(sel);
+  } else {
+    const only = document.createElement('span');
+    only.className = 'one';
+    const v = inStock[0] || variants[0];
+    only.textContent = (!v || v.title === 'Default Title') ? 'One size' : v.title;
+    chooser.appendChild(only);
   }
 
   const buy = document.createElement('a');
