@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photos &amp; Videos | Brandon Howard</title>
+<meta name="description" content="Photos and videos of Brandon Howard. Texas country, red dirt and southern rock out of North Texas.">
+<meta name="robots" content="noindex">
+
+<meta property="og:title" content="Photos &amp; Videos | Brandon Howard">
+<meta property="og:description" content="Real Songs, No Apologies.">
+<meta property="og:image" content="images/hero.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink:    #0A0A0A;
+    --panel:  #121212;
+    --paper:  #F2EADC;
+    --muted:  #9E968A;
+    --brass:  #C89B4A;
+    --rule:   rgba(242,234,220,0.14);
+    --display: 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink); color: var(--paper);
+    font-family: var(--body); line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+
+  a { color: var(--brass); }
+
+  /* ── Nav ──────────────────────────────────────────────────────────────── */
+  .topbar { padding: 26px 20px 0; text-align: center; }
+
+  .wordmark {
+    font-family: var(--display); font-weight: 700; font-size: 23px;
+    letter-spacing: 0.20em; text-transform: uppercase; line-height: 1;
+  }
+  .wordmark a { color: var(--paper); text-decoration: none; }
+
+  nav { margin-top: 20px; }
+  nav a {
+    font-family: var(--display); font-size: 12.5px; font-weight: 500;
+    letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    margin: 0 10px; line-height: 2.4; white-space: nowrap;
+    transition: color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible, nav a[aria-current] { color: var(--brass); }
+
+  main { flex: 1; padding: 54px 20px 84px; }
+  .inner { max-width: 1120px; margin: 0 auto; }
+
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(32px, 7.4vw, 54px);
+    letter-spacing: 0.03em; text-transform: uppercase; text-align: center;
+  }
+  h1::after {
+    content: ''; display: block; width: 54px; height: 2px;
+    margin: 15px auto 0; background: var(--brass);
+  }
+
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(24px, 5vw, 34px);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-align: center; margin-bottom: 30px;
+  }
+
+  .section { margin-top: 64px; }
+
+  /* ── Photo grid ───────────────────────────────────────────────────────── */
+  .photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+  }
+
+  .photos button {
+    padding: 0; border: 0; background: none; cursor: zoom-in;
+    display: block; position: relative; overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .photos img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .4s ease, opacity .2s ease;
+  }
+
+  .photos button:hover img,
+  .photos button:focus-visible img { transform: scale(1.05); opacity: .88; }
+  .photos button:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+
+  /* ── Lightbox ─────────────────────────────────────────────────────────── */
+  dialog.lb {
+    border: 0; padding: 0; background: transparent;
+    max-width: 100vw; max-height: 100vh; width: 100%; height: 100%;
+  }
+  dialog.lb::backdrop { background: rgba(6,6,6,.94); }
+
+  .lb-inner {
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    padding: 56px 16px;
+  }
+  .lb-inner img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+  .lb-close, .lb-nav {
+    position: fixed; background: rgba(18,18,18,.82);
+    border: 1px solid var(--rule); color: var(--paper);
+    font-family: var(--display); letter-spacing: .1em;
+    cursor: pointer; line-height: 1;
+  }
+  .lb-close { top: 16px; right: 16px; font-size: 22px; padding: 8px 13px; }
+  .lb-nav   { top: 50%; transform: translateY(-50%); font-size: 26px; padding: 12px 16px; }
+  .lb-prev  { left: 12px; }
+  .lb-next  { right: 12px; }
+  .lb-close:hover, .lb-nav:hover { border-color: var(--brass); color: var(--brass); }
+
+  /* ── Videos ───────────────────────────────────────────────────────────── */
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+
+  /* Click-to-play facade. A real iframe per video would pull YouTube's player
+     and its cookies on page load for every tile; this loads a thumbnail and
+     only swaps in the iframe when someone actually asks for it. */
+  .vid {
+    border: 1px solid var(--rule); background: var(--panel);
+    display: flex; flex-direction: column;
+  }
+  .vid .frame {
+    position: relative; aspect-ratio: 16/9; cursor: pointer;
+    background: #000; border: 0; padding: 0; width: 100%; display: block;
+  }
+  .vid .frame img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .82; transition: opacity .2s ease; }
+  .vid .frame:hover img, .vid .frame:focus-visible img { opacity: 1; }
+  .vid .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .play svg { width: 58px; height: 58px; filter: drop-shadow(0 2px 10px rgba(0,0,0,.6)); }
+
+  .vid .cap {
+    padding: 13px 15px 15px;
+    font-family: var(--display); font-size: 14.5px; font-weight: 400;
+    letter-spacing: .04em; text-transform: uppercase; line-height: 1.35;
+  }
+
+  .yt-link { text-align: center; margin-top: 30px; }
+  .yt-link a {
+    display: inline-block;
+    font-family: var(--display); font-size: 13px; font-weight: 500;
+    letter-spacing: .17em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    border: 1px solid var(--rule); background: rgba(242,234,220,.04);
+    padding: 13px 30px; transition: border-color .15s ease, background .15s ease;
+  }
+  .yt-link a:hover { border-color: var(--brass); background: rgba(200,155,74,.11); }
+
+  .note {
+    border: 1px dashed rgba(200,155,74,0.5);
+    background: rgba(200,155,74,0.06);
+    padding: 18px 20px; font-size: 14px; color: var(--muted);
+    max-width: 700px; margin: 30px auto 0;
+  }
+  .note b { color: var(--brass); }
+
+  footer {
+    padding: 34px 20px 44px; border-top: 1px solid var(--rule);
+    text-align: center; font-size: 12.5px; color: var(--muted); letter-spacing: .05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark"><a href="index.html">Brandon Howard</a></div>
+  <nav>
+    <a href="index.html#music">Music</a>
+    <a href="index.html#shows">Shows</a>
+    <a href="index.html#about">About</a>
+    <a href="photos-videos.html" aria-current="page">Photos &amp; Videos</a>
+    <a href="merch.html">Merch</a>
+    <a href="index.html#booking">Booking</a>
+  </nav>
+</div>
+
+<main>
+  <div class="inner">
+    <h1>Photos &amp; Videos</h1>
+
+    <div class="note">
+      <b>A first selection, not the full set.</b> Twelve photos chosen for range
+      out of a much larger library, and eight videos pulled from the YouTube
+      channel. Brandon should say which to drop and what is missing.
+    </div>
+
+    <!-- ── PHOTOS ────────────────────────────────────────────────────────── -->
+    <section class="section">
+      <h2>Photos</h2>
+      <div class="photos" id="photos"></div>
+    </section>
+
+    <!-- ── VIDEOS ────────────────────────────────────────────────────────── -->
+    <section class="section">
+      <h2>Videos</h2>
+      <div class="videos" id="videos"></div>
+      <p class="yt-link">
+        <a href="https://www.youtube.com/channel/UCzDMR8d3snpksXqSAm3SwYw" target="_blank" rel="noopener">
+          All videos on YouTube
+        </a>
+      </p>
+    </section>
+  </div>
+</main>
+
+<dialog class="lb" id="lb">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&lsaquo;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&rsaquo;</button>
+  <div class="lb-inner"><img id="lbImg" alt=""></div>
+</dialog>
+
+<footer>
+  <p>Brandon Howard &nbsp;&middot;&nbsp; Texas Country &nbsp;&middot;&nbsp; North Texas</p>
+</footer>
+
+<script>
+/* ─── PHOTOS ────────────────────────────────────────────────────────────────
+   Add or remove by editing this list. Each entry needs a base filename in
+   images/gallery/; the grid uses <name>-t.jpg and the lightbox uses <name>.jpg. */
+const PHOTOS = [
+  ['bison-sunset',       'Standing in the grass at sunset, bison behind'],
+  ['smoke-telecaster',   'Playing a Telecaster in smoke and stage light'],
+  ['fence-goldenhour',   'Leaning on a fence line at golden hour'],
+  ['smoke-color',        'Playing amid coloured smoke'],
+  ['bison-portrait-bw',  'Black and white portrait, bison behind'],
+  ['motorcycle-bw',      'With a guitar and a motorcycle, black and white'],
+  ['acoustic-barn-bw',   'Playing acoustic in a barn, black and white'],
+  ['bison-arms-crossed', 'Arms crossed in the field, bison behind'],
+  ['garage-smoke',       'Portrait in a parking garage with smoke'],
+  ['teal-guitar-shop',   'Playing a teal guitar in a workshop'],
+  ['fencepost-sunset',   'At a fence post, sun low behind'],
+  ['bar-portrait',       'Portrait at a bar'],
+];
+
+/* ─── VIDEOS ────────────────────────────────────────────────────────────────
+   From youtube.com/channel/UCzDMR8d3snpksXqSAm3SwYw. Chosen to lead with the
+   songs that appear on the home page, then recent originals. */
+const VIDEOS = [
+  ['bucpdqQ3nDw', 'Louisiana Growler, live from 3rd and Lindsley, Nashville'],
+  ['phb7niNkF34', 'Tiny Town, stripped down acoustic'],
+  ['uDtaeTSvWt4', 'Cowboy Cry'],
+  ['p0OanFxmgd8', 'Girl, I See You'],
+  ['_ALV6YwWDkw', 'Whiskey and You, Fort Worth Stockyards'],
+  ['S0_jAv8BXdg', 'Come Lay Your Life Down'],
+  ['MJZXwUTHavE', 'Damn Sure Try'],
+  ['rU4o0Dh636Y', 'Be Somebody'],
+];
+
+/* ─── Photo grid + lightbox ──────────────────────────────────────────────── */
+const grid = document.getElementById('photos');
+PHOTOS.forEach(([name, alt], i) => {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'View: ' + alt);
+  const img = document.createElement('img');
+  img.src = 'images/gallery/' + name + '-t.jpg';
+  img.alt = alt; img.loading = 'lazy'; img.width = 640; img.height = 640;
+  btn.appendChild(img);
+  btn.addEventListener('click', () => open(i));
+  grid.appendChild(btn);
+});
+
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+let idx = 0;
+
+function open(i) {
+  idx = (i + PHOTOS.length) % PHOTOS.length;
+  lbImg.src = 'images/gallery/' + PHOTOS[idx][0] + '.jpg';
+  lbImg.alt = PHOTOS[idx][1];
+  if (!lb.open) lb.showModal();
+}
+
+document.getElementById('lbClose').addEventListener('click', () => lb.close());
+document.getElementById('lbPrev').addEventListener('click', () => open(idx - 1));
+document.getElementById('lbNext').addEventListener('click', () => open(idx + 1));
+lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+document.addEventListener('keydown', e => {
+  if (!lb.open) return;
+  if (e.key === 'ArrowLeft')  open(idx - 1);
+  if (e.key === 'ArrowRight') open(idx + 1);
+});
+
+/* ─── Video facades ──────────────────────────────────────────────────────── */
+const vids = document.getElementById('videos');
+VIDEOS.forEach(([id, title]) => {
+  const card = document.createElement('article');
+  card.className = 'vid';
+
+  const frame = document.createElement('button');
+  frame.className = 'frame';
+  frame.type = 'button';
+  frame.setAttribute('aria-label', 'Play: ' + title);
+
+  const thumb = document.createElement('img');
+  thumb.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+  thumb.alt = ''; thumb.loading = 'lazy'; thumb.width = 480; thumb.height = 360;
+  frame.appendChild(thumb);
+
+  const play = document.createElement('span');
+  play.className = 'play';
+  play.innerHTML =
+    '<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6A89 89 0 0 0 0 24a89 89 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6A89 89 0 0 0 68 24a89 89 0 0 0-1.5-16.3z" fill="#C8202A"/>' +
+    '<path d="M27 34V14l18 10z" fill="#fff"/></svg>';
+  frame.appendChild(play);
+
+  // Swap the facade for the real player only on demand, and use nocookie.
+  frame.addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    f.title = title;
+    f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    frame.replaceWith(f);
+  }, { once: true });
+
+  const cap = document.createElement('div');
+  cap.className = 'cap';
+  cap.textContent = title;
+
+  card.appendChild(frame);
+  card.appendChild(cap);
+  vids.appendChild(card);
+});
+</script>
+
+</body>
+</html>

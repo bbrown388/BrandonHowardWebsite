@@ -367,6 +367,39 @@
     .booking-form textarea { font-size: 16px; }
   }
 
+  /* ── Home photo strip ─────────────────────────────────────────────────── */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+  }
+
+  .strip a { display: block; overflow: hidden; aspect-ratio: 4/5; }
+
+  .strip img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .45s ease, opacity .2s ease;
+  }
+
+  .strip a:hover img, .strip a:focus-visible img { transform: scale(1.05); opacity: .88; }
+
+  .more {
+    text-align: center; margin-top: 30px;
+  }
+
+  .more a {
+    display: inline-block;
+    font-family: var(--display);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    border: 1px solid var(--rule); background: rgba(242,234,220,0.04);
+    padding: 13px 30px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+
+  .more a:hover, .more a:focus-visible { border-color: var(--brass); background: rgba(200,155,74,0.11); }
+
   /* ── Placeholder ──────────────────────────────────────────────────────── */
   .todo {
     border: 1px dashed rgba(200,155,74,0.5);
@@ -401,6 +434,7 @@
     <a href="#music">Music</a>
     <a href="#shows">Shows</a>
     <a href="#about">About</a>
+    <a href="photos-videos.html">Photos</a>
     <a href="merch.html">Merch</a>
     <a href="#booking">Booking</a>
   </nav>
@@ -504,6 +538,23 @@
       <div class="cred"><b>TSSA</b><span>2024 Champion, Texas State Songwriters Association</span></div>
       <div class="cred"><b>300+</b><span>Songs written since the age of eleven</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ── PHOTO STRIP ───────────────────────────────────────────────────────────
+     Four alternative shots on the way down the page, in the same spirit as the
+     hero. Portrait crops so they read as a row of frames rather than a second
+     hero. Links through to the full gallery. -->
+<section class="alt">
+  <div class="inner">
+    <h2>Photos</h2>
+    <div class="strip">
+      <a href="photos-videos.html"><img src="images/gallery/bison-arms-crossed-t.jpg" alt="Arms crossed in the field, bison behind" loading="lazy" width="640" height="640"></a>
+      <a href="photos-videos.html"><img src="images/gallery/smoke-telecaster-t.jpg" alt="Playing a Telecaster in smoke and stage light" loading="lazy" width="640" height="640"></a>
+      <a href="photos-videos.html"><img src="images/gallery/fence-goldenhour-t.jpg" alt="Leaning on a fence line at golden hour" loading="lazy" width="640" height="640"></a>
+      <a href="photos-videos.html"><img src="images/gallery/acoustic-barn-bw-t.jpg" alt="Playing acoustic in a barn, black and white" loading="lazy" width="640" height="640"></a>
+    </div>
+    <p class="more"><a href="photos-videos.html">Photos &amp; Videos</a></p>
   </div>
 </section>
 

@@ -79,6 +79,39 @@ the display type work. Swap it for a self-hosted copy if that dependency is unwa
 
 ---
 
+## Photos and videos
+
+`photos-videos.html`, linked from the nav, plus a four-shot strip on the home page.
+
+### Photos
+
+**Twelve, chosen for range from a much larger iCloud library**, not everything Brandon has.
+Extracted at full resolution and resized to 1600px, with a square 640px thumbnail each.
+
+**To change the selection**, edit the `PHOTOS` array near the bottom of
+`photos-videos.html`. Each entry needs `images/gallery/<name>.jpg` for the lightbox and
+`<name>-t.jpg` for the grid. Removing an entry removes the tile. The home-page strip is
+four hard-coded `<img>` tags in `index.html`, changed the same way.
+
+The grid opens a keyboard-navigable lightbox using a native `<dialog>`, so arrow keys and
+Escape work without a library.
+
+### Videos
+
+**Eight from `youtube.com/channel/UCzDMR8d3snpksXqSAm3SwYw`**, ordered to lead with the four
+songs that also appear on the home page, then recent originals. Meme and joke posts were
+skipped. Edit the `VIDEOS` array to change them.
+
+**Loaded as click-to-play facades, not iframes.** Eight real embeds would pull YouTube's
+player and its cookies on every page load; instead each tile shows a thumbnail and swaps in
+a `youtube-nocookie.com` iframe only when clicked. Verified: **zero iframes present until
+someone plays something.**
+
+**Note the channel is still named "Howard County".** Another asset under the old brand.
+Worth renaming as part of the same move, since the site now points at it.
+
+---
+
 ## Photographs
 
 **`images/hero.jpg` came from Bob**, via an iCloud link, and is the better-provenance image
