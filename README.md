@@ -104,14 +104,33 @@ without turning taps into swipes.
 The chevron handlers call `stopPropagation`, otherwise a chevron click would also register
 on the surface underneath and advance twice.
 
+**Photos are contained, not cropped.** `object-fit: cover` at a fixed height centre-crops,
+which was cutting heads off. Each slide now shows the whole frame over a blurred, darkened
+copy of the same photo, so nothing is lost and the frame still fills edge to edge. Verified
+across all eight: zero clipped.
+
 The grid opens a keyboard-navigable lightbox using a native `<dialog>`, so arrow keys and
 Escape work without a library.
+
+**A note on `<dialog>` and the CSS reset.** The reset at the top of each file sets
+`* { margin: 0 }`, which also matches `dialog` and overrides the UA stylesheet's
+`margin: auto` that a modal dialog uses to centre itself. Both lightboxes therefore fill the
+viewport and centre their contents with flex instead. Anything new using `<dialog>` here has
+to do the same or it will open pinned to the top left.
 
 ### Videos
 
 **Eight from `youtube.com/channel/UCzDMR8d3snpksXqSAm3SwYw`**, ordered to lead with the four
 songs that also appear on the home page, then recent originals. Meme and joke posts were
 skipped. Edit the `VIDEOS` array to change them.
+
+**Videos open in a lightbox, with the same prev/next arrows as the photos.** A grid tile is
+300 to 400px wide, too small to watch anything, so playing opens the video at up to 1100px.
+Arrows and arrow keys walk the list, and the caption carries the position.
+
+**Closing removes the iframe rather than hiding it.** Hiding alone leaves the audio playing.
+The same applies when stepping between videos: the previous iframe is torn out, not
+re-pointed, or it keeps buffering in the background.
 
 **Loaded as click-to-play facades, not iframes.** Eight real embeds would pull YouTube's
 player and its cookies on every page load; instead each tile shows a thumbnail and swaps in

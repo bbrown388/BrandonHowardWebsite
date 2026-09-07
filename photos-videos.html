@@ -182,13 +182,17 @@
     letter-spacing: .06em; text-transform: uppercase; color: var(--paper);
   }
 
-  .vb-close {
-    position: fixed; top: 16px; right: 16px;
-    background: rgba(18,18,18,.82); border: 1px solid var(--rule);
-    color: var(--paper); font-size: 22px; padding: 8px 13px;
+  .vb-close, .vb-nav {
+    position: fixed; background: rgba(18,18,18,.82);
+    border: 1px solid var(--rule); color: var(--paper);
+    font-family: var(--display); letter-spacing: .1em;
     cursor: pointer; line-height: 1;
   }
-  .vb-close:hover { border-color: var(--brass); color: var(--brass); }
+  .vb-close { top: 16px; right: 16px; font-size: 22px; padding: 8px 13px; }
+  .vb-nav   { top: 50%; transform: translateY(-50%); font-size: 26px; padding: 12px 16px; }
+  .vb-prev  { left: 12px; }
+  .vb-next  { right: 12px; }
+  .vb-close:hover, .vb-nav:hover { border-color: var(--brass); color: var(--brass); }
 
   .play {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -272,6 +276,8 @@
 
 <dialog class="vb" id="vb">
   <button class="vb-close" id="vbClose" aria-label="Close">&times;</button>
+  <button class="vb-nav vb-prev" id="vbPrev" aria-label="Previous video">&lsaquo;</button>
+  <button class="vb-nav vb-next" id="vbNext" aria-label="Next video">&rsaquo;</button>
   <div class="vb-inner">
     <div class="vb-frame" id="vbFrame"></div>
     <p class="vb-cap" id="vbCap"></p>
@@ -362,15 +368,23 @@ const vb      = document.getElementById('vb');
 const vbFrame = document.getElementById('vbFrame');
 const vbCap   = document.getElementById('vbCap');
 
-function playInLightbox(id, title) {
+let vIdx = 0;
+
+/* Index-driven rather than id-driven, so the arrows can walk VIDEOS the same
+   way the photo lightbox walks PHOTOS. */
+function playInLightbox(i) {
+  vIdx = (i + VIDEOS.length) % VIDEOS.length;
+  const [id, title] = VIDEOS[vIdx];
   const f = document.createElement('iframe');
   f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
   f.title = title;
   f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
   f.allowFullscreen = true;
+  /* replaceChildren tears out the previous iframe, which is what stops the
+     previous video. Swapping only the src would leave it buffering. */
   vbFrame.replaceChildren(f);
-  vbCap.textContent = title;
-  vb.showModal();
+  vbCap.textContent = title + '  (' + (vIdx + 1) + ' / ' + VIDEOS.length + ')';
+  if (!vb.open) vb.showModal();
 }
 
 /* Tearing the iframe out is what actually stops playback; hiding the dialog
@@ -379,11 +393,21 @@ function closeVideo() { vbFrame.replaceChildren(); vbCap.textContent = ''; }
 
 vb.addEventListener('close', closeVideo);
 document.getElementById('vbClose').addEventListener('click', () => vb.close());
+document.getElementById('vbPrev').addEventListener('click', e => { e.stopPropagation(); playInLightbox(vIdx - 1); });
+document.getElementById('vbNext').addEventListener('click', e => { e.stopPropagation(); playInLightbox(vIdx + 1); });
 vb.addEventListener('click', e => { if (e.target === vb) vb.close(); });
+
+/* Arrow keys move between videos while the player is open. Checked before the
+   photo lightbox's own handler so the two never both fire. */
+document.addEventListener('keydown', e => {
+  if (!vb.open) return;
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); playInLightbox(vIdx - 1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); playInLightbox(vIdx + 1); }
+});
 
 /* ─── Video facades ──────────────────────────────────────────────────────── */
 const vids = document.getElementById('videos');
-VIDEOS.forEach(([id, title]) => {
+VIDEOS.forEach(([id, title], vi) => {
   const card = document.createElement('article');
   card.className = 'vid';
 
@@ -408,7 +432,7 @@ VIDEOS.forEach(([id, title]) => {
   // Open large rather than playing in the tile. A grid cell is 300-400px wide,
   // which is too small to watch anything, and an earlier version replaced the
   // .frame element outright, which also dropped its aspect-ratio styling.
-  frame.addEventListener('click', () => playInLightbox(id, title));
+  frame.addEventListener('click', () => playInLightbox(vi));
 
   const cap = document.createElement('div');
   cap.className = 'cap';

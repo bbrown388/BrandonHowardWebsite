@@ -391,13 +391,25 @@
 
   @media (prefers-reduced-motion: reduce) { .track { transition: none; } }
 
-  .slide { min-width: 100%; }
+  .slide { min-width: 100%; position: relative; overflow: hidden; }
+
+  /* A blurred, darkened copy of the same photo fills the frame behind it.
+     The photo itself is CONTAINED rather than cropped, because `cover` at a
+     fixed height centre-crops and was cutting heads off. Insetting past the
+     edges hides the soft border that blurring an element leaves behind. */
+  .slide .fill {
+    position: absolute; inset: -60px;
+    background-size: cover; background-position: center;
+    filter: blur(34px) brightness(.38) saturate(.85);
+    pointer-events: none;
+  }
 
   .slide img {
+    position: relative;
     width: 100%;
     height: 76vh;
     max-height: 820px;
-    object-fit: cover;
+    object-fit: contain;    /* never crops; whole frame always visible */
     display: block;
     pointer-events: none;   /* clicks belong to the carousel, not the image */
   }
@@ -600,14 +612,14 @@
 
   <div class="carousel" id="car" role="group" aria-roledescription="carousel" aria-label="Photos of Brandon Howard">
     <div class="track" id="track">
-      <div class="slide"><img src="images/gallery/bison-arms-crossed.jpg" alt="Arms crossed in the field, bison behind" width="1600" height="1004"></div>
-      <div class="slide"><img src="images/gallery/smoke-telecaster.jpg" alt="Playing a Telecaster in smoke and stage light" loading="lazy" width="1600" height="1352"></div>
-      <div class="slide"><img src="images/gallery/fence-goldenhour.jpg" alt="Leaning on a fence line at golden hour" loading="lazy" width="1600" height="996"></div>
-      <div class="slide"><img src="images/gallery/smoke-color.jpg" alt="Playing amid coloured smoke" loading="lazy" width="1600" height="1043"></div>
-      <div class="slide"><img src="images/gallery/acoustic-barn-bw.jpg" alt="Playing acoustic in a barn, black and white" loading="lazy" width="1600" height="952"></div>
-      <div class="slide"><img src="images/gallery/bison-portrait-bw.jpg" alt="Black and white portrait, bison behind" loading="lazy" width="1600" height="1107"></div>
-      <div class="slide"><img src="images/gallery/garage-smoke.jpg" alt="Portrait in a parking garage with smoke" loading="lazy" width="1600" height="1366"></div>
-      <div class="slide"><img src="images/gallery/teal-guitar-shop.jpg" alt="Playing a teal guitar in a workshop" loading="lazy" width="1600" height="1196"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/bison-arms-crossed.jpg)"></div><img src="images/gallery/bison-arms-crossed.jpg" alt="Arms crossed in the field, bison behind" width="1600" height="1004"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/smoke-telecaster.jpg)"></div><img src="images/gallery/smoke-telecaster.jpg" alt="Playing a Telecaster in smoke and stage light" loading="lazy" width="1600" height="1352"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/fence-goldenhour.jpg)"></div><img src="images/gallery/fence-goldenhour.jpg" alt="Leaning on a fence line at golden hour" loading="lazy" width="1600" height="996"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/smoke-color.jpg)"></div><img src="images/gallery/smoke-color.jpg" alt="Playing amid coloured smoke" loading="lazy" width="1600" height="1043"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/acoustic-barn-bw.jpg)"></div><img src="images/gallery/acoustic-barn-bw.jpg" alt="Playing acoustic in a barn, black and white" loading="lazy" width="1600" height="952"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/bison-portrait-bw.jpg)"></div><img src="images/gallery/bison-portrait-bw.jpg" alt="Black and white portrait, bison behind" loading="lazy" width="1600" height="1107"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/garage-smoke.jpg)"></div><img src="images/gallery/garage-smoke.jpg" alt="Portrait in a parking garage with smoke" loading="lazy" width="1600" height="1366"></div>
+      <div class="slide"><div class="fill" style="background-image:url(images/gallery/teal-guitar-shop.jpg)"></div><img src="images/gallery/teal-guitar-shop.jpg" alt="Playing a teal guitar in a workshop" loading="lazy" width="1600" height="1196"></div>
     </div>
     <button class="cx cx-prev" id="cxPrev" type="button" aria-label="Previous photo">&lsaquo;</button>
     <button class="cx cx-next" id="cxNext" type="button" aria-label="Next photo">&rsaquo;</button>
