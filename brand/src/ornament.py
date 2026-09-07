@@ -27,40 +27,54 @@ def arrowhead(cx, tip_y, w, h, notch=0.60):
                  (cx - w / 2.0, tip_y + h)])
 
 
+# Fletching proportions, as multiples of shaft thickness. Pulled out here rather
+# than buried in arrow() because this is the dial that decides whether the thing
+# reads as a drawn arrow or as clip art: too long and too tall and it becomes a
+# stamp stuck on the end of a line.
+FLETCH = dict(length=6.0, height=2.2, count=5, barb=0.52, lean=0.55, nock=1.05)
+
+
 def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
     """A horizontal arrow pointing right, fletched the way a real one is drawn.
 
-    Three parts unioned by a nonzero fill: shaft, barbed head with its base cut
-    back between the barbs, and a feather at the tail drawn as individual barbs
-    radiating off the shaft.
+    Shaft, barbed head with its base cut back between the barbs, and a feather
+    at the tail built from individual barbs radiating off the shaft.
 
-    The barbs are the whole point. A filled vane closes into a solid paddle no
-    matter how elegantly it is shaped, because the halves meet across the shaft,
-    and that paddle is what made two earlier attempts look cheap. Separate
-    strokes keep the shaft visible through the feather and stay legible small,
-    because the eye reads the rhythm rather than the mass. Barb length follows a
-    profile peaking about a third along, which gives the silhouette of a real
-    fletching without drawing its outline.
+    The barbs are the point. A filled vane closes into a solid paddle however
+    elegantly it is shaped, because the halves meet across the shaft, and that
+    paddle is what makes an arrow look cheap. Separate strokes keep the shaft
+    visible through the feather and stay legible small, since the eye reads their
+    rhythm rather than a mass. Barb length follows a profile peaking about a
+    third along, which gives the silhouette of a real fletching without drawing
+    its outline.
+
+    Proportions come from FLETCH above; `fletch` overrides the barb count.
     """
-    hl = head if head is not None else thick * 5.4
-    hw = barb if barb is not None else thick * 2.5
-    n = int(fletch) if fletch is not None else 7
+    F = FLETCH
+    hl = head if head is not None else thick * 5.0
+    hw = barb if barb is not None else thick * 2.3
+    n = int(fletch) if fletch is not None else F['count']
     t2 = thick / 2.0
 
-    parts = [_pts([(x0 + thick * 0.8, y - t2), (x1 - hl * 0.9, y - t2),
-                   (x1 - hl * 0.9, y + t2), (x0 + thick * 0.8, y + t2)]),
+    parts = [_pts([(x0 + thick * 0.5, y - t2), (x1 - hl * 0.9, y - t2),
+                   (x1 - hl * 0.9, y + t2), (x0 + thick * 0.5, y + t2)]),
              _pts([(x1, y), (x1 - hl, y - hw),
-                   (x1 - hl * 0.62, y), (x1 - hl, y + hw)]),
-             _pts([(x0, y - thick * 1.45), (x0 + thick * 0.85, y - thick * 1.45),
-                   (x0 + thick * 0.85, y + thick * 1.45), (x0, y + thick * 1.45)])]
+                   (x1 - hl * 0.62, y), (x1 - hl, y + hw)])]
+    if F['nock']:
+        k = thick * F['nock']
+        parts.append(_pts([(x0, y - k), (x0 + thick * 0.7, y - k),
+                           (x0 + thick * 0.7, y + k), (x0, y + k)]))
 
-    L, maxh, lean, w = thick * 9.0, thick * 3.3, 0.55, thick * 0.68
+    L = thick * F['length']
+    maxh = thick * F['height']
+    w = thick * F['barb']
+    lean = F['lean']
     for s in (-1, 1):
         for i in range(n):
-            u = i / float(n - 1)
-            prof = math.sin(math.pi * (0.18 + 0.72 * u)) ** 0.65
+            u = i / float(n - 1) if n > 1 else 0.0
+            prof = math.sin(math.pi * (0.20 + 0.70 * u)) ** 0.65
             h = maxh * prof
-            bx = x0 + thick * 0.7 + L * u
+            bx = x0 + thick * 0.5 + L * u
             parts.append(_pts([(bx, y + s * t2 * 0.6),
                                (bx + w, y + s * t2 * 0.6),
                                (bx + w - lean * h, y + s * h),

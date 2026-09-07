@@ -94,16 +94,18 @@ CARDS = [
       body='Spurred western slab. Saloon door, rodeo bill, Lone Star, and the '
            'least ambiguous about where the band is from of anything built so far. '
            'The problem was never the character. It is that the spurs are '
-           'hairlines, so it loses 46 per cent of its ink at hat size. Everything '
-           'below keeps the flavour and adds weight.'),
+           'hairlines, so it loses 47 per cent of its ink at hat size and the '
+           'small format lockup is barely better. Everything below keeps the '
+           'flavour and adds weight.'),
  dict(k='am-sancreek', g='west', hat='am-sancreek-hat',
       title='Sancreek', tag='Best of the western set',
       faces='Sancreek',
       body='The same spurred western language with more ink in the stems. If what '
            'you liked was specifically the western lettering rather than the general '
            'vintage feel, this is the one to hold up against Rye first. It is also '
-           'the strongest of this group on the measurements by a clear margin, '
-           'turning Rye 46 per cent into 14.'),
+           'the strongest of this group on the measurements, turning Rye 47 per '
+           'cent into 18 at full size, and its small format lockup clears '
+           'embroidery outright at 9.4.'),
  dict(k='am-swanky', g='west', hat='am-swanky-hat',
       title='Fontdiner Swanky', tag='More swagger',
       faces='Fontdiner Swanky',
@@ -111,13 +113,13 @@ CARDS = [
            'more roadhouse sign, with a bit of movement in the letterforms that the '
            'straighter faces do not have.'),
  dict(k='am-bevan', g='west', hat='am-bevan-hat',
-      title='Bevan', tag='Looks tougher than it measures',
+      title='Bevan', tag='Durable, as it looks',
       faces='Bevan',
-      body='Heavy Egyptian slab, and unmistakably old American printing. I expected '
-           'this to be the durable one, since it drops the spurs entirely, and the '
-           'measurement says otherwise: its serif brackets and the thin horizontals '
-           'in the small type give it the worst full size number in the western set. '
-           'Good for shirts and posters, poor for stitching.'),
+      body='Heavy Egyptian slab, and unmistakably old American printing. It drops '
+           'the spurs entirely and gets back exactly the durability that suggests: '
+           '15.1 per cent full size and 10.9 on a hat, which clears. An earlier '
+           'version of this sheet claimed the reverse, on the strength of a broken '
+           'measurement. That has been corrected.'),
  dict(k='am-rammetto', g='west', hat='am-rammetto-hat',
       title='Rammetto One', tag='Heaviest of the group',
       faces='Rammetto One',

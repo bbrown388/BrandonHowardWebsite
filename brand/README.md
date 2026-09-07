@@ -188,15 +188,30 @@ share of its ink sitting in strokes too fine for a given process, taken at four
 inches wide at 300 dpi. The method is a morphological opening, which removes
 exactly the ink thinner than a given width.
 
+**These figures were re-measured after a harness bug, and roughly two thirds of
+them moved.** Every mark used to be rendered onto one very tall page and captured
+in a single screenshot. Chrome caps a full page capture at about 16384 pixels and
+the stitch below that seam is wrong, so every mark past it was measured against
+whatever artwork landed in its slot. The results looked plausible, which is why it
+went unnoticed for several rounds, and in the worst case it reversed a conclusion:
+Bevan was reported as the weakest western face at 51.6 percent and actually
+measures 15.1.
+
+`src/measure_pages.py` now splits the marks across chunks well under the cap and
+stamps each tile with its key. `src/measure_run.py` verifies that stamp before
+trusting a tile, refuses to run if a chunk screenshot is not the expected height,
+and masks ink on all three colour channels so the stamp itself is never counted.
+
 | Threshold | Process | Meaning |
 |---|---|---|
 | 0.42 mm | Screen print, DTG | Below this, ink bridges or drops out. Every mark here is comfortable. |
 | 1.10 mm | Embroidery | A stitch cannot render a finer stroke. This is what decides hats. |
 
-The headline result: at hat size the Bodoni and Alex Brush mark loses 33 percent
-of its ink to strokes too fine to stitch. The Alamo lettering is the strongest
-distinctive option, losing nothing at all below the print threshold and clearing
-embroidery in small format at 11.1 percent.
+The headline result: Oswald Bold measures best of everything at 11.0 percent full
+size and 6.5 on a hat. The chosen mark, Sancreek with arrow rules, is 12.7 percent
+full size and 8.9 on a hat, which clears embroidery. Rye is print only at 47
+percent, which is the face rather than the western direction, since Sancreek,
+Bevan and Rammetto all clear in small format. No dance hall version clears.
 
 The longer name cost something real here. Before BAND was added, the Playfair and
 Kaushan small format lockup cleared embroidery at 11.8 percent. A motto can be
