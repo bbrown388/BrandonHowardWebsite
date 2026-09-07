@@ -1,19 +1,57 @@
 # Howard County — starter site
 
-A single-page starter site for **Brandon Howard / Howard County**, built 7 Sep 2026.
+Single-page site for **Brandon Howard / Howard County**. Built 7 Sep 2026.
 
-One file, `index.html`. No build step, no dependencies, no framework. Edit it in any
-text editor, commit, and GitHub Pages redeploys.
+One file, `index.html`, plus `images/`. No build step, no framework. Edit, commit, and
+GitHub Pages redeploys.
+
+**Live preview:** https://bbrown388.github.io/BrandonHowardWebsite/
 
 ---
 
-## Read this before editing
+## Design
 
-**Every fact on the page is sourced. Nothing was invented.** Where a real value was not
-available it is marked `PLACEHOLDER` in the HTML rather than filled with a plausible guess,
-because this is a real person's public page and a wrong detail is worse than a blank one.
+Built in the **standard Texas country band convention**: full-bleed photo hero with a dark
+scrim, condensed uppercase display type, dark ground, anchor nav, social row. That layout
+is genre furniture, not any one band's invention — randyrogersband.com was the reference
+for *structure and hierarchy* only.
 
-### What is on the page and where it came from
+**Nothing was copied.** No markup, no CSS, no images, no copy from any other band's site.
+Palette, type scale and section design are original to this page.
+
+| Token | Value | |
+|---|---|---|
+| `--ink` | `#0A0A0A` | ground |
+| `--paper` | `#F2EADC` | display + body text |
+| `--brass` | `#C89B4A` | accent |
+| `--display` | Oswald | headings, condensed caps |
+
+**One external dependency:** Oswald from Google Fonts, loaded in `<head>`. It is what makes
+the display type work. Swap it for a self-hosted copy if that dependency is unwanted.
+
+---
+
+## Photographs — read this
+
+`images/hero.jpg`, `feature.jpg` and `about.jpg` were **downloaded from
+howardcountymusic.com** and resized for web. They are photographs of Brandon, from a site
+about Brandon.
+
+**But the photographer's rights are unknown, and that site may be controlled by the former
+management.** Before this goes on a real domain, Brandon should either confirm he holds
+rights to these images or supply his own. Swapping them is a file replacement, nothing more.
+
+**Randy Rogers Band images were not used and must never be.** They are another band's
+copyrighted photographs of their own members. Using them, even as a placeholder, would be
+both infringement and misrepresentation.
+
+---
+
+## Every fact on the page is sourced
+
+Nothing was invented. Where a real value was unavailable it is marked `PLACEHOLDER` rather
+than filled with a plausible guess, because this is a real person's public page and a wrong
+detail is worse than a blank one.
 
 | Fact | Source |
 |---|---|
@@ -21,130 +59,112 @@ because this is a real person's public page and a wrong detail is worse than a b
 | First song at 11, 300+ songs written | howardcountymusic.com |
 | 2024 Future Faces of Texas Country, TRRMA | howardcountymusic.com |
 | 2024 Champion, Texas State Songwriters Association | howardcountymusic.com |
-| Tiny Town, Top 20 Texas Country Music Chart | search results, corroborated |
-| Girl I See You, Louisiana Growler, Cowboy Cry, Jolene | search results |
-| I Ain't Comfortable | Bandcamp, redironpush.bandcamp.com |
+| Tiny Town, Top 20 Texas Country Music Chart | search, corroborated |
+| Girl I See You, Louisiana Growler, Cowboy Cry, Jolene | search |
+| I Ain't Comfortable | redironpush.bandcamp.com |
 | Facebook, /HowardCountyMusic | live page |
 
-**The copy was written fresh from those facts, not pasted.** The prose on
-howardcountymusic.com is someone else's work and lifting it would be both a copyright
-question and the wrong voice for a site Brandon controls.
-
-### What still needs filling in
-
-1. **BOOKING CONTACT.** Blank on purpose. See the next section.
-2. **SHOWS.** No dates were invented. Add real ones or drop in a Bandsintown widget.
-3. **Spotify link.** `open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu` came up in search as
-   "Brandon Howard" but **could not be confirmed as the right one** — Spotify serves a
-   JavaScript shell to fetchers and there is more than one artist by that name. **Open it
-   and check before this goes anywhere public.**
-4. **Photography.** The design carries without images deliberately, since none were
-   available. A hero photo would improve it.
-5. **Analytics.** None installed. Bob's Google Analytics tag was deliberately left off, so
-   Brandon's traffic is not reported into Bob's property. Add Brandon's own if he wants one.
+**The prose was written fresh from those facts, not pasted.** The copy on
+howardcountymusic.com is someone else's work; lifting it would be both a copyright question
+and the wrong voice for a site Brandon controls.
 
 ---
 
-## Why the booking contact is blank
+## What still needs filling in
 
-**howardcountymusic.com is live right now**, registered March 2023, and its booking
-section reads:
+### 1. Booking contact — the important one
+
+**howardcountymusic.com is live right now** and its booking section reads:
 
 ```
 Howard County, contact:
-Neil Sparkman
-Business Manager
+Neil Sparkman, Business Manager
 214-869-7580
 howardcounty@brokenroadtx.com
 ```
 
-Per Bob's own notes, **Broken Road Productions was formerly Howard County's label and
-management, and that relationship ended.** So the site the public finds first is still
-routing Brandon's bookings to a former manager.
+Per Bob's notes, **Broken Road Productions was formerly Howard County's label and
+management, and that relationship ended.** So the site the public finds first still routes
+Brandon's bookings to a former manager.
 
-That is very likely the reason this repo exists. It is also why the booking field here was
-left empty rather than copied across: **the entire point of a new site is that the contact
-on it is Brandon's own.** Filling it from the old site would rebuild the problem.
+That is very likely why this repo exists, and it is why the booking field here is empty
+rather than copied across. **The entire point of a new site is that the contact on it is
+Brandon's own.** Populate it from Brandon directly and no other source.
 
-**Do not populate that field from any source except Brandon directly.**
+### 2. Merch link
+
+Currently points at **`bobdavismusic.com/merch.html`** per Bob's instruction.
+
+**That store does not carry Howard County products.** Until it does, the button sends
+Brandon's fans to buy Bob's merch, which does not serve Brandon. Two ways to resolve:
+
+- **Add Howard County products** to the Bob Davis store. Needs an arrangement about who
+  collects, what split, who fulfils and who handles returns — revenue would land in Bob
+  Davis Music LLC.
+- **Or hide the section** until there is something to sell. One line to comment out.
+
+### 3. Shows
+
+No dates were invented. Replace the placeholder with a list, or embed Bandsintown or
+Songkick so it maintains itself.
+
+### 4. Spotify link — unverified
+
+`open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu` came up in search as "Brandon Howard" but
+**could not be confirmed as the right one**; Spotify serves a JavaScript shell to fetchers
+and more than one artist shares that name. **Open it and check before this goes public.**
+
+### 5. Analytics
+
+None installed. Bob's Google Analytics tag was deliberately left off so Brandon's traffic is
+not reported into Bob's property. Add Brandon's own if he wants one.
 
 ---
 
 ## The domain situation
 
-Worth knowing before deciding where this lives.
-
 | Domain | Registered | Expires | Nameservers | State |
 |---|---|---|---|---|
 | `howardcountymusic.com` | 2023-03-25 | 2027-03-25 | GoDaddy | **live**, old site, former-manager contact |
-| `howardcountyband.com` | **2025-11-26** | **2026-11-26** | `radiopromoguy.com` | **registered but not resolving** |
+| `howardcountyband.com` | **2025-11-26** | **2026-11-26** | `radiopromoguy.com` | **registered, not resolving** |
 
-`howardcountyband.com` is indexed by search engines under the title "Brandon Howard Music ||
-Official Website" but its DNS does not resolve. It was registered in November 2025 and
-**expires 26 November 2026, about eleven weeks out.**
+`howardcountyband.com` is indexed by Google as "Brandon Howard Music || Official Website"
+but its DNS does not resolve. Somebody already tried to move Brandon onto a new domain and
+it never landed.
 
-The reading: somebody already tried to move Brandon onto a new domain and it never landed.
+**It expires 26 November 2026 — whoever controls it should know that.**
 
-**If Brandon owns `howardcountyband.com`, that is the right long-term home for this site**,
-not a subdomain of anyone else's domain. A working artist's booking contact, business cards
-and socials should point at a domain he controls. The subdomain below is a good staging
-address and a fine temporary home; it is not where this should end up.
-
-**Whoever controls that domain should also be told it expires 26 Nov 2026.**
+**If Brandon owns it, that is the right long-term home for this site**, not a subdomain of
+anyone else's domain. A working artist's booking contact, cards and socials should point at
+a domain he controls.
 
 ---
 
 ## Deploying
 
-### Now: the free GitHub Pages URL
+### Now: the GitHub Pages URL
 
-Settings → Pages → Source: **Deploy from a branch**, branch `main`, folder `/`.
+Settings → Pages → Source: **Deploy from a branch**, `main`, `/`. Already enabled.
 
-Serves at:
+Unlinked and unindexed — good enough for Brandon to review before anything points at it.
 
-```
-https://bbrown388.github.io/BrandonHowardWebsite/
-```
+### Later: a custom domain
 
-Unlinked and unindexed. Good enough for Brandon to review before anything points at it.
+**There is deliberately no `CNAME` file yet.** Adding one makes GitHub Pages redirect the
+`github.io` URL to the custom domain, so if DNS is not ready the site is unreachable at
+*both* addresses. Create it only once DNS exists.
 
-### Later: a real domain
-
-**There is deliberately no `CNAME` file in this repo yet.** Adding one makes GitHub Pages
-redirect the `github.io` URL to the custom domain, so if DNS is not ready the site becomes
-unreachable at *both* addresses. Create it only when DNS is in place.
-
-**For a bobdavismusic.com subdomain**, add this DNS record at Cloudflare:
+**For a bobdavismusic.com subdomain**, add at Cloudflare:
 
 | Type | Name | Target | Proxy |
 |---|---|---|---|
-| CNAME | `howardcounty` | `bbrown388.github.io` | **DNS only** — grey cloud, not orange |
+| CNAME | `howardcounty` | `bbrown388.github.io` | **DNS only** — grey cloud |
 
-Then add a file named `CNAME` to this repo containing exactly:
+Then add a file named `CNAME` containing exactly `howardcounty.bobdavismusic.com`.
 
-```
-howardcounty.bobdavismusic.com
-```
+**A path like `bobdavismusic.com/howardcounty` is not possible from this repo.** GitHub
+Pages serves one repository per hostname and the apex is already served by
+`bbrown388/bobdavismusicwebsite`. A separate repo requires a subdomain.
 
-**Note:** a path such as `bobdavismusic.com/howardcounty` is *not* possible from this repo.
-GitHub Pages serves one repository per hostname, and the apex `bobdavismusic.com` is already
-served by `bbrown388/bobdavismusicwebsite`. A path would mean putting these files inside
-Bob's repo. A separate repo requires a subdomain. That is what settled the question.
-
-**For `howardcountyband.com`**, the same but with the apex: four `A` records at GitHub's
-Pages IPs plus a `CNAME` file containing the domain.
-
----
-
-## Editing
-
-Everything is in `index.html`. The palette sits in `:root` at the top:
-
-```css
---ground:   #101410;   /* pine dark */
---bone:     #ECE4D4;   /* text */
---copper:   #C2703F;   /* accent */
-```
-
-**It is deliberately not bobdavismusic.com's gold-on-black.** Brandon is his own artist and
-should not read as a sub-brand of Bob's. Light mode is included and inverts the same tokens.
+**For `howardcountyband.com`**, use four `A` records at GitHub's Pages IPs plus a `CNAME`
+file containing the apex domain.

@@ -8,293 +8,403 @@
 
 <meta property="og:title" content="Howard County | Brandon Howard">
 <meta property="og:description" content="Texas country, gospel and blues. Over 300 songs. TRRMA Future Face of Texas Country and TSSA Champion.">
+<meta property="og:image" content="images/hero.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- STARTER SITE, built 7 Sep 2026. Read README.md in this repo before editing.
-     Every fact on this page is sourced; nothing is invented. Placeholders are marked
-     with the word PLACEHOLDER in the HTML and must be filled by Brandon, not guessed at. -->
+<!-- STARTER SITE. Read README.md before editing.
+     Layout follows the standard Texas country band convention: full-bleed photo
+     hero, condensed caps, dark ground, anchor nav. Nothing is copied from any
+     other band's site; no third-party assets are used.
+     Every fact is sourced. PLACEHOLDER marks anything needing real data. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* ── Palette ────────────────────────────────────────────────────────────────
-     Deliberately NOT bobdavismusic.com's gold-on-black. Brandon is his own
-     artist, not a sub-brand. This is Louisiana warmth: pine dark, bone, copper. */
   :root {
-    --ground:   #101410;
-    --raised:   #171C16;
-    --bone:     #ECE4D4;
-    --muted:    #9A9484;
-    --copper:   #C2703F;
-    --copper-b: #DA8B58;
-    --rule:     rgba(236,228,212,0.13);
+    --ink:    #0A0A0A;
+    --panel:  #121212;
+    --paper:  #F2EADC;
+    --muted:  #9E968A;
+    --brass:  #C89B4A;
+    --rule:   rgba(242,234,220,0.14);
+    --display: 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
-    background: var(--ground);
-    color: var(--bone);
-    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px 64px;
   }
 
-  .wrap { width: 100%; max-width: 620px; }
+  a { color: var(--brass); }
+
+  /* ── Nav ──────────────────────────────────────────────────────────────── */
+  .topbar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    padding: 26px 20px 0; text-align: center;
+  }
+
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 23px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .wordmark span { display: block; font-size: 10px; font-weight: 400; letter-spacing: 0.42em; color: var(--brass); margin-top: 7px; }
+
+  nav { margin-top: 20px; }
+
+  nav a {
+    font-family: var(--display);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    margin: 0 11px;
+    line-height: 2.4;
+    white-space: nowrap;
+    transition: color .15s ease;
+  }
+
+  nav a:hover, nav a:focus-visible { color: var(--brass); }
 
   /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header { padding: 72px 0 40px; text-align: center; }
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 190px 20px 60px;
+    background: #000 url('images/hero.jpg') center 22% / cover no-repeat;
+  }
+
+  /* Legibility scrim. The photo is bright top-left, so this is weighted
+     to protect the centred type without flattening the picture. */
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 34%, rgba(0,0,0,.62) 78%, var(--ink) 100%);
+  }
+
+  .hero-inner { position: relative; }
 
   .eyebrow {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--copper);
+    font-family: var(--display);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--brass);
   }
 
   h1 {
-    font-size: clamp(42px, 12vw, 68px);
-    line-height: 0.98;
-    letter-spacing: -0.5px;
-    margin: 14px 0 10px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(46px, 13vw, 104px);
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    margin: 12px 0 14px;
+    text-shadow: 0 2px 26px rgba(0,0,0,.6);
   }
 
-  .lede {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 460px;
+  .tagline {
+    font-size: 15.5px;
+    max-width: 430px;
     margin: 0 auto;
+    color: #E4DBCB;
+    text-shadow: 0 1px 14px rgba(0,0,0,.7);
   }
 
-  /* ── Credentials ──────────────────────────────────────────────────────── */
-  .creds {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 26px;
+  .cta {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 44px;
+    border: 1px solid var(--paper);
+    font-family: var(--display);
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    transition: background .18s ease, color .18s ease;
   }
 
-  .cred {
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 9px 13px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    line-height: 1.45;
-    color: var(--muted);
-  }
+  .cta:hover, .cta:focus-visible { background: var(--paper); color: var(--ink); }
 
-  .cred b { display: block; color: var(--copper-b); font-size: 12px; letter-spacing: 0.14em; }
+  /* ── Socials ──────────────────────────────────────────────────────────── */
+  .socials { display: flex; justify-content: center; gap: 24px; margin-top: 32px; }
+
+  .socials a { color: var(--paper); line-height: 0; transition: color .15s ease; }
+  .socials a:hover, .socials a:focus-visible { color: var(--brass); }
+  .socials svg { width: 21px; height: 21px; fill: currentColor; display: block; }
 
   /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: 40px 0; border-top: 1px solid var(--rule); }
+  section { padding: 76px 20px; }
+  .inner { max-width: 940px; margin: 0 auto; }
+  .narrow { max-width: 660px; margin: 0 auto; }
 
   h2 {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
+    font-family: var(--display);
     font-weight: 700;
-    letter-spacing: 0.28em;
+    font-size: clamp(28px, 6vw, 42px);
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    color: var(--copper);
-    margin-bottom: 22px;
+    text-align: center;
+    color: var(--paper);
+    margin-bottom: 34px;
   }
+
+  h2::after {
+    content: ''; display: block;
+    width: 54px; height: 2px; margin: 15px auto 0;
+    background: var(--brass);
+  }
+
+  .alt { background: var(--panel); }
 
   p + p { margin-top: 15px; }
 
-  .about p { font-size: 16.5px; }
+  /* ── Music ────────────────────────────────────────────────────────────── */
+  .tracks { list-style: none; max-width: 560px; margin: 0 auto 30px; }
 
-  /* ── Link buttons ─────────────────────────────────────────────────────── */
-  .links { display: flex; flex-direction: column; gap: 10px; }
+  .tracks li {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 13px 2px;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--display);
+    font-size: 19px; font-weight: 400;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .tracks li:last-child { border-bottom: 0; }
+  .tracks .badge {
+    margin-left: auto;
+    font-family: var(--body);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--brass); text-align: right; line-height: 1.35;
+  }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
   .btn {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 15px 17px;
-    background: var(--raised);
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 24px;
     border: 1px solid var(--rule);
-    border-radius: 4px;
-    color: var(--bone);
-    text-decoration: none;
-    font-size: 15.5px;
+    background: rgba(242,234,220,0.04);
+    font-family: var(--display);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
     transition: border-color .15s ease, background .15s ease;
   }
 
-  .btn:hover, .btn:focus-visible {
-    background: #1D231B;
-    border-color: rgba(194,112,63,0.55);
+  .btn:hover, .btn:focus-visible { border-color: var(--brass); background: rgba(200,155,74,0.10); }
+  .btn svg { width: 17px; height: 17px; fill: currentColor; }
+
+  /* ── About ────────────────────────────────────────────────────────────── */
+  .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 42px; align-items: start; }
+  .about-grid img { width: 100%; height: auto; display: block; filter: grayscale(0.15); }
+  .about-grid p { font-size: 16.5px; }
+
+  @media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; gap: 26px; }
+    .about-grid img { max-width: 320px; margin: 0 auto; }
+    nav a { margin: 0 7px; font-size: 11.5px; }
   }
 
-  .btn svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
-  .btn .sub { margin-left: auto; font-size: 12.5px; color: var(--muted); }
+  /* ── Credentials ──────────────────────────────────────────────────────── */
+  .creds { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 44px; }
 
-  /* ── Song list ────────────────────────────────────────────────────────── */
-  .songs { list-style: none; }
-
-  .songs li {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--rule);
-    font-size: 16px;
+  .cred { border: 1px solid var(--rule); padding: 20px 18px; text-align: center; }
+  .cred b {
+    display: block;
+    font-family: var(--display);
+    font-size: 15px; font-weight: 600;
+    letter-spacing: 0.19em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 7px;
   }
+  .cred span { font-size: 13.5px; color: var(--muted); }
 
-  .songs li:last-child { border-bottom: 0; }
-  .songs .note { margin-left: auto; font-size: 12px; color: var(--muted); text-align: right; }
-
-  /* ── Placeholder blocks ───────────────────────────────────────────────── */
+  /* ── Placeholder ──────────────────────────────────────────────────────── */
   .todo {
-    background: rgba(194,112,63,0.07);
-    border: 1px dashed rgba(194,112,63,0.45);
-    border-radius: 4px;
-    padding: 16px 18px;
+    border: 1px dashed rgba(200,155,74,0.5);
+    background: rgba(200,155,74,0.06);
+    padding: 22px 24px;
     font-size: 14.5px;
     color: var(--muted);
+    max-width: 620px; margin: 0 auto;
   }
 
-  .todo b { color: var(--copper-b); }
+  .todo b { color: var(--brass); }
 
   /* ── Footer ───────────────────────────────────────────────────────────── */
   footer {
-    padding: 34px 0 0;
+    padding: 44px 20px 54px;
     border-top: 1px solid var(--rule);
     text-align: center;
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--muted);
+    letter-spacing: 0.05em;
   }
 
-  footer a { color: var(--copper-b); }
-
-  a { color: var(--copper-b); }
-
-  /* ── Light mode ───────────────────────────────────────────────────────── */
-  @media (prefers-color-scheme: light) {
-    :root {
-      --ground:   #F4F0E6;
-      --raised:   #EBE5D6;
-      --bone:     #1C2019;
-      --muted:    #5F6356;
-      --copper:   #9A4E22;
-      --copper-b: #7E3D18;
-      --rule:     rgba(28,32,25,0.16);
-    }
-    .btn:hover, .btn:focus-visible { background: #E2DBC8; }
-  }
+  footer .socials { margin-bottom: 22px; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+<div class="topbar">
+  <div class="wordmark">Howard County<span>Brandon Howard</span></div>
+  <nav>
+    <a href="#music">Music</a>
+    <a href="#shows">Shows</a>
+    <a href="#about">About</a>
+    <a href="#merch">Merch</a>
+    <a href="#booking">Booking</a>
+  </nav>
+</div>
 
-  <header>
+<header class="hero">
+  <div class="hero-inner">
     <p class="eyebrow">Texas Country</p>
     <h1>Howard County</h1>
-    <p class="lede">
-      Texas country artist Brandon Howard and his band. Gospel, blues and
-      country, out of Southwest Louisiana by way of North Texas.
+    <p class="tagline">
+      Gospel, blues and country out of Southwest Louisiana,
+      by way of North Texas.
     </p>
+    <a class="cta" href="#music">Listen</a>
 
-    <div class="creds">
-      <div class="cred"><b>TRRMA</b>2024 Future Faces of Texas Country</div>
-      <div class="cred"><b>TSSA</b>2024 Champion, Texas State Songwriters Association</div>
-      <div class="cred"><b>300+</b>Songs written since age 11</div>
+    <div class="socials">
+      <a href="https://www.facebook.com/HowardCountyMusic/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu" target="_blank" rel="noopener" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+      <a href="https://redironpush.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ── LISTEN ──────────────────────────────────────────────────────────── -->
-  <section>
-    <h2>Listen</h2>
-    <div class="links">
+<!-- ── MUSIC ─────────────────────────────────────────────────────────────── -->
+<section id="music">
+  <div class="inner">
+    <h2>Music</h2>
 
-      <a class="btn" href="https://open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Spotify
-        <span class="sub">PLACEHOLDER: verify link</span>
-      </a>
-
-      <a class="btn" href="https://redironpush.bandcamp.com/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg>
-        Bandcamp
-        <span class="sub">Red Iron Push</span>
-      </a>
-
-      <a class="btn" href="https://www.facebook.com/HowardCountyMusic/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
-
-    </div>
-  </section>
-
-  <!-- ── SONGS ───────────────────────────────────────────────────────────── -->
-  <section>
-    <h2>Songs</h2>
-    <ul class="songs">
-      <li>Tiny Town <span class="note">Top 20, Texas Country Music Chart</span></li>
+    <ul class="tracks">
+      <li>Tiny Town <span class="badge">Top 20<br>Texas Country Chart</span></li>
       <li>Girl I See You</li>
       <li>Louisiana Growler</li>
       <li>Cowboy Cry</li>
       <li>I Ain't Comfortable</li>
       <li>Jolene</li>
     </ul>
-  </section>
 
-  <!-- ── ABOUT ───────────────────────────────────────────────────────────── -->
-  <section class="about">
-    <h2>About</h2>
-    <p>
-      Brandon Howard grew up singing gospel, blues and country in Southwest
-      Louisiana. The road ran through Kansas and Colorado before it settled in
-      North Texas, and all of it ended up in the songs.
-    </p>
-    <p>
-      He wrote his first one at eleven. There have been more than three hundred
-      since. In 2024 the Texas Regional Radio Music Association named him one of
-      the Future Faces of Texas Country, and he took the Texas State Songwriters
-      Association championship the same year.
-    </p>
-    <p>
-      Howard County is Brandon and his band, playing it live.
-    </p>
-  </section>
+    <div class="btn-row">
+      <a class="btn" href="https://open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify</a>
+      <a class="btn" href="https://redironpush.bandcamp.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg>
+        Bandcamp</a>
+    </div>
+  </div>
+</section>
 
-  <!-- ── SHOWS ───────────────────────────────────────────────────────────── -->
-  <section>
+<!-- ── SHOWS ─────────────────────────────────────────────────────────────── -->
+<section id="shows" class="alt">
+  <div class="inner">
     <h2>Shows</h2>
     <div class="todo">
-      <b>PLACEHOLDER.</b> No dates listed. Nothing was invented here, so this
-      section is empty until Brandon supplies real ones. Delete this block and
-      add a simple list, or drop in a Bandsintown or Songkick widget.
+      <b>PLACEHOLDER.</b> No dates are listed because no real ones were available,
+      and inventing them was not an option. Replace this block with a simple list,
+      or embed Bandsintown or Songkick so it updates itself.
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ── BOOKING ─────────────────────────────────────────────────────────── -->
-  <section>
+<!-- ── ABOUT ─────────────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="inner">
+    <h2>About</h2>
+
+    <div class="about-grid">
+      <img src="images/feature.jpg" alt="Brandon Howard with a resonator guitar">
+      <div>
+        <p>
+          Brandon Howard grew up singing gospel, blues and country in Southwest
+          Louisiana. The road ran through Kansas and Colorado before it settled
+          in North Texas, and all of it ended up in the songs.
+        </p>
+        <p>
+          He wrote his first one at eleven. There have been more than three
+          hundred since. In 2024 the Texas Regional Radio Music Association named
+          him one of the Future Faces of Texas Country, and he took the Texas
+          State Songwriters Association championship the same year.
+        </p>
+        <p>
+          Howard County is Brandon and his band, playing it live.
+        </p>
+      </div>
+    </div>
+
+    <div class="creds">
+      <div class="cred"><b>TRRMA</b><span>2024 Future Faces of Texas Country</span></div>
+      <div class="cred"><b>TSSA</b><span>2024 Champion, Texas State Songwriters Association</span></div>
+      <div class="cred"><b>300+</b><span>Songs written since the age of eleven</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MERCH ─────────────────────────────────────────────────────────────── -->
+<section id="merch" class="alt">
+  <div class="inner narrow" style="text-align:center">
+    <h2>Merch</h2>
+    <div class="todo" style="margin-bottom:26px">
+      <b>PLACEHOLDER LINK.</b> This points at the Bob Davis Music store, which
+      does not carry Howard County products yet. Until it does, this button sends
+      Brandon's fans to someone else's merch. See <code>README.md</code>.
+    </div>
+    <a class="btn" href="https://bobdavismusic.com/merch.html" target="_blank" rel="noopener">Shop</a>
+  </div>
+</section>
+
+<!-- ── BOOKING ───────────────────────────────────────────────────────────── -->
+<section id="booking">
+  <div class="inner">
     <h2>Booking</h2>
     <div class="todo">
       <b>PLACEHOLDER, and the most important field on the page.</b> This needs
-      Brandon's own current booking contact. It is deliberately left blank rather
-      than copied from anywhere else. See <code>README.md</code> for why that
-      matters.
+      Brandon's own current booking contact. It was deliberately left blank rather
+      than copied from anywhere else. <code>README.md</code> explains why that
+      matters more than it looks.
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>Howard County &middot; Brandon Howard &middot; North Texas</p>
-  </footer>
-
-</div>
+<footer>
+  <div class="socials">
+    <a href="https://www.facebook.com/HowardCountyMusic/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+    <a href="https://open.spotify.com/artist/2fB4ElpylR4ujb0J3mnUvu" target="_blank" rel="noopener" aria-label="Spotify">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+    <a href="https://redironpush.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
+  </div>
+  <p>Howard County &nbsp;&middot;&nbsp; Brandon Howard &nbsp;&middot;&nbsp; North Texas</p>
+</footer>
 
 </body>
 </html>
