@@ -126,12 +126,13 @@ def marquee(key, label, font, pre='THE', lines=('BRANDON', 'HOWARD'), post='BAND
                 # Each half of the rule becomes an arrow pointing away from the
                 # centre. The right half is drawn directly; the left is the same
                 # path mirrored about its own right edge, so both taper outward.
-                d = orn.arrow(0, b - a, y + th / 2, th * 1.5)
+                # arrow() returns markup, not path data, because the traced
+                # artwork is positioned with a transform
+                g = orn.arrow(0, b - a, y + th / 2, th * 1.5)
                 if outward < 0:
-                    body.append('<g transform="translate(%.2f,0) scale(-1,1)">'
-                                '<path d="%s"/></g>' % (b, d))
+                    body.append('<g transform="translate(%.2f,0) scale(-1,1)">%s</g>' % (b, g))
                 else:
-                    body.append('<g transform="translate(%.2f,0)"><path d="%s"/></g>' % (a, d))
+                    body.append('<g transform="translate(%.2f,0)">%s</g>' % (a, g))
                 pts.extend([(a, y - th * 2), (b, y + th * 3)])
             else:
                 body.append('<rect x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>'

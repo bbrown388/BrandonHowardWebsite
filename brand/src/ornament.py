@@ -140,13 +140,32 @@ def fletching(x0, y, t, length=13.5, height=4.4, n=15, lean=0.60, w=0.40):
 # is short, instead of the fletching running into the head.
 ARROW_SPAN = 30.0
 
+# 'reference' uses the traced public domain drawing; 'drawn' uses the one built
+# from curves in this file. The traced artwork is the default because it is
+# genuinely hand-inked and no amount of parameter tuning gets there.
+ARROW_STYLE = 'reference'
 
-def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
+
+def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None, style=None):
+    """An arrow spanning x0..x1, centred on y. Returns MARKUP, not path data.
+
+    It has to be markup: the traced artwork is placed with a transform rather
+    than by rewriting its coordinates, and a transform cannot live inside a d
+    attribute.
+    """
+    if (style or ARROW_STYLE) == 'reference':
+        import refarrow
+        _, _, vw, vh = refarrow.VIEWBOX
+        s = (x1 - x0) / vw
+        return ('<g transform="translate(%.3f,%.3f) scale(%.5f)"><path d="%s"/></g>'
+                % (x0, y - vh * s / 2.0, s, refarrow.PATH))
+
     t = min(thick, (x1 - x0) / ARROW_SPAN)
     hl = t * 4.6
-    return ' '.join([shaft(x0 + t * 1.2, x1 - hl * 0.40, y, t),
-                     fletching(x0, y, t),
-                     globals()['head'](x1, y, t)])
+    d = ' '.join([shaft(x0 + t * 1.2, x1 - hl * 0.40, y, t),
+                  fletching(x0, y, t),
+                  globals()['head'](x1, y, t)])
+    return '<path d="%s"/>' % d
 
 
 def crossed_arrows(cx, cy, length, thick, angle=17.0):
@@ -154,10 +173,9 @@ def crossed_arrows(cx, cy, length, thick, angle=17.0):
     out = []
     for sign in (1, -1):
         a = math.radians(angle * sign)
-        co, si = math.cos(a), math.sin(a)
-        d = arrow(-length / 2.0, length / 2.0, 0, thick)
-        out.append('<g transform="translate(%.2f,%.2f) rotate(%.2f) scale(%d,1)">'
-                   '<path d="%s"/></g>' % (cx, cy, math.degrees(a), sign, d))
+        out.append('<g transform="translate(%.2f,%.2f) rotate(%.2f) scale(%d,1)">%s</g>'
+                   % (cx, cy, math.degrees(a), sign,
+                      arrow(-length / 2.0, length / 2.0, 0, thick)))
     return ''.join(out)
 
 

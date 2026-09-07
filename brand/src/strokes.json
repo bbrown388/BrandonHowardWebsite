@@ -135,13 +135,13 @@
   "verdict": "safe for embroidery and print"
  },
  "am-sancreek-arrows": {
-  "dtg": 10.2,
-  "emb": 23.6,
+  "dtg": 11.6,
+  "emb": 23.1,
   "verdict": "print fine, embroidery needs it larger"
  },
  "am-sancreek-arrows-hat": {
-  "dtg": 9.9,
-  "emb": 20.0,
+  "dtg": 11.7,
+  "emb": 19.7,
   "verdict": "print fine, embroidery needs it larger"
  },
  "am-sancreek-crow": {
@@ -155,23 +155,23 @@
   "verdict": "print fine, embroidery needs it larger"
  },
  "am-sancreek-crossed": {
-  "dtg": 5.3,
-  "emb": 27.5,
-  "verdict": "print fine, embroidery needs it larger"
+  "dtg": 3.3,
+  "emb": 32.6,
+  "verdict": "print only at this size"
  },
  "am-sancreek-crossed-hat": {
-  "dtg": 5.1,
-  "emb": 20.4,
+  "dtg": 3.0,
+  "emb": 26.9,
   "verdict": "print fine, embroidery needs it larger"
  },
  "am-rye-arrows-crow": {
-  "dtg": 17.2,
-  "emb": 53.0,
+  "dtg": 19.7,
+  "emb": 51.3,
   "verdict": "print only at this size"
  },
  "am-rye-arrows-crow-hat": {
-  "dtg": 15.1,
-  "emb": 50.5,
+  "dtg": 17.3,
+  "emb": 49.2,
   "verdict": "print only at this size"
  }
 }

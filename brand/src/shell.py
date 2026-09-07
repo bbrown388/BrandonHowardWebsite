@@ -185,29 +185,25 @@ the A and rebalancing the apex around them. That is a type designer sitting in a
 vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
-into the letters. You picked that one, so the arrows were rebuilt to
-the hand-inked reference you sent. What makes that drawing work is the fletching:
-fifteen fine barbs a side rather than a few bars, leaning back, with the white
-gaps falling out of the spacing. The shaft runs the whole length underneath so
-the two vanes meet on it, and carries a hairline split, which is most of the
-hand-drawn quality. The head has concave flanks, dead straight inner edges, and
-barbs that end in a short flat instead of a knife point</p>
+into the letters. You picked that one, and the arrow is now the
+drawing you supplied, traced to vector rather than redrawn from it. It is public
+domain, from publicdomainpictures.net, which makes it free to use on merchandise
+with no attribution owed. It is also plainly better than what I was producing by
+working from a description, and using it directly was the right call</p>
 </div>
 __ORN__
 <div class="callout">
-<p><strong>The detailed arrow costs you embroidery, and the number is worth
-seeing.</strong> All that fine barb work is thin ink. Against the plain curved
-arrow it was replacing, this version goes from 11.2 per cent too fine to 23.6 at
-full size, and from 6.9 to 20.0 on a hat. It no longer clears the embroidery
-threshold, and even the print figure moved from 1.7 to 10.2.</p>
-<p>That is the same trade this project keeps running into: detail at rule scale
-does not survive being stitched. Three ways to take it. Use this everywhere and
-accept hats will lose the feathering. Keep it for shirts, posters and the site
-and put the plain version on hats, which is the two-file family already used in
-the dance hall direction. Or thin the difference by cutting the barb count and
-thickening what remains, which is two numbers in <code>ornament.fletching</code>.</p>
-<p>The plain arrow has not been thrown away. <code>src/arrow3.py</code> still
-holds it along with three other tails.</p>
+<p><strong>An inked arrow costs embroidery, and the number is worth seeing.</strong>
+All that fine barb work is thin ink. The mark measures 23.1 per cent too fine at
+full size and 19.7 on a hat, against 18.4 and 9.4 for bare Sancreek with no
+arrows at all. So the wordmark is fine and the fletching is what costs, and this
+holds whether the arrow is the traced one or the plain one I drew.</p>
+<p>Three ways to take it. Use it everywhere and accept that hats lose the
+feathering to fill-in. Keep it for shirts, posters and the site and run something
+plainer on hats, which is the two-file family already used in the dance hall
+direction; <code>ornament.ARROW_STYLE</code> switches to a drawn arrow that
+measures 11.2 and 6.9. Or have the traced artwork simplified for stitching, which
+is a normal thing to ask an embroidery digitiser to do.</p>
 </div>
 <div class="callout">
 <p><strong>On the crow, plainly: it is not there.</strong> That is five redraws
@@ -284,11 +280,11 @@ opening a second visual language.</li>
 <li><strong>Alfa Slab One if he wants character over convenience.</strong> About
 as far from clean and geometric as you can get without a novelty face, and it
 still clears embroidery in small format at 9.8 per cent.</li>
-<li><strong>The chosen mark now needs a decision about hats.</strong> With the
-hand-inked arrow it measures 23.6 per cent full size and 20.0 on a hat, where the
-plain arrow it replaced was 11.2 and 6.9. Bare Sancreek without any arrows is 18.4
-and 9.4, so the wordmark itself is fine; it is the fletching that costs. Rye stays
-print only at 47 per cent regardless.</li>
+<li><strong>The chosen mark needs a decision about hats.</strong> With the
+traced arrow it measures 23.1 per cent full size and 19.7 on a hat. Bare Sancreek
+without arrows is 18.4 and 9.4, so the wordmark is fine and the fletching is what
+costs. A plainer drawn arrow is one setting away at 11.2 and 6.9. Rye stays print
+only at 47 per cent regardless.</li>
 <li><strong>Bodoni + Alex Brush</strong> stays the pick in the dance hall
 direction, for tee fronts, posters, backdrops and the website.</li>
 </ul>

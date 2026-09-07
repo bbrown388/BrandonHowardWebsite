@@ -103,28 +103,37 @@ Standalone devices are in `marks/device-arrow.svg`,
 `marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
 own for a sleeve, a hat back or a setlist stamp.
 
-The arrow is drawn to a hand-inked reference. What makes that drawing work:
-fletching as fifteen fine barbs a side rather than a few bars, with the white gaps
-falling out of the spacing; a shaft running the whole length underneath so the two
-vanes meet on it, carrying a hairline split; and a head with concave outer flanks,
-dead straight inner edges, and barbs ending in a short flat rather than a knife
-point. Curving the inner edges turns the barbs into scythes and running both edges
-to one point leaves a razor sliver.
+The arrow is a public domain drawing, traced to vector rather than redrawn.
 
-**It costs embroidery, and the figure is the point of recording this.** All that
-barb work is thin ink. Against the plain curved arrow it replaced, the mark goes
-from 11.2 percent too fine to 23.6 at full size and from 6.9 to 20.0 on a hat, so
-it no longer clears the threshold; the print figure moved from 1.7 to 10.2. Bare
-Sancreek with no arrows is 18.4 and 9.4, so the wordmark is fine and the fletching
-is what costs. Either run the plain arrow on hats, which `src/arrow3.py` still
-holds along with three other tails, or cut the barb count and thicken what
-remains, which is two numbers in `ornament.fletching`.
+Source: https://www.publicdomainpictures.net/pictures/140000/velka/archers-arrow-1443454687iGZ.jpg
+Licence: CC0 / public domain, free for merchandise with no attribution owed. The
+usual CC0 caveats about model and property releases and trademarks do not apply
+to a drawing of an arrow. Original in `reference/archers-arrow.jpg`, traced copy
+beside it, path data baked into `src/refarrow.py`.
 
-Earlier attempts failed for two reasons worth remembering. Everything was made of
-straight segments, because the path helper only emitted L commands, and a polygon
-head on a rectangular shaft cannot look drawn however the proportions are tuned.
-And each was designed zoomed in, where a feather carries detail, when in the mark
-the arrow is a rule beside small caps.
+Tracing was necessary rather than cosmetic: the marks are single flat fills, and
+a raster cannot scale for print, be recoloured for a dark garment, or be handed
+to an embroidery digitiser. `src/trace_png.py` does it, and the round trip was
+validated by rasterising a known vector and tracing it back before trusting it on
+real artwork.
+
+**It costs embroidery.** All that fine barb work is thin ink: 23.1 percent too
+fine at full size and 19.7 on a hat, against 18.4 and 9.4 for bare Sancreek with
+no arrows. The wordmark is fine; the fletching is what costs, and that holds for
+any inked arrow. Either accept hats lose the feathering, run
+`ornament.ARROW_STYLE = 'drawn'` on hats for a plainer arrow at 11.2 and 6.9, or
+have the artwork simplified for stitching, which is a normal digitiser request.
+
+`ornament.arrow()` returns markup rather than path data, because the traced
+artwork is positioned with a transform and a transform cannot live inside a d
+attribute.
+
+Four hand-drawn attempts preceded this and all read as clip art, for two reasons
+worth remembering. Everything was built from straight segments, because the path
+helper only emitted L commands, and a polygon head on a rectangular shaft cannot
+look drawn however the proportions are tuned. And each was designed zoomed in,
+where a feather carries detail, when in the mark the arrow is a rule beside small
+caps. `src/arrow3.py` and `src/arrow4.py` keep them.
 
 Open-licence arrows were searched for rather than assumed unavailable. See
 `ARROW-SOURCING.md`: Openclipart, Public Domain Vectors and Wikimedia Commons
