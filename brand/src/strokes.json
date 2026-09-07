@@ -1,0 +1,52 @@
+{
+ "gh-bodoni": {
+  "dtg": 2.2,
+  "emb": 36.1,
+  "verdict": "print only at this size"
+ },
+ "gh-bodoni-tag": {
+  "dtg": 2.0,
+  "emb": 35.4,
+  "verdict": "print only at this size"
+ },
+ "gh-playfair": {
+  "dtg": 2.9,
+  "emb": 17.3,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "gh-rye": {
+  "dtg": 4.8,
+  "emb": 54.8,
+  "verdict": "print only at this size"
+ },
+ "am-archivo": {
+  "dtg": 0.1,
+  "emb": 18.1,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-jost": {
+  "dtg": 0.2,
+  "emb": 21.4,
+  "verdict": "print fine, embroidery needs it larger"
+ },
+ "am-anton": {
+  "dtg": 0.0,
+  "emb": 4.9,
+  "verdict": "safe for embroidery and print"
+ },
+ "gh-bodoni-hat": {
+  "dtg": 1.5,
+  "emb": 31.2,
+  "verdict": "print only at this size"
+ },
+ "gh-playfair-hat": {
+  "dtg": 2.0,
+  "emb": 11.8,
+  "verdict": "safe for embroidery and print"
+ },
+ "am-archivo-hat": {
+  "dtg": 0.0,
+  "emb": 13.4,
+  "verdict": "print fine, embroidery needs it larger"
+ }
+}
