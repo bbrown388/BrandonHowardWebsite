@@ -185,17 +185,30 @@ the A and rebalancing the apex around them. That is a type designer sitting in a
 vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
-into the letters. You picked that one, so the arrows were rebuilt from
-scratch. Four earlier attempts all read as clip art for two reasons. Every shape
-was made of straight segments, since the path helper only ever emitted line
-commands, so a polygon head on a rectangular shaft could never look drawn no
-matter how the proportions were tuned. And each was designed zoomed in, where a
-feather can carry detail, when in the mark the arrow is a rule beside small caps
-and that detail only ever prints as fuzz. These are curves with far fewer parts:
-a tapering shaft, a point with slightly concave flanks, and two swept ticks at
-the tail. They were judged at the size they are actually used at.</p>
+into the letters. You picked that one, so the arrows were rebuilt to
+the hand-inked reference you sent. What makes that drawing work is the fletching:
+fifteen fine barbs a side rather than a few bars, leaning back, with the white
+gaps falling out of the spacing. The shaft runs the whole length underneath so
+the two vanes meet on it, and carries a hairline split, which is most of the
+hand-drawn quality. The head has concave flanks, dead straight inner edges, and
+barbs that end in a short flat instead of a knife point</p>
 </div>
 __ORN__
+<div class="callout">
+<p><strong>The detailed arrow costs you embroidery, and the number is worth
+seeing.</strong> All that fine barb work is thin ink. Against the plain curved
+arrow it was replacing, this version goes from 11.2 per cent too fine to 23.6 at
+full size, and from 6.9 to 20.0 on a hat. It no longer clears the embroidery
+threshold, and even the print figure moved from 1.7 to 10.2.</p>
+<p>That is the same trade this project keeps running into: detail at rule scale
+does not survive being stitched. Three ways to take it. Use this everywhere and
+accept hats will lose the feathering. Keep it for shirts, posters and the site
+and put the plain version on hats, which is the two-file family already used in
+the dance hall direction. Or thin the difference by cutting the barb count and
+thickening what remains, which is two numbers in <code>ornament.fletching</code>.</p>
+<p>The plain arrow has not been thrown away. <code>src/arrow3.py</code> still
+holds it along with three other tails.</p>
+</div>
 <div class="callout">
 <p><strong>On the crow, plainly: it is not there.</strong> That is five redraws
 against your reference and it still reads closer to a grackle than a crow. The
@@ -271,10 +284,11 @@ opening a second visual language.</li>
 <li><strong>Alfa Slab One if he wants character over convenience.</strong> About
 as far from clean and geometric as you can get without a novelty face, and it
 still clears embroidery in small format at 9.8 per cent.</li>
-<li><strong>The chosen mark is in good shape.</strong> Sancreek with arrow rules
-measures 11.2 per cent full size and 6.9 on a hat, so it clears embroidery at both
-sizes. Rye stays print only at 47 per cent, and that is the face rather than the
-direction: Sancreek, Bevan and Rammetto all clear in small format.</li>
+<li><strong>The chosen mark now needs a decision about hats.</strong> With the
+hand-inked arrow it measures 23.6 per cent full size and 20.0 on a hat, where the
+plain arrow it replaced was 11.2 and 6.9. Bare Sancreek without any arrows is 18.4
+and 9.4, so the wordmark itself is fine; it is the fletching that costs. Rye stays
+print only at 47 per cent regardless.</li>
 <li><strong>Bodoni + Alex Brush</strong> stays the pick in the dance hall
 direction, for tee fronts, posters, backdrops and the website.</li>
 </ul>

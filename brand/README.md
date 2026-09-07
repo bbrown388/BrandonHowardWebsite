@@ -103,16 +103,28 @@ Standalone devices are in `marks/device-arrow.svg`,
 `marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
 own for a sleeve, a hat back or a setlist stamp.
 
-The arrow was rebuilt from scratch after four attempts that all read as clip art,
-and both causes are worth recording. Every shape was made of straight segments,
-because the path helper only ever emitted L commands; a polygon head on a
-rectangular shaft cannot look drawn however carefully the proportions are tuned.
-And each attempt was designed zoomed in, where a feather can carry detail, when in
-the mark the arrow is a rule sitting beside small caps and that detail can only
-print as fuzz. The answer was curves and far fewer parts: a tapering shaft, a
-point with slightly concave flanks and no notch, and two swept ticks at the tail.
-`ARROW_STYLE` in `src/ornament.py` switches the tail between `plain`, `bar`,
-`ticks` and `vane`; `src/arrow3.py` holds all four side by side.
+The arrow is drawn to a hand-inked reference. What makes that drawing work:
+fletching as fifteen fine barbs a side rather than a few bars, with the white gaps
+falling out of the spacing; a shaft running the whole length underneath so the two
+vanes meet on it, carrying a hairline split; and a head with concave outer flanks,
+dead straight inner edges, and barbs ending in a short flat rather than a knife
+point. Curving the inner edges turns the barbs into scythes and running both edges
+to one point leaves a razor sliver.
+
+**It costs embroidery, and the figure is the point of recording this.** All that
+barb work is thin ink. Against the plain curved arrow it replaced, the mark goes
+from 11.2 percent too fine to 23.6 at full size and from 6.9 to 20.0 on a hat, so
+it no longer clears the threshold; the print figure moved from 1.7 to 10.2. Bare
+Sancreek with no arrows is 18.4 and 9.4, so the wordmark is fine and the fletching
+is what costs. Either run the plain arrow on hats, which `src/arrow3.py` still
+holds along with three other tails, or cut the barb count and thicken what
+remains, which is two numbers in `ornament.fletching`.
+
+Earlier attempts failed for two reasons worth remembering. Everything was made of
+straight segments, because the path helper only emitted L commands, and a polygon
+head on a rectangular shaft cannot look drawn however the proportions are tuned.
+And each was designed zoomed in, where a feather carries detail, when in the mark
+the arrow is a rule beside small caps.
 
 Open-licence arrows were searched for rather than assumed unavailable. See
 `ARROW-SOURCING.md`: Openclipart, Public Domain Vectors and Wikimedia Commons

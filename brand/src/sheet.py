@@ -130,16 +130,15 @@ CARDS = [
       title='Arrow rules', tag='Chosen',
       faces='Sancreek',
       body='The rules themselves become arrows, pointing out from the centre with '
-           'THE and BAND sitting in the breaks. The arrows were rebuilt from '
-           'scratch after four attempts that all looked like clip art. Two things '
-           'were wrong. Every shape was made of straight segments, because the path '
-           'helper only ever emitted line commands, so a polygon head and a '
-           'rectangular shaft could never look drawn however the proportions were '
-           'tuned. And they were designed zoomed in, where a feather can carry '
-           'detail, when in the mark the arrow is a rule sitting beside small caps '
-           'and none of that detail can resolve. These are curves, with far fewer '
-           'parts: a shaft that tapers, a point with slightly concave flanks, and '
-           'two swept ticks at the tail. Letterforms untouched.'),
+           'THE and BAND sitting in the breaks. The arrows are drawn to the '
+           'hand-inked reference you sent: fletching as fifteen fine barbs a '
+           'side, a shaft that runs the whole length with a hairline split down '
+           'it, and a head with concave flanks and blunt-ended barbs. It costs '
+           'something real, and the number below is it. All that fine detail is '
+           'thin ink, so this went from 11.2 per cent to 23.6 at full size and '
+           'from 6.9 to 20.0 on a hat. It no longer clears embroidery. The plain '
+           'version that did is one setting away, see the note under this '
+           'section.'),
  dict(k='am-sancreek-crow', g='orn', hat='am-sancreek-crow-hat',
       title='Crow on the rule', tag='A bird on a sign',
       faces='Sancreek',

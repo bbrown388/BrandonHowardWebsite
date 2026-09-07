@@ -28,16 +28,19 @@ def arrowhead(cx, tip_y, w, h, notch=0.60):
 
 
 # ── Arrow ───────────────────────────────────────────────────────────────────
-# Rebuilt from scratch. Two things had been wrong with every earlier version.
-# Everything was made of straight segments, because the path helper only emitted
-# L commands, so a polygon head and a rectangular shaft read as clip art however
-# the proportions were tuned. And it was designed while zoomed in, where a
-# feather can carry detail; in the mark the arrow is a rule, long and thin beside
-# small caps, and at that size barbs and serrations cannot resolve, so they print
-# as fuzz. The fix was fewer parts, drawn with curves.
+# Built to the hand-inked reference. What makes that drawing work:
 #
-# ARROW_STYLE picks the tail: 'plain', 'bar', 'ticks' or 'vane'.
-ARROW_STYLE = 'ticks'
+#   * Fletching is many fine barbs, around fifteen a side, thin and leaning
+#     back. The white gaps come free because they are separate strokes, and that
+#     rhythm is what reads as feather rather than as a paddle.
+#   * The shaft runs the whole length, under the fletching, so the two vanes
+#     meet on it instead of floating either side of a gap. It carries a hairline
+#     split, which is most of the hand-drawn quality; a solid bar looks printed.
+#   * The head has concave outer flanks and dead straight inner edges. Curving
+#     the inner edges turns the barbs into scythes, and the barb has to end in a
+#     short flat, since running both edges to one point leaves a razor sliver.
+#
+# Slits are cut with reverse-wound subpaths, which a nonzero fill reads as holes.
 
 
 class _P(object):
@@ -56,106 +59,94 @@ class _P(object):
     def Z(self):
         self.d.append('Z'); return self
 
+    def add(self, s):
+        self.d.append(s); return self
+
     def __str__(self):
         return ' '.join(self.d)
 
 
-def head(x1, y, t, length=4.0, half=1.55, waist=0.10):
-    """A solid point with slightly concave flanks and a flat back.
+def _quad(a, b, c, d):
+    return str(_P().M(a).L(b).L(c).L(d).Z())
 
-    No notch. A notch cut into the base is the single thing that pushed earlier
-    versions toward looking like a harpoon, and at rule size it just prints as a
-    white nick. The flanks bow inward by a tenth of the half width, which is
-    enough to read as sharpened and little enough to survive small.
+
+def head(x1, y, t, length=4.6, half=1.95, blunt=0.13):
+    """Sharp point with barbs swept back.
+
+    Outer flanks gently concave so the point reads as sharpened; inner edges
+    dead straight from barb tip down to the shaft. Curving those was what turned
+    the barbs into scythes, and slitting them was worse: the barb is thin near
+    its tip, so a slit cut it clean off and left a detached bar and a stray
+    hairline. The reference has a split in its head, but at the size this mark
+    uses there is nothing there to split.
+
+    Each barb ends in a short flat rather than a knife point. Running the
+    concave outer curve and the straight inner edge together to a single point
+    leaves a razor sliver that vanishes in print and looks like a scratch on
+    screen.
     """
     hl, hw = t * length, t * half
+    j = x1 - hl * 0.45
     p = _P().M((x1, y))
-    p.C((x1 - hl * 0.38, y - hw * (0.30 - waist)), (x1 - hl * 0.72, y - hw * (0.68 - waist)),
-        (x1 - hl, y - hw))
+    p.C((x1 - hl * 0.30, y - hw * 0.18), (x1 - hl * 0.68, y - hw * 0.56), (x1 - hl, y - hw))
+    p.L((x1 - hl * (1 - blunt), y - hw * 0.78))   # short flat end on the barb
+    p.L((j, y - t * 0.50))
+    p.L((j, y + t * 0.50))
+    p.L((x1 - hl * (1 - blunt), y + hw * 0.78))
     p.L((x1 - hl, y + hw))
-    p.C((x1 - hl * 0.72, y + hw * (0.68 - waist)), (x1 - hl * 0.38, y + hw * (0.30 - waist)),
-        (x1, y))
+    p.C((x1 - hl * 0.68, y + hw * 0.56), (x1 - hl * 0.30, y + hw * 0.18), (x1, y))
     return str(p.Z())
 
 
-def shaft(x0, x1, y, t, taper=0.66):
-    """Tapered: thin at the nock, full under the head. Gives the line life."""
-    a, b = t * taper / 2.0, t / 2.0
-    return str(_P().M((x0, y - a)).L((x1, y - b)).L((x1, y + b)).L((x0, y + a)).Z())
+def shaft(x0, x1, y, t, split=0.22):
+    """Shaft with a hairline split down it, cut rather than drawn.
 
-
-def chevron(x, y, t, s=1.0, w=1.9, h=1.6, thick=0.42):
-    """One swept tick off the shaft, tapering to a point."""
-    W, H, k = t * w, t * h * s, t * thick
-    p = _P().M((x + W, y + H))
-    p.C((x + W * 0.45, y + H * 0.55), (x + W * 0.20, y + H * 0.20), (x, y))
-    p.L((x + k * 0.9, y))
-    p.C((x + W * 0.30, y + H * 0.22), (x + W * 0.55, y + H * 0.58), (x + W + k * 0.5, y + H))
-    return str(p.Z())
-
-
-def nock_bar(x, y, t, h=1.35, w=0.5):
-    return str(_P().M((x, y - t * h)).L((x + t * w, y - t * h))
-               .L((x + t * w, y + t * h)).L((x, y + t * h)).Z())
-
-
-def vane(x0, y, t, s, length=8.0, height=1.15):
-    """A single shallow feather on one side only.
-
-    One vane rather than two. A pair always closes across the shaft into a
-    paddle; one reads as a feather seen side on, which is what an arrow actually
-    looks like from this angle anyway.
+    Runs the whole length, under the fletching as well, so the two vanes meet on
+    it instead of floating either side of a gap.
     """
-    fl, fh = t * length, t * height * s
-    p = _P().M((x0 + fl, y + s * t * 0.22))
-    p.C((x0 + fl * 0.74, y + fh * 0.60), (x0 + fl * 0.52, y + fh * 0.96), (x0 + fl * 0.34, y + fh))
-    p.C((x0 + fl * 0.22, y + fh * 1.02), (x0 + fl * 0.10, y + fh * 0.80), (x0 + fl * 0.02, y + fh * 0.40))
-    p.C((x0 + fl * 0.02, y + fh * 0.20), (x0 + fl * 0.06, y + s * t * 0.26), (x0 + fl * 0.12, y + s * t * 0.22))
-    return str(p.L((x0 + fl, y + s * t * 0.22)).Z())
+    p = _P().M((x0, y - t * 0.44)).L((x1, y - t * 0.50))            .L((x1, y + t * 0.50)).L((x0, y + t * 0.44)).Z()
+    g = t * split / 2.0
+    inset = (x1 - x0) * 0.04
+    p.add(str(_P().M((x0 + inset, y + g)).L((x1 - inset, y + g * 0.65))
+              .L((x1 - inset, y - g * 0.65)).L((x0 + inset, y - g)).Z()))
+    return str(p)
 
 
-# ── the four candidates ──────────────────────────────────────────────────────
-def plain(x0, x1, y, t):
-    return ' '.join([shaft(x0, x1 - t * 4.0 * 0.98, y, t), head(x1, y, t)])
+def fletching(x0, y, t, length=13.5, height=4.4, n=15, lean=0.60, w=0.40):
+    """A feather as a run of fine barbs.
 
-
-def barred(x0, x1, y, t):
-    return ' '.join([shaft(x0 + t * 0.5, x1 - t * 3.92, y, t), head(x1, y, t),
-                     nock_bar(x0, y, t)])
-
-
-def chevrons(x0, x1, y, t, n=2):
-    parts = [shaft(x0 + t * 0.4, x1 - t * 3.92, y, t), head(x1, y, t)]
+    Inner ends sit on the shaft, outer ends ride a line falling from the nock to
+    the shaft, and every barb leans back by a fixed multiple of its own height.
+    That lean is what throws the first few barbs out past the tail and cuts the
+    swallowtail without it having to be drawn.
+    """
+    L, hmax, bw = t * length, t * height, t * w
+    out = []
     for i in range(n):
-        cx = x0 + t * (0.6 + 1.5 * i)
-        parts.append(chevron(cx, y, t, -1))
-        parts.append(chevron(cx, y, t, 1))
-    return ' '.join(parts)
+        u = i / float(n - 1)
+        h = t * 0.5 + (hmax - t * 0.5) * (1.0 - u) ** 0.92
+        xo = x0 + L * u * 0.82
+        xi = xo + lean * h
+        for s in (-1, 1):
+            out.append(_quad((xo, y + s * h), (xo + bw, y + s * h),
+                             (xi + bw, y + s * t * 0.40), (xi, y + s * t * 0.40)))
+    return ' '.join(out)
 
 
-def single_vane(x0, x1, y, t):
-    return ' '.join([shaft(x0 + t * 0.4, x1 - t * 3.92, y, t), head(x1, y, t),
-                     nock_bar(x0, y, t), vane(x0 + t * 0.6, y, t, -1)])
+
+# The whole arrow needs roughly 30 shaft-thicknesses of length. In the mark it
+# has to fit a rule segment, so thickness is derived from the space available
+# rather than dictated: pass the nominal weight and it thins down if the segment
+# is short, instead of the fletching running into the head.
+ARROW_SPAN = 30.0
 
 
-
-def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None, style=None):
-    """A drawn arrow pointing right: tapered shaft, sharpened point, quiet tail."""
-    t = thick
-    s = style or ARROW_STYLE
-    parts = [shaft(x0 + t * 0.4, x1 - t * 3.92, y, t), globals()['head'](x1, y, t)]
-    if s == 'bar':
-        parts.append(nock_bar(x0, y, t))
-    elif s == 'ticks':
-        parts.append(nock_bar(x0, y, t))
-        for i in range(2):
-            cx = x0 + t * (0.9 + 1.5 * i)
-            parts.append(chevron(cx, y, t, -1))
-            parts.append(chevron(cx, y, t, 1))
-    elif s == 'vane':
-        parts.append(nock_bar(x0, y, t))
-        parts.append(vane(x0 + t * 0.6, y, t, -1))
-    return ' '.join(parts)
+def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
+    t = min(thick, (x1 - x0) / ARROW_SPAN)
+    hl = t * 4.6
+    return ' '.join([shaft(x0 + t * 1.2, x1 - hl * 0.40, y, t),
+                     fletching(x0, y, t),
+                     globals()['head'](x1, y, t)])
 
 
 def crossed_arrows(cx, cy, length, thick, angle=17.0):
