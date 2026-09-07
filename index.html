@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brandon Howard | Texas Country</title>
-<meta name="description" content="Brandon Howard is a Texas country artist. Country, red dirt and southern rock out of North Texas. Over three hundred songs written.">
+<meta name="description" content="Real Songs, No Apologies. Brandon Howard is a Texas country artist. Country, red dirt and southern rock out of North Texas. Over three hundred songs written.">
 
 <meta property="og:title" content="Brandon Howard | Texas Country">
-<meta property="og:description" content="Country, red dirt and southern rock. Over three hundred songs. TRRMA Future Face of Texas Country and TSSA Champion.">
+<meta property="og:description" content="Real Songs, No Apologies. Country, red dirt and southern rock. Over three hundred songs. TRRMA Future Face of Texas Country and TSSA Champion.">
 <meta property="og:image" content="images/hero.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -130,8 +130,21 @@
     line-height: 0.92;
     letter-spacing: 0.005em;
     text-transform: uppercase;
-    margin: 12px 0 14px;
+    margin: 0 0 14px;
     text-shadow: 0 2px 30px rgba(0,0,0,.75);
+  }
+
+  /* The motto. Display face so it carries, but title case and a step down in
+     size so it reads as a statement under the name rather than competing with
+     it. Brass, because it is the line doing the talking. */
+  .motto {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(17px, 4.2vw, 23px);
+    letter-spacing: 0.13em;
+    color: var(--brass);
+    margin-bottom: 13px;
+    text-shadow: 0 1px 16px rgba(0,0,0,.85);
   }
 
   .tagline {
@@ -292,11 +305,11 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Texas Country</p>
     <h1>Brandon Howard</h1>
+    <p class="motto">Real Songs, No Apologies</p>
     <p class="tagline">
-      Three hundred songs, and not one of them apologizes.
       Country, red dirt and southern rock out of North Texas.
+      Over three hundred songs written.
     </p>
     <a class="cta" href="#music">Listen</a>
 
