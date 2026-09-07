@@ -290,6 +290,72 @@
   }
   .cred span { font-size: 13.5px; color: var(--muted); }
 
+  /* ── Booking form ─────────────────────────────────────────────────────── */
+  .booking-direct {
+    text-align: center;
+    font-family: var(--display);
+    font-size: clamp(16px, 3.6vw, 20px);
+    letter-spacing: 0.09em;
+    margin-bottom: 34px;
+  }
+
+  .booking-direct a { text-decoration: none; border-bottom: 1px solid rgba(200,155,74,.4); padding-bottom: 2px; }
+  .booking-direct a:hover { border-bottom-color: var(--brass); }
+
+  .booking-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .booking-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .booking-form label {
+    display: flex; flex-direction: column; gap: 7px;
+    font-family: var(--display);
+    font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.19em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .booking-form input,
+  .booking-form textarea {
+    font-family: var(--body);
+    font-size: 15px;
+    color: var(--paper);
+    background: rgba(242,234,220,0.045);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 12px 13px;
+    width: 100%;
+    /* 16px on small screens or iOS zooms the page on focus */
+    transition: border-color .15s ease, background .15s ease;
+  }
+
+  .booking-form textarea { resize: vertical; min-height: 118px; line-height: 1.55; }
+
+  .booking-form input::placeholder,
+  .booking-form textarea::placeholder { color: #6E6A61; }
+
+  .booking-form input:focus,
+  .booking-form textarea:focus {
+    outline: none;
+    border-color: var(--brass);
+    background: rgba(200,155,74,0.07);
+  }
+
+  .booking-form .submit {
+    align-self: center;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 14px 40px;
+  }
+
+  /* Honeypot */
+  .honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+  @media (max-width: 620px) {
+    .booking-form .row { grid-template-columns: 1fr; }
+    .booking-form input,
+    .booking-form textarea { font-size: 16px; }
+  }
+
   /* ── Placeholder ──────────────────────────────────────────────────────── */
   .todo {
     border: 1px dashed rgba(200,155,74,0.5);
@@ -443,16 +509,59 @@
   </div>
 </section>
 
-<!-- ── BOOKING ───────────────────────────────────────────────────────────── -->
+<!-- ── BOOKING ───────────────────────────────────────────────────────────────
+     The form posts to FormSubmit, which needs no account: the endpoint IS the
+     address, so swapping in Brandon's real one is a single edit in two places,
+     the form action and the mailto below. FormSubmit will not deliver anything
+     until the first submission is confirmed from that inbox. See README.md. -->
 <section id="booking">
-  <div class="inner">
+  <div class="inner narrow">
     <h2>Booking</h2>
-    <div class="todo">
-      <b>PLACEHOLDER, and the most important field on the page.</b> This needs
-      Brandon's own current booking contact. It was deliberately left blank rather
-      than copied from anywhere else. <code>README.md</code> explains why that
-      matters more than it looks.
+
+    <div class="todo" style="margin-bottom:32px">
+      <b>PLACEHOLDER ADDRESS.</b> This form and the address below both point at
+      <code>booking@brandonhowardmusic.com</code>, which does not exist yet.
+      <b>Nothing will be delivered</b> until the address is real and the first
+      FormSubmit message is confirmed from that inbox. Replace it with Brandon's
+      own contact and no other. See <code>README.md</code>.
     </div>
+
+    <p class="booking-direct">
+      <a href="mailto:booking@brandonhowardmusic.com">booking@brandonhowardmusic.com</a>
+    </p>
+
+    <form class="booking-form" action="https://formsubmit.co/booking@brandonhowardmusic.com" method="POST">
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="Booking enquiry from brandonhoward site">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <!-- Honeypot. Real people never see it; bots fill everything. -->
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="honey">
+
+      <div class="row">
+        <label>Name
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label>Email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+      </div>
+
+      <div class="row">
+        <label>Date
+          <input type="text" name="date" placeholder="or a rough window">
+        </label>
+        <label>Venue or city
+          <input type="text" name="venue">
+        </label>
+      </div>
+
+      <label>Details
+        <textarea name="message" rows="5" placeholder="Room size, budget, set length, anything useful."></textarea>
+      </label>
+
+      <button class="btn submit" type="submit">Send enquiry</button>
+    </form>
   </div>
 </section>
 
