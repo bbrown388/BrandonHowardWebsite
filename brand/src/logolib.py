@@ -140,3 +140,66 @@ def svg(body, box, fg='#111111', bg=None):
     return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="%.2f %.2f %.2f %.2f" '
             'width="%.0f" height="%.0f">%s<g fill="%s">%s</g></svg>'
             % (x, y, w, h, w, h, ground, fg, body))
+
+
+def glyph_boxes(face, text, size, tracking=0.0, cx=0.0, baseline=0.0):
+    """Per-glyph ink boxes for a run laid out exactly as run_straight lays it.
+
+    Needed to decorate specific letters: without knowing where each A actually
+    sits, an ornament has to be positioned by hand and breaks the moment the
+    size, tracking or face changes.
+    """
+    s, glyphs, ws, total = _widths(face, text, size, tracking)
+    x = cx - total / 2.0
+    out = []
+    for (gn, adv, dx, dy), w in zip(glyphs, ws):
+        b = face.bounds(gn)
+        if b:
+            out.append(dict(name=gn,
+                            x0=x + dx * s + b[0] * s, x1=x + dx * s + b[2] * s,
+                            top=baseline - dy * s - b[3] * s,
+                            bot=baseline - dy * s - b[1] * s))
+        x += w
+    return out
+
+
+def letter_boxes(face, text, char, size, tracking=0.0, cx=0.0, baseline=0.0):
+    """Ink boxes for every occurrence of one character in a run."""
+    target = face.shape(char)[0][0]
+    return [g for g in glyph_boxes(face, text, size, tracking, cx, baseline)
+            if g['name'] == target]
+
+
+def outline_points(face, gname):
+    """Every on-curve and control point of a glyph, in font units."""
+    from fontTools.pens.recordingPen import RecordingPen
+    pen = RecordingPen()
+    face.gs[gname].draw(pen)
+    pts = []
+    for op, args in pen.value:
+        for a in args:
+            if isinstance(a, tuple) and len(a) == 2:
+                pts.append(a)
+    return pts
+
+
+def apex_span(face, char, band=0.16):
+    """Horizontal extent of a glyph within `band` of its top, in em fractions.
+
+    Used to sit an ornament against the actual shape of a letter rather than its
+    bounding box. The apex of an A is far narrower than its box, so anything
+    aligned to the box lands in the wrong place.
+    """
+    gn = face.shape(char)[0][0]
+    b = face.bounds(gn)
+    if not b:
+        return None
+    pts = outline_points(face, gn)
+    cut = b[3] - (b[3] - b[1]) * band
+    top = [p for p in pts if p[1] >= cut]
+    if not top:
+        return None
+    xs = [p[0] for p in top]
+    return dict(x0=min(xs) / face.upem, x1=max(xs) / face.upem,
+                y=cut / face.upem, top=b[3] / face.upem,
+                bx0=b[0] / face.upem, bx1=b[2] / face.upem)

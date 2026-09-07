@@ -69,6 +69,41 @@ percent into 14.
 Bevan is worth a note because it contradicts the obvious guess. It looks like the
 robust one, since it has no spurs at all, and it measures worst at full size.
 
+### Arrows and crows
+
+The A in Sancreek already reads a little like an arrow. The first attempt leaned
+on that directly, adding mirrored barbs at the apex to make the existing spur
+look deliberate, and it did not work. The apex of these faces is a fine point
+sitting well above the widest part of the letter, so anything positioned off the
+letter box lands in mid air and reads as a detached shape hovering over the A.
+Making it work means editing the glyph outline itself, adding barbs as real
+nodes and rebalancing the apex around them. That is a type designer in a vector
+editor, and worth commissioning if the idea is wanted badly enough.
+
+So the arrows went into the structure of the mark instead of into the letters.
+
+| File | What it is | Embroidery, hat |
+|---|---|---|
+| `marks/am-sancreek-arrows.svg` | The rules become arrows pointing out from the centre. | 15.7% |
+| `marks/am-sancreek-crow.svg` | A crow perched on the top rule. | 9.3% |
+| `marks/am-rye-arrows-crow.svg` | Both devices, on Rye. | 17.8% |
+| `marks/am-sancreek-crossed.svg` | Crossed arrows under the mark. | 6.5% |
+
+`src/ornament.py` draws all of it: arrowheads, arrows, crossed arrows and the
+crow, as flat single colour paths sized off one dimension.
+
+**The measurements in this group are misleading and the sheet says so.** The
+metric is a share of total ink, so a solid crow or a pair of heavy arrows raises
+the denominator and the percentage falls without any hairline getting thicker.
+Rye alone measures 45.7 percent too fine; Rye with arrows and a crow measures 9.6
+percent, and nothing about the letters changed. Judge letterforms by the face
+numbers in the western table.
+
+The crow is a first pass. It went through three redraws to stop reading as a
+songbird, and the fix was the bill: a crow carries a long deep dagger about two
+thirds the length of its head, and drawn small and pointed it is a finch no
+matter what the body does. An illustrator would still push it further.
+
 Every marquee mark has a `-hat` small format twin with the tagline removed.
 
 Each SVG is a single flat fill, so recolouring is one attribute and a reversed

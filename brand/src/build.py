@@ -2,7 +2,8 @@
 """Build the Brandon Howard Band merch logo candidates."""
 import sys, os, io, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from logolib import Face, run_arc, run_straight, swash, crop, svg
+from logolib import Face, run_arc, run_straight, swash, crop, svg, letter_boxes
+import ornament as orn
 
 F = {}
 def face(n):
@@ -83,7 +84,8 @@ def dancehall(key, label, arc_font, script_font,
 
 
 def marquee(key, label, font, pre='THE', lines=('BRANDON', 'HOWARD'), post='BAND',
-            tagline=None, size=170, track=26, gap=1.30, note=''):
+            tagline=None, size=170, track=26, gap=1.30, note='', decorate=None,
+            rule_style='plain'):
     """The Alamo vernacular: heavy caps stacked tight inside a ruled panel.
 
     THE and BAND are set into breaks in the rules rather than given lines of
@@ -117,8 +119,21 @@ def marquee(key, label, font, pre='THE', lines=('BRANDON', 'HOWARD'), post='BAND
         p, q = shift(p, q, y + th / 2 - (wtop + wbot) / 2)
         body.append(p); pts.extend(q)
         half = (max(xx for xx, yy in q) - min(xx for xx, yy in q)) / 2 + size * 0.16
-        for a, b in ((x0, CX - half), (CX + half, x1)):
-            if b > a:
+        for a, b, outward in ((x0, CX - half, -1), (CX + half, x1, 1)):
+            if b <= a:
+                continue
+            if rule_style == 'arrow':
+                # Each half of the rule becomes an arrow pointing away from the
+                # centre. The right half is drawn directly; the left is the same
+                # path mirrored about its own right edge, so both taper outward.
+                d = orn.arrow(0, b - a, y + th / 2, th * 1.5)
+                if outward < 0:
+                    body.append('<g transform="translate(%.2f,0) scale(-1,1)">'
+                                '<path d="%s"/></g>' % (b, d))
+                else:
+                    body.append('<g transform="translate(%.2f,0)"><path d="%s"/></g>' % (a, d))
+                pts.extend([(a, y - th * 2), (b, y + th * 3)])
+            else:
                 body.append('<rect x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>'
                             % (a, y, b - a, th))
                 pts.extend([(a, y), (b, y + th)])
@@ -131,6 +146,14 @@ def marquee(key, label, font, pre='THE', lines=('BRANDON', 'HOWARD'), post='BAND
         p, _, q = run_straight(f, tagline, size * 0.215, tracking=size * 0.10,
                                cx=CX, baseline=base)
         body.append(p); pts += q
+
+    # Ornaments go on last so they cannot shift the tagline, which is placed off
+    # the running bounds. They still join pts, so the crop accounts for them.
+    if decorate:
+        eb, ep = decorate(dict(face=f, size=size, track=track, gap=gap, lines=lines,
+                               x0=x0, x1=x1, top=top, bot=bot, th=th, cx=CX,
+                               bottom=max(y for x, y in pts)))
+        body.append(eb); pts += ep
 
     marks.append(dict(key=key, label=label, family='marquee', note=note,
                       body='\n'.join(body), box=list(crop(pts, 46))))
@@ -186,9 +209,11 @@ def cap_size(font, target=120.0):
     return target / ((bb[3] - bb[1]) / f.upem)
 
 
-def marq(key, label, font, tagline=TAG, cap=120.0, track=0.085, note=''):
+def marq(key, label, font, tagline=TAG, cap=120.0, track=0.085, note='', decorate=None,
+         rule_style='plain'):
     s = cap_size(font, cap)
-    marquee(key, label, font, tagline=tagline, size=s, track=s * track, note=note)
+    marquee(key, label, font, tagline=tagline, size=s, track=s * track, note=note,
+            decorate=decorate, rule_style=rule_style)
 
 
 # The face Brandon saw first. Kept for comparison, not as a recommendation.
@@ -253,6 +278,93 @@ marq('am-rammetto', 'Rammetto One', 'RammettoOne-Regular.ttf',
      note='The heaviest here. Poster weight, softened corners, hardest to break.')
 marq('am-rammetto-hat', 'Rammetto One, small format', 'RammettoOne-Regular.ttf', tagline=None,
      note='Hat lockup.')
+
+# ── Arrows and crows ────────────────────────────────────────────────────────
+# The A in both western faces already carries an angled spur at the apex that
+# reads a little like a barb. These lean into that: the decorators find every A
+# by its measured ink box, so an ornament lands correctly whatever the face,
+# size or tracking, rather than being nudged into place by hand.
+def _each_A(c):
+    for i, line in enumerate(c['lines']):
+        for g in letter_boxes(c['face'], line, 'A', c['size'],
+                              tracking=c['track'], cx=c['cx'],
+                              baseline=c['size'] * c['gap'] * i):
+            yield g
+
+
+def dec_apex(c):
+    """Turn the apex of each A into a barbed arrowhead."""
+    d, pts = [], []
+    for g in _each_A(c):
+        w = (g['x1'] - g['x0']) * 1.04     # barbs clear the sides of the A
+        hh = (g['bot'] - g['top']) * 0.46
+        cx = (g['x0'] + g['x1']) / 2.0
+        tip = g['top'] - hh * 0.10         # only just above the cap line
+        d.append('<path d="%s"/>' % orn.arrowhead(cx, tip, w, hh))
+        pts += [(cx - w / 2, tip), (cx + w / 2, tip + hh)]
+    return ''.join(d), pts
+
+
+def dec_shaft(c):
+    """Run an arrow straight through the crossbar of each A."""
+    d, pts = [], []
+    for g in _each_A(c):
+        H = g['bot'] - g['top']
+        y = g['bot'] - H * 0.30
+        # No overhang. An arrow that pokes past the A runs straight into the R
+        # and the N either side of it.
+        th = c['size'] * 0.048
+        d.append('<path d="%s"/>' % orn.arrow(g['x0'], g['x1'], y, th,
+                                               head=th * 3.0, fletch=th * 2.6,
+                                               barb=th * 2.3))
+        pts += [(g['x0'], y - th * 2), (g['x1'], y + th * 2)]
+    return ''.join(d), pts
+
+
+def dec_crossed(c):
+    """Crossed arrows sitting under the mark."""
+    L = (c['x1'] - c['x0']) * 0.78
+    y = c['bottom'] + c['size'] * 0.46
+    th = c['size'] * 0.070
+    return (orn.crossed_arrows(c['cx'], y, L, th),
+            [(c['cx'] - L * 0.6, y - L * 0.22), (c['cx'] + L * 0.6, y + L * 0.22)])
+
+
+def dec_crow(c):
+    """A crow perched on the top rule, off to one side like a bird on a sign."""
+    h = c['size'] * 0.80
+    x = c['x1'] - c['size'] * 0.22
+    return ('<path d="%s"/>' % orn.crow_on_rule(x, c['top'], h, facing=-1),
+            [(x - h * 1.8, c['top'] - h), (x + h * 0.2, c['top'])])
+
+
+def dec_crow_apex(c):
+    b1, p1 = dec_crow(c)
+    b2, p2 = dec_apex(c)
+    return b1 + b2, p1 + p2
+
+
+marq('am-sancreek-arrows', 'Sancreek, arrow rules', 'Sancreek-Regular.ttf',
+     rule_style='arrow',
+     note='The rules themselves become arrows pointing out from the centre.')
+marq('am-sancreek-arrows-hat', 'Sancreek, arrow rules, small format',
+     'Sancreek-Regular.ttf', tagline=None, rule_style='arrow', note='Hat lockup.')
+
+marq('am-sancreek-crow', 'Sancreek, crow on the rule', 'Sancreek-Regular.ttf',
+     decorate=dec_crow, note='A crow perched on the top rule, like a bird on a sign.')
+marq('am-sancreek-crow-hat', 'Sancreek, crow on the rule, small format',
+     'Sancreek-Regular.ttf', tagline=None, decorate=dec_crow, note='Hat lockup.')
+
+marq('am-sancreek-crossed', 'Sancreek, crossed arrows', 'Sancreek-Regular.ttf',
+     decorate=dec_crossed, note='Letters untouched, crossed arrows sitting under the mark.')
+marq('am-sancreek-crossed-hat', 'Sancreek, crossed arrows, small format',
+     'Sancreek-Regular.ttf', tagline=None, decorate=dec_crossed, note='Hat lockup.')
+
+marq('am-rye-arrows-crow', 'Rye, arrows and crow', 'Rye-Regular.ttf',
+     rule_style='arrow', decorate=dec_crow,
+     note='Both devices at once, on the face you started from.')
+marq('am-rye-arrows-crow-hat', 'Rye, arrows and crow, small format', 'Rye-Regular.ttf',
+     tagline=None, rule_style='arrow', decorate=dec_crow, note='Hat lockup.')
 
 for m in marks:
     io.open(os.path.join(OUT, m['key'] + '.svg'), 'w', encoding='utf-8', newline='\n').write(

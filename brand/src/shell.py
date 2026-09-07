@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import io
-dance, marq, west = io.open('sheet_body.html', encoding='utf-8').read().split(chr(0))
+dance, marq, west, orn = io.open('sheet_body.html', encoding='utf-8').read().split(chr(0))
 
 HEAD = """<title>Brandon Howard Band Marks</title>
 <style>
@@ -95,7 +95,7 @@ BODY = """
 <div class="wrap">
 <p class="eyebrow">Merch identity, first pass</p>
 <h1>The Brandon Howard Band</h1>
-<p class="lead">Thirteen candidate marks in three directions, each shown on a
+<p class="lead">Seventeen candidate marks in four directions, each shown on a
 light and a dark garment, then tested at the size that actually breaks logos: a
 four inch hat front.</p>
 
@@ -111,7 +111,7 @@ get to shed their finest ink.</p>
 </div>
 
 <div class="callout">
-<p><strong>Three directions now.</strong> The first was
+<p><strong>Four directions now.</strong> The first was
 the Alamo Drafthouse marquee, specifically the ALAMO word rather than the
 DRAFTHOUSE CINEMA line under it, which are two different faces. The second was the
 Gruene Hall sign, which is a different animal: a word arched across the top, a
@@ -167,6 +167,36 @@ group clears the embroidery threshold. Sancreek gets closest and turns Rye 46 pe
 cent into 14.</p>
 </div>
 __WEST__
+</section>
+
+<section>
+<div class="sechead">
+<h2>Direction four, arrows and crows</h2>
+<h3 style="font-size:22px;margin-top:4px">Devices rather than decoration</h3>
+<p>You were right that the A in Sancreek already reads a little like an arrow,
+and the first thing I tried was leaning on exactly that: mirrored barbs at the
+apex to make the existing spur look deliberate.</p>
+<p><strong>It did not work, and it is worth saying why.</strong> The apex of
+these faces is a fine point sitting well above the widest part of the letter, so
+anything positioned from the letter box lands in mid air and reads as a small
+detached shape hovering over the A rather than part of it. Making that idea work
+means editing the outline of the glyph itself, adding the barbs as real nodes on
+the A and rebalancing the apex around them. That is a type designer sitting in a
+vector editor for an hour, not something worth faking, and it is a reasonable
+thing to commission if you like the idea enough.</p>
+<p>So the arrows went where they read: into the structure of the mark instead of
+into the letters.</p>
+</div>
+__ORN__
+<div class="callout">
+<p><strong>Read the numbers on this section carefully.</strong> The measurement
+is a share of total ink, so adding a solid crow or a pair of heavy arrows raises
+the denominator and the percentage falls without a single hairline getting any
+thicker. Rye on its own measures 45.7 per cent too fine; the same Rye with
+arrows and a crow measures 9.6 per cent. Nothing about the letters changed.</p>
+<p>Judge the letterforms by the face numbers in the western section, and treat
+these four as compositions rather than as better versions of the same type.</p>
+</div>
 </section>
 
 <section>
@@ -265,5 +295,6 @@ if hats are going ahead.</li>
 io.open('brandon-marks.html', 'w', encoding='utf-8', newline='\n').write(
     HEAD + BODY.replace('__DANCE__', dance)
                .replace('__MARQ__', marq)
-               .replace('__WEST__', west))
+               .replace('__WEST__', west)
+               .replace('__ORN__', orn))
 print('  brandon-marks.html written')

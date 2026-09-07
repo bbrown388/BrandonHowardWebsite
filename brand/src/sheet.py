@@ -124,6 +124,35 @@ CARDS = [
       body='The heaviest thing in the whole set. Poster weight with softened '
            'corners. Furthest from Rye in detail, but doing the same job: loud, '
            'vintage and American, and it holds at any size you throw at it.'),
+ dict(k='am-sancreek-arrows', g='orn', hat='am-sancreek-arrows-hat',
+      title='Arrow rules', tag='The one that works',
+      faces='Sancreek',
+      body='The rules themselves become arrows, pointing out from the centre with '
+           'THE and BAND sitting in the breaks. This is the version that reads as '
+           'deliberate rather than decorated: the arrows are unmistakable at any '
+           'size, they use structure the mark already had, and they leave the '
+           'letterforms completely alone.'),
+ dict(k='am-sancreek-crow', g='orn', hat='am-sancreek-crow-hat',
+      title='Crow on the rule', tag='A bird on a sign',
+      faces='Sancreek',
+      body='A crow perched on the top rule, off to one side, the way a bird sits on '
+           'a real roadside sign. It is a drawn silhouette rather than clip art, '
+           'built blunt on purpose so it holds at small sizes. Worth saying it is a '
+           'first pass: an illustrator would push the bill heavier and the tail '
+           'longer, and that is a job worth paying for if this direction wins.'),
+ dict(k='am-rye-arrows-crow', g='orn', hat='am-rye-arrows-crow-hat',
+      title='Arrows and crow, on Rye', tag='Both devices at once',
+      faces='Rye',
+      body='Both ideas together on the face you started from, with the crow perched '
+           'on the arrow rather than a plain rule. Read the measurements on this one '
+           'carefully, see the note below the section.'),
+ dict(k='am-sancreek-crossed', g='orn', hat='am-sancreek-crossed-hat',
+      title='Crossed arrows', tag='Quietest option',
+      faces='Sancreek',
+      body='Letters untouched, crossed arrows sitting under the mark as a device you '
+           'could also use on its own: a sleeve print, a hat back, a stamp on a '
+           'setlist. The most separable of the four, and the easiest to drop when it '
+           'is not wanted.'),
 ]
 
 def card(c):
@@ -155,9 +184,8 @@ def card(c):
                  data(c['hat'], 'Small format lockup'))
 
 dance = ''.join(card(c) for c in CARDS if c.get('g') == 'dance')
-marq  = ''.join(card(c) for c in CARDS if c.get('g') == 'marq')
-west  = ''.join(card(c) for c in CARDS if c.get('g') == 'west')
+groups = ('dance', 'marq', 'west', 'orn')
 io.open('sheet_body.html', 'w', encoding='utf-8', newline='\n').write(
-    chr(0).join([dance, marq, west]))
-print('  cards built: %d dance hall, %d marquee, %d western'
-      % tuple(sum(1 for c in CARDS if c.get('g') == g) for g in ('dance', 'marq', 'west')))
+    chr(0).join(''.join(card(c) for c in CARDS if c.get('g') == g) for g in groups))
+print('  cards built: ' + ', '.join(
+    '%d %s' % (sum(1 for c in CARDS if c.get('g') == g), g) for g in groups))
