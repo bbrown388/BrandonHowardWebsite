@@ -125,21 +125,23 @@ CARDS = [
            'corners. Furthest from Rye in detail, but doing the same job: loud, '
            'vintage and American, and it holds at any size you throw at it.'),
  dict(k='am-sancreek-arrows', g='orn', hat='am-sancreek-arrows-hat',
-      title='Arrow rules', tag='The one that works',
+      title='Arrow rules', tag='Chosen',
       faces='Sancreek',
       body='The rules themselves become arrows, pointing out from the centre with '
-           'THE and BAND sitting in the breaks. This is the version that reads as '
-           'deliberate rather than decorated: the arrows are unmistakable at any '
-           'size, they use structure the mark already had, and they leave the '
-           'letterforms completely alone.'),
+           'THE and BAND sitting in the breaks. The arrows are redrawn since you '
+           'picked this: a properly barbed head with a notch cut back into its '
+           'base, and fletching that is two swept vanes off a nock rather than a '
+           'pair of ticks. Both matter at sign size. A plain triangle on a stick '
+           'reads as a interface icon; this reads as a drawn arrow. The '
+           'letterforms are untouched.'),
  dict(k='am-sancreek-crow', g='orn', hat='am-sancreek-crow-hat',
       title='Crow on the rule', tag='A bird on a sign',
       faces='Sancreek',
-      body='A crow perched on the top rule, off to one side, the way a bird sits on '
-           'a real roadside sign. It is a drawn silhouette rather than clip art, '
-           'built blunt on purpose so it holds at small sizes. Worth saying it is a '
-           'first pass: an illustrator would push the bill heavier and the tail '
-           'longer, and that is a job worth paying for if this direction wins.'),
+      body='The idea is right: a bird on the sign the way one sits on a real '
+           'roadside board. The bird is not. This is the fifth redraw against your '
+           'reference and it still reads closer to a grackle than a crow. Hand '
+           'coding polygon coordinates is the wrong tool for an animal silhouette, '
+           'and the honest recommendation is below rather than a sixth attempt.'),
  dict(k='am-rye-arrows-crow', g='orn', hat='am-rye-arrows-crow-hat',
       title='Arrows and crow, on Rye', tag='Both devices at once',
       faces='Rye',

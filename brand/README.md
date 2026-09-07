@@ -84,7 +84,7 @@ So the arrows went into the structure of the mark instead of into the letters.
 
 | File | What it is | Embroidery, hat |
 |---|---|---|
-| `marks/am-sancreek-arrows.svg` | The rules become arrows pointing out from the centre. | 15.7% |
+| `marks/am-sancreek-arrows.svg` | **Chosen.** The rules become arrows pointing out from the centre. | 15.7% |
 | `marks/am-sancreek-crow.svg` | A crow perched on the top rule. | 9.3% |
 | `marks/am-rye-arrows-crow.svg` | Both devices, on Rye. | 17.8% |
 | `marks/am-sancreek-crossed.svg` | Crossed arrows under the mark. | 6.5% |
@@ -99,10 +99,26 @@ Rye alone measures 45.7 percent too fine; Rye with arrows and a crow measures 9.
 percent, and nothing about the letters changed. Judge letterforms by the face
 numbers in the western table.
 
-The crow is a first pass. It went through three redraws to stop reading as a
-songbird, and the fix was the bill: a crow carries a long deep dagger about two
-thirds the length of its head, and drawn small and pointed it is a finch no
-matter what the body does. An illustrator would still push it further.
+Standalone devices are in `marks/device-arrow.svg`,
+`marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
+own for a sleeve, a hat back or a setlist stamp.
+
+The arrows were redrawn once this direction was chosen: a barbed head with a
+notch cut back into its base, and fletching built as two swept vanes off a nock
+rather than a pair of ticks. At sign size a plain triangle on a stick reads as an
+interface icon rather than a drawn arrow, and the difference is worth the extra
+nodes.
+
+**The crow is not finished, and should not ship as it stands.** Five redraws
+against a supplied reference and it still reads closer to a grackle. The method
+is the problem rather than the proportions: hand coding polygon coordinates is a
+fine way to draw an arrow and a poor way to draw an animal, because each
+correction is a guess at a number rather than a line you can see while pulling
+it. The realistic options are to license a vector crow (the Alamy reference costs
+tens of dollars and settles the rights question at once), to commission one if
+the bird is going to carry the brand, or to keep iterating with falling returns.
+
+The arrow mark stands on its own without a bird, which is why it is the pick.
 
 Every marquee mark has a `-hat` small format twin with the tagline removed.
 

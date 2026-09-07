@@ -185,17 +185,35 @@ the A and rebalancing the apex around them. That is a type designer sitting in a
 vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
-into the letters.</p>
+into the letters. You picked that one, so the arrows themselves have been
+redrawn: a properly barbed head with a notch cut back into the base, and
+fletching that is two swept vanes off a nock rather than a pair of ticks.</p>
 </div>
 __ORN__
 <div class="callout">
-<p><strong>Read the numbers on this section carefully.</strong> The measurement
+<p><strong>On the crow, plainly: it is not there.</strong> That is five redraws
+against your reference and it still reads closer to a grackle than a crow. The
+idea is good and the placement works. The bird is the problem, and the problem is
+the method: hand coding polygon coordinates is a reasonable way to draw an arrow
+and a poor way to draw an animal, because every correction is a guess at a number
+rather than a line you can see while you pull it.</p>
+<p>Three honest ways forward, in the order I would take them. <strong>License a
+vector crow.</strong> The image you sent is Alamy stock and licensing it outright
+is usually tens of dollars, which buys a finished silhouette immediately and
+settles the rights question at the same time. <strong>Commission one</strong>, if
+the bird is going to carry the brand rather than decorate it. Or <strong>keep me
+at it</strong>, which I am happy to do, but the returns per attempt are clearly
+falling and you should know that before spending more of the session on it.</p>
+<p>Meanwhile the arrow mark stands on its own without a bird, and that is what
+the top of this section shows.</p>
+</div>
+<div class="callout">
+<p><strong>Read the measurements in this section carefully.</strong> The metric
 is a share of total ink, so adding a solid crow or a pair of heavy arrows raises
 the denominator and the percentage falls without a single hairline getting any
-thicker. Rye on its own measures 45.7 per cent too fine; the same Rye with
-arrows and a crow measures 9.6 per cent. Nothing about the letters changed.</p>
-<p>Judge the letterforms by the face numbers in the western section, and treat
-these four as compositions rather than as better versions of the same type.</p>
+thicker. Rye on its own measures 45.7 per cent too fine; the same Rye with arrows
+and a crow measures 9.6 per cent. Nothing about the letters changed. Judge
+letterforms by the face numbers in the western section.</p>
 </div>
 </section>
 

@@ -28,26 +28,41 @@ def arrowhead(cx, tip_y, w, h, notch=0.60):
 
 
 def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
-    """A horizontal arrow: fletching, shaft, head. Points right.
+    """A horizontal arrow pointing right: fletching, shaft, barbed head.
 
-    Returned as several subpaths in one string. They only ever overlap on the
-    shaft, and a nonzero fill unions them, so the result reads as one object.
+    The head is properly barbed, with a notch cut back into its base, and the
+    fletching is two swept vanes off a nock rather than a pair of ticks. Both
+    matter at sign size: a plain triangle on a stick reads as a UI glyph, and
+    this has to read as a drawn arrow.
+
+    Emitted as several subpaths in one string. They overlap only on the shaft,
+    and a nonzero fill unions them, so it behaves as one object.
     """
-    head = head if head is not None else thick * 3.4
-    barb = barb if barb is not None else thick * 2.6
-    fletch = fletch if fletch is not None else thick * 3.0
-    half = thick / 2.0
+    hl = head if head is not None else thick * 4.2      # head length
+    hw = barb if barb is not None else thick * 2.0      # head half width
+    fl = fletch if fletch is not None else thick * 4.6  # fletching length
+    t2 = thick / 2.0
 
-    shaft = _pts([(x0 + fletch * 0.35, y - half), (x1 - head, y - half),
-                  (x1 - head, y + half), (x0 + fletch * 0.35, y + half)])
-    point = _pts([(x1, y), (x1 - head, y - barb / 2.0),
-                  (x1 - head, y + barb / 2.0)])
-    # two swept feathers, angled back off the shaft
-    f1 = _pts([(x0, y - barb * 0.62), (x0 + fletch, y - half),
-               (x0 + fletch, y + half * 0.4), (x0 + fletch * 0.30, y - half * 0.2)])
-    f2 = _pts([(x0, y + barb * 0.62), (x0 + fletch, y + half),
-               (x0 + fletch, y - half * 0.4), (x0 + fletch * 0.30, y + half * 0.2)])
-    return ' '.join([shaft, point, f1, f2])
+    shaft = _pts([(x0 + fl * 0.20, y - t2), (x1 - hl * 0.55, y - t2),
+                  (x1 - hl * 0.55, y + t2), (x0 + fl * 0.20, y + t2)])
+
+    # barbed head: tip, back to the barb, in to the notch, out to the far barb
+    point = _pts([(x1, y),
+                  (x1 - hl, y - hw),
+                  (x1 - hl * 0.62, y),
+                  (x1 - hl, y + hw)])
+
+    # nock at the very end, so the tail reads as the back of an arrow
+    nock = _pts([(x0, y - t2 * 1.5), (x0 + fl * 0.22, y - t2),
+                 (x0 + fl * 0.22, y + t2), (x0, y + t2 * 1.5)])
+
+    vanes = []
+    for s in (-1, 1):
+        vanes.append(_pts([(x0 + fl * 0.06, y + s * t2),
+                           (x0 + fl * 0.30, y + s * thick * 2.3),
+                           (x0 + fl * 1.00, y + s * thick * 1.05),
+                           (x0 + fl * 0.86, y + s * t2 * 0.6)]))
+    return ' '.join([shaft, point, nock] + vanes)
 
 
 def crossed_arrows(cx, cy, length, thick, angle=17.0):
@@ -62,53 +77,64 @@ def crossed_arrows(cx, cy, length, thick, angle=17.0):
     return ''.join(out)
 
 
-def crow(x, y, h, facing=-1):
-    """A perched crow in silhouette, facing left by default.
+def crow(x, y, h, facing=1):
+    """A crow standing in profile, facing right by default.
 
-    The bill is the whole tell. A crow carries a long, deep, dagger of a bill
-    roughly two thirds the length of its head and about as deep at the base as a
-    songbird bill is long; draw it small and pointed and you get a finch no
-    matter what the rest of the body does. The other corvid markers are a flat
-    crown running straight into that bill with no rounded forehead step, shaggy
-    throat hackles, a deep chest, heavy legs, and a squared-off tail rather than
-    a fine taper.
+    Drawn from reference for pose and proportion only, never traced. What makes
+    it read as a crow: an upright standing posture rather than a horizontal
+    perch, the head carried high and clear of the shoulders, a long deep bill
+    with a slight hook, shaggy throat hackles, a deep barrel of a body, and a
+    long wing and tail sweeping back and down to finish near the level of the
+    feet.
 
-    Straight segments throughout, so the silhouette stays faceted and blunt.
-    Feather detail is the first thing to close up on a garment, and a cut notch
-    would not work anyway: these fill with a nonzero rule, so an inner contour
-    adds ink instead of removing it.
+    The body has to be genuinely deep. At around a third of the height across
+    the chest it reads as a bird; much narrower and the whole silhouette
+    collapses into a hook, which is the failure mode of every thin bird drawing.
 
-    h is crown to feet. Overall length lands near 1.6h.
+    Straight segments throughout, since this has to hold on a garment where
+    feather detail closes up first. The contour is a single simple polygon: a
+    nonzero fill would turn any inner contour into more ink rather than less.
+
+    h is crown to feet; overall width lands near 1.09h.
     """
     def P(px, py):
         return (x + px * h * facing, y + py * h)
 
     outline = [
-        (0.000, 0.250),                     # bill tip
-        (0.090, 0.200), (0.220, 0.162),     # heavy upper mandible
-        (0.310, 0.120), (0.410, 0.098),     # forehead runs flat off the bill
-        (0.510, 0.100), (0.580, 0.135),     # flat crown, nape
-        (0.625, 0.210), (0.670, 0.285),     # neck into shoulder
-        (0.810, 0.340), (0.980, 0.400),     # back
-        (1.170, 0.450),
-        (1.430, 0.512), (1.512, 0.548),     # tail, genuinely squared at the tip
-        (1.498, 0.652), (1.170, 0.602),
-        (1.010, 0.610), (0.860, 0.648),     # deep belly
-        (0.710, 0.678), (0.570, 0.686),
-        (0.440, 0.656), (0.340, 0.586),     # chest
-        (0.278, 0.498), (0.242, 0.424),
-        (0.205, 0.372), (0.232, 0.338),     # shaggy throat hackle
-        (0.200, 0.310), (0.100, 0.288),     # lower mandible
+        (0.430, 0.000), (0.545, 0.012),     # crown
+        (0.640, 0.048), (0.705, 0.090),     # forehead running flat into the bill
+        (0.845, 0.135), (0.950, 0.178),     # bill: deep at the base, not a needle
+        (0.845, 0.203), (0.720, 0.200),     # under the bill
+        (0.655, 0.232), (0.608, 0.300),     # chin into throat
+        (0.590, 0.390),                     # shaggy hackles
+        (0.594, 0.480), (0.570, 0.575),     # deep chest
+        (0.528, 0.665), (0.468, 0.726),     # belly
+        (0.380, 0.762),                     # vent
+        # Wing and tail together: one long low sweep back and down, close to the
+        # length of the bird itself. This is the shape that says corvid; a short
+        # tail on a big head is a kingfisher every time.
+        (0.250, 0.812), (0.040, 0.872),
+        (-0.200, 0.920), (-0.420, 0.950),   # tip of the sweep
+        (-0.440, 0.876),
+        (-0.220, 0.828), (0.010, 0.778),
+        (0.200, 0.716), (0.268, 0.664),
+        (0.232, 0.575), (0.228, 0.468),     # back
+        (0.252, 0.358), (0.290, 0.250),
+        (0.336, 0.147), (0.378, 0.062),     # nape into the back of the crown
     ]
     d = _pts([P(px, py) for px, py in outline])
 
-    # Set wide enough apart to stay two legs. At 0.48 and 0.60 the shafts very
-    # nearly touch and the bird reads as though it is standing on a post.
-    lw = h * 0.042
-    for lx in (0.445, 0.635):
-        a_, b_ = P(lx, 0.660), P(lx, 1.000)
+    lw = h * 0.032
+    for lx in (0.380, 0.478):
+        a_, b_ = P(lx, 0.735), P(lx, 0.982)
         d += ' ' + _pts([(a_[0] - lw, a_[1]), (a_[0] + lw, a_[1]),
                          (b_[0] + lw, b_[1]), (b_[0] - lw, b_[1])])
+        # a foot with a forward toe and a short spur back, so it grips the rule
+        f = P(lx, 0.982)
+        d += ' ' + _pts([(f[0] - lw * 3.2 * facing, f[1]),
+                         (f[0] + lw * 6.5 * facing, f[1]),
+                         (f[0] + lw * 6.5 * facing, f[1] + lw * 1.4),
+                         (f[0] - lw * 3.2 * facing, f[1] + lw * 1.4)])
     return d
 
 
