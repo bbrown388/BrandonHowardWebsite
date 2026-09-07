@@ -186,8 +186,10 @@ vector editor for an hour, not something worth faking, and it is a reasonable
 thing to commission if you like the idea enough.</p>
 <p>So the arrows went where they read: into the structure of the mark instead of
 into the letters. You picked that one, so the arrows themselves have been
-redrawn: a properly barbed head with a notch cut back into the base, and
-fletching that is two swept vanes off a nock rather than a pair of ticks.</p>
+redrawn twice. The first attempt gave them solid swept vanes and those fused into
+a lump at the tail. These have a barbed head and fletching drawn as three thin
+parallel bars crossing the shaft, which is what keeps them legible small: the eye
+reads the rhythm of the gaps rather than the mass.</p>
 </div>
 __ORN__
 <div class="callout">

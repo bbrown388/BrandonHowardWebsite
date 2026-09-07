@@ -28,41 +28,35 @@ def arrowhead(cx, tip_y, w, h, notch=0.60):
 
 
 def arrow(x0, x1, y, thick, head=None, fletch=None, barb=None):
-    """A horizontal arrow pointing right: fletching, shaft, barbed head.
+    """A horizontal arrow pointing right.
 
-    The head is properly barbed, with a notch cut back into its base, and the
-    fletching is two swept vanes off a nock rather than a pair of ticks. Both
-    matter at sign size: a plain triangle on a stick reads as a UI glyph, and
-    this has to read as a drawn arrow.
+    Three parts, all separate subpaths unioned by a nonzero fill: a plain shaft,
+    a barbed head with the base cut back between the barbs, and fletching drawn
+    as three thin parallel bars crossing the shaft.
 
-    Emitted as several subpaths in one string. They overlap only on the shaft,
-    and a nonzero fill unions them, so it behaves as one object.
+    The bars matter. An earlier version used two solid swept vanes and they fused
+    into a lump at the tail that read as a leaf rather than feathers, worse the
+    smaller it got. Separate strokes stay legible all the way down because the
+    eye reads the rhythm of the gaps, not the mass.
     """
-    hl = head if head is not None else thick * 4.2      # head length
-    hw = barb if barb is not None else thick * 2.0      # head half width
-    fl = fletch if fletch is not None else thick * 4.6  # fletching length
+    hl = head if head is not None else thick * 5.4       # head length
+    hw = barb if barb is not None else thick * 2.5       # head half width
     t2 = thick / 2.0
 
-    shaft = _pts([(x0 + fl * 0.20, y - t2), (x1 - hl * 0.55, y - t2),
-                  (x1 - hl * 0.55, y + t2), (x0 + fl * 0.20, y + t2)])
+    parts = [_pts([(x0 + thick, y - t2), (x1 - hl * 0.9, y - t2),
+                   (x1 - hl * 0.9, y + t2), (x0 + thick, y + t2)]),
+             _pts([(x1, y), (x1 - hl, y - hw),
+                   (x1 - hl * 0.62, y), (x1 - hl, y + hw)])]
 
-    # barbed head: tip, back to the barb, in to the notch, out to the far barb
-    point = _pts([(x1, y),
-                  (x1 - hl, y - hw),
-                  (x1 - hl * 0.62, y),
-                  (x1 - hl, y + hw)])
-
-    # nock at the very end, so the tail reads as the back of an arrow
-    nock = _pts([(x0, y - t2 * 1.5), (x0 + fl * 0.22, y - t2),
-                 (x0 + fl * 0.22, y + t2), (x0, y + t2 * 1.5)])
-
-    vanes = []
-    for s in (-1, 1):
-        vanes.append(_pts([(x0 + fl * 0.06, y + s * t2),
-                           (x0 + fl * 0.30, y + s * thick * 2.3),
-                           (x0 + fl * 1.00, y + s * thick * 1.05),
-                           (x0 + fl * 0.86, y + s * t2 * 0.6)]))
-    return ' '.join([shaft, point, nock] + vanes)
+    lean, reach, gap = thick * 1.1, thick * 2.6, thick * 2.4
+    n = fletch if fletch is not None else 3
+    for i in range(int(n)):
+        bx = x0 + gap * i + thick * 1.2
+        parts.append(_pts([(bx - lean, y - reach),
+                           (bx - lean + thick * 0.95, y - reach),
+                           (bx + lean + thick * 0.95, y + reach),
+                           (bx + lean, y + reach)]))
+    return ' '.join(parts)
 
 
 def crossed_arrows(cx, cy, length, thick, angle=17.0):

@@ -103,11 +103,13 @@ Standalone devices are in `marks/device-arrow.svg`,
 `marks/device-crossed-arrows.svg` and `marks/device-crow.svg`, usable on their
 own for a sleeve, a hat back or a setlist stamp.
 
-The arrows were redrawn once this direction was chosen: a barbed head with a
-notch cut back into its base, and fletching built as two swept vanes off a nock
-rather than a pair of ticks. At sign size a plain triangle on a stick reads as an
-interface icon rather than a drawn arrow, and the difference is worth the extra
-nodes.
+The arrows took two goes. The first gave them solid swept vanes for fletching,
+and those fused into a lump at the tail that read as a leaf, getting worse the
+smaller it went. The shipping version has a barbed head with its base cut back
+between the barbs, and fletching drawn as three thin parallel bars crossing the
+shaft. Separate strokes stay legible all the way down, because the eye reads the
+rhythm of the gaps rather than the mass. `src/arrowtest.py` holds the six
+constructions that were compared.
 
 **The crow is not finished, and should not ship as it stands.** Five redraws
 against a supplied reference and it still reads closer to a grackle. The method

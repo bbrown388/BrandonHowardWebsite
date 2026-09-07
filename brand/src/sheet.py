@@ -128,12 +128,13 @@ CARDS = [
       title='Arrow rules', tag='Chosen',
       faces='Sancreek',
       body='The rules themselves become arrows, pointing out from the centre with '
-           'THE and BAND sitting in the breaks. The arrows are redrawn since you '
-           'picked this: a properly barbed head with a notch cut back into its '
-           'base, and fletching that is two swept vanes off a nock rather than a '
-           'pair of ticks. Both matter at sign size. A plain triangle on a stick '
-           'reads as a interface icon; this reads as a drawn arrow. The '
-           'letterforms are untouched.'),
+           'THE and BAND sitting in the breaks. The arrows have been redrawn '
+           'twice. The first attempt built the fletching as two solid swept vanes '
+           'and they fused into a lump at the tail that read as a leaf, worse the '
+           'smaller it got. These use three thin parallel bars crossing the shaft '
+           'instead, which stay legible all the way down because the eye reads the '
+           'rhythm of the gaps rather than the mass. The head is barbed, with its '
+           'base cut back between the barbs. Letterforms untouched.'),
  dict(k='am-sancreek-crow', g='orn', hat='am-sancreek-crow-hat',
       title='Crow on the rule', tag='A bird on a sign',
       faces='Sancreek',
