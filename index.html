@@ -93,8 +93,14 @@
        over his chest and the field, leaving the face clear above it. */
     display: flex; align-items: flex-end; justify-content: center;
     text-align: center;
-    padding: 190px 20px 96px;
-    background: #000 url('images/hero.jpg') 47% center / cover no-repeat;
+    padding: 190px 20px 62px;
+    /* NOT `cover`. At this photo's aspect ratio cover fits the viewport height
+       exactly, which leaves no vertical slack and makes background-position-Y
+       inert. Sizing to 118% of the height instead creates the headroom, and the
+       72% Y then shows more of the lower frame, lifting him up the picture and
+       away from the headline. Paired with the reduced bottom padding above,
+       which drops the type. */
+    background: #000 url('images/hero.jpg') 47% 72% / auto 118% no-repeat;
   }
 
   /* Legibility scrim, tuned to this photo. The picture is sepia and bright,
